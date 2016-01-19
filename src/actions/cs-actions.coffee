@@ -16,8 +16,9 @@ categorySelected = (urn) ->
 # @param [Object] cs the category scheme object
 #
 csLoaded = (cs) ->
-  if not cs or not cs.categoryschemes or cs.categoryschemes.length is 0
-    throw TypeError 'The parameter must be a category scheme object'
+  if not cs or cs not instanceof Error and
+    not cs.categoryschemes or cs.categoryschemes?.length is 0
+      throw TypeError 'The parameter must be a category scheme object'
   createAction(ActionTypes.CS_LOADED)(cs)
 
 module.exports =

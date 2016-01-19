@@ -45,3 +45,9 @@ describe 'Category scheme actions', ->
       action = func payload
       action.should.have.property 'payload'
       action.payload.should.equal payload
+
+    it 'should allow passing error information', ->
+      error = new Error("Could not retrieve the category schemes")
+      action = func error
+      action.error.should.be.true
+      action.payload.should.equal error
