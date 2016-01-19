@@ -1,5 +1,4 @@
 list = ["Michaela", "Sami", "Xavier"]
 
-module.exports = {
+module.exports =
   dev: list
-}
