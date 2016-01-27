@@ -9,8 +9,8 @@
     "commit": "git-cz",
     "check-coverage": "istanbul check-coverage --statements 90 --branches 90 --functions 95 --lines 90",
     "report-coverage": "cat ./coverage/lcov.info | codecov",
-    "test": "mocha test/**/*.test.coffee --compilers coffee:coffee-script/register",
-    "test:single": "istanbul cover -x **/*.test.coffee _mocha -- test/**/*.test.coffee --compilers coffee:coffee-script/register --require coffee-coverage/register-istanbul",
+    "test": "mocha --recursive --compilers coffee:coffee-script/register",
+    "test:single": "istanbul cover -x **/*.test.coffee _mocha -- --recursive --compilers coffee:coffee-script/register --require coffee-coverage/register-istanbul",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "lint": "coffeelint src"
   },
@@ -32,19 +32,23 @@
   },
   "homepage": "https://github.com/ecbsdmx/t2swdc#readme",
   "devDependencies": {
+    "browserify": "13.0.0",
     "chai": "3.4.1",
     "codecov.io": "0.1.6",
     "coffee-coverage": "0.7.0",
     "coffee-script": "1.10.0",
+    "coffeeify": "2.0.1",
     "coffeelint": "1.14.2",
     "commitizen": "2.4.6",
     "cz-conventional-changelog": "1.1.5",
+    "enzyme": "1.4.1",
     "ghooks": "1.0.3",
     "istanbul": "0.4.1",
+    "jsdom": "7.2.2",
     "mocha": "2.3.4",
-    "semantic-release": "4.3.5",
-    "browserify": "13.0.0",
-    "coffeeify": "2.0.1"
+    "react-addons-test-utils": "0.14.6",
+    "react-dom": "0.14.6",
+    "semantic-release": "4.3.5"
   },
   "config": {
     "commitizen": {
@@ -56,6 +60,9 @@
   },
   "dependencies": {
     "immutable": "3.7.6",
+    "react": "0.14.6",
+    "react-dom": "0.14.6",
+    "react-redux": "4.0.6",
     "redux": "3.0.5",
     "redux-actions": "0.9.0"
   }
