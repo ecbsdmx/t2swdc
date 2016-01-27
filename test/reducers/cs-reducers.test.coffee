@@ -17,7 +17,7 @@ describe 'Category scheme reducers', ->
       state.should.be.an('object')
       state.selectedCategory.should.equal id
     it 'should have null as default value for the selected category', ->
-      action = csActions.csLoaded {categoryschemes: [{categories: []}]}
+      action = csActions.csLoaded [{categories: []}]
       state = csReducers {}, action
       state.should.be.an('object')
       state.should.have.property('selectedCategory')
@@ -25,7 +25,7 @@ describe 'Category scheme reducers', ->
 
   describe 'Reducer for loading of category schemes', ->
     it 'should change the category schemes array', ->
-      scheme = {categoryschemes: [{categories: []}]}
+      scheme = [{categories: []}]
       action = csActions.csLoaded scheme
       state = csReducers initialState, action
       state.should.be.an('object')
@@ -39,11 +39,11 @@ describe 'Category scheme reducers', ->
       state.should.have.property('categoryschemes')
       state.categoryschemes.toJS().should.be.empty
     it 'should generate an immutable collection', ->
-      scheme = {categoryschemes: [{categories: []}]}
+      scheme = [{categories: []}]
       action = csActions.csLoaded scheme
       state = csReducers initialState, action
       state.should.be.an('object')
       state.should.have.property('categoryschemes')
       state.categoryschemes.toJS().should.deep.equal(scheme)
-      scheme.categoryschemes.push {categories: [], id: 'test'}
+      scheme.push {categories: [], id: 'test'}
       state.categoryschemes.toJS().should.not.deep.equal(scheme)

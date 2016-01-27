@@ -10,6 +10,17 @@ categorySelected = (urn) ->
     throw TypeError 'The category id must be a non-empty string'
   createAction(ActionTypes.CATEGORY_SELECTED)(urn)
 
+# Validates the category schemes array
+#
+# @param cs the category schemes to be validated
+#
+# @return true if all category schemes are OK, false otherwise
+validItems = (cs) ->
+  valid = true
+  for item in cs
+    valid = if not item.categories then false else valid
+  valid
+
 # Creates an action indicating that the process to load the category schemes is
 # finished
 #
@@ -17,8 +28,9 @@ categorySelected = (urn) ->
 #
 csLoaded = (cs) ->
   if not cs or cs not instanceof Error and
-    not cs.categoryschemes or cs.categoryschemes?.length is 0
-      throw TypeError 'The parameter must be a category scheme object'
+    cs not instanceof Array or cs.length is 0 or not validItems cs
+      throw TypeError 'The parameter must be a category scheme array'
+
   createAction(ActionTypes.CS_LOADED)(cs)
 
 module.exports =

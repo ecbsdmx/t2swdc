@@ -28,9 +28,9 @@ describe 'Category scheme actions', ->
       expect(func.bind(func, '')).to.throw TypeError
       expect(func.bind(func, ' ')).to.throw TypeError
 
-  describe 'Actions for metadata loading', ->
+  describe 'Actions for category scheme loading', ->
     func = csActions.csLoaded
-    payload = {categoryschemes: [{categories: []}]}
+    payload = [{categories: []}]
 
     it 'should have the proper type', ->
       action = func payload
@@ -42,6 +42,8 @@ describe 'Category scheme actions', ->
       expect(func.bind(func, null)).to.throw TypeError
       expect(func.bind(func, {name: "Categories"})).to.throw TypeError
       expect(func.bind(func, {categoryschemes: []})).to.throw TypeError
+      expect(func.bind(func, [])).to.throw TypeError
+      expect(func.bind(func, [{id: 'Category Scheme'}])).to.throw TypeError
       action = func payload
       action.should.have.property 'payload'
       action.payload.should.equal payload
