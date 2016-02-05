@@ -6,7 +6,7 @@
 # @param [String] urn the SDMX urn of the selected category
 #
 categorySelected = (urn) ->
-  if not urn or typeof urn isnt 'string' or urn.trim().length is 0
+  unless typeof urn is 'string' and urn.trim().length > 1
     throw TypeError 'The category id must be a non-empty string'
   createAction(ActionTypes.CATEGORY_SELECTED)(urn)
 
@@ -16,6 +16,7 @@ categorySelected = (urn) ->
 #
 # @return true if all category schemes are OK, false otherwise
 validItems = (cs) ->
+  if cs.length is 0 then return false
   valid = true
   for item in cs
     valid = if not item.categories then false else valid
@@ -27,10 +28,8 @@ validItems = (cs) ->
 # @param [Object] cs the category scheme object
 #
 csLoaded = (cs) ->
-  if not cs or cs not instanceof Error and
-    cs not instanceof Array or cs.length is 0 or not validItems cs
-      throw TypeError 'The parameter must be a category scheme array'
-
+  unless cs instanceof Error or cs instanceof Array and validItems cs
+    throw TypeError 'The parameter must be a category scheme array'
   createAction(ActionTypes.CS_LOADED)(cs)
 
 module.exports =

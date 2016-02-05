@@ -1,5 +1,4 @@
 should = require('chai').should()
-expect = require('chai').expect
 {ActionTypes} = require '../../src/constants/action-types.coffee'
 {csReducers} = require '../../src/reducers/cs-reducers.coffee'
 csActions = require '../../src/actions/cs-actions.coffee'
@@ -14,36 +13,32 @@ describe 'Category scheme reducers', ->
       id = 'test'
       action = csActions.categorySelected id
       state = csReducers initialState, action
-      state.should.be.an('object')
-      state.selectedCategory.should.equal id
+      state.should.be.an('object').with.property('selectedCategory').
+        that.equals id
     it 'should have null as default value for the selected category', ->
       action = csActions.csLoaded [{categories: []}]
       state = csReducers {}, action
-      state.should.be.an('object')
-      state.should.have.property('selectedCategory')
-      expect(state.selectedCategory).to.be.null
+      state.should.be.an('object').with.property('selectedCategory').
+        that.is.a('null')
 
   describe 'Reducer for loading of category schemes', ->
     it 'should change the category schemes array', ->
       scheme = [{categories: []}]
       action = csActions.csLoaded scheme
       state = csReducers initialState, action
-      state.should.be.an('object')
-      state.should.have.property('categoryschemes')
+      state.should.be.an('object').with.property 'categoryschemes'
       state.categoryschemes.toJS().should.deep.equal(scheme)
     it 'should have an empty array as default for the category schemes', ->
       id = 'test'
       action = csActions.categorySelected id
       state = csReducers {}, action
-      state.should.be.an('object')
-      state.should.have.property('categoryschemes')
+      state.should.be.an('object').with.property 'categoryschemes'
       state.categoryschemes.toJS().should.be.empty
     it 'should generate an immutable collection', ->
       scheme = [{categories: []}]
       action = csActions.csLoaded scheme
       state = csReducers initialState, action
-      state.should.be.an('object')
-      state.should.have.property('categoryschemes')
+      state.should.be.an('object').with.property 'categoryschemes'
       state.categoryschemes.toJS().should.deep.equal(scheme)
       scheme.push {categories: [], id: 'test'}
       state.categoryschemes.toJS().should.not.deep.equal(scheme)

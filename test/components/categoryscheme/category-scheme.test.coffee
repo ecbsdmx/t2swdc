@@ -1,8 +1,4 @@
-chai = require 'chai'
-spies = require 'chai-spies'
-chai.use spies
-should = chai.should()
-expect = chai.expect
+should = require('chai').should()
 {CategoryScheme} =
   require '../../../src/components/categoryscheme/category-scheme.coffee'
 React = require 'react'
@@ -16,8 +12,7 @@ describe 'Category Scheme component', ->
   ]
 
   it 'should render a category scheme as a bootstrap list group div', ->
-    id = 'xyz'
-    name = 'category scheme'
+    [id, name] = ['xyz', 'category scheme']
     scheme = """
     <div id="cs_#{id}" class="list-group">\
     <a id="cat_A" href="#" class="list-group-item">\
@@ -29,5 +24,4 @@ describe 'Category Scheme component', ->
     element =
       React.createElement CategoryScheme, {id: id, name: name, categories: cats}
     wrapper = shallow element
-    html = wrapper.html()
-    expect(html).to.equal scheme
+    wrapper.html().should.equal scheme

@@ -4,8 +4,8 @@ dom = React.DOM
 Category = React.createClass
   render: ->
     dom.a(
-      {id: "cat_#{@props.id}", href: "#", className: "list-group-item"},
-      dom.span({className: "badge badge-primary"}, @props.numberOfFlows),
+      {id: "cat_#{@props.id}", href: '#', className: 'list-group-item'},
+      dom.span({className: 'badge badge-primary'}, @props.numberOfFlows),
       @props.name
     )
 

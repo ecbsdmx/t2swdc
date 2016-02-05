@@ -7,7 +7,7 @@ CategoryScheme = React.createClass
     categoryNodes = @props.categories.map (c) ->
       React.createElement Category,
         {key: c.id, id: c.id, name: c.name, numberOfFlows: c.dataflows.length}
-    dom.div {id: "cs_#{@props.id}", className:"list-group"},
+    dom.div {id: "cs_#{@props.id}", className: 'list-group'},
       categoryNodes
 
 CategoryScheme.propTypes = {

@@ -1,8 +1,4 @@
-chai = require 'chai'
-spies = require 'chai-spies'
-chai.use spies
-should = chai.should()
-expect = chai.expect
+should = require('chai').should()
 {Category} = require '../../../src/components/categoryscheme/category.coffee'
 React = require 'react'
 {shallow} = require 'enzyme'
@@ -10,16 +6,12 @@ React = require 'react'
 describe 'Category component', ->
 
   it 'should render a category as a bootstrap list group item with badge', ->
-    id = 'xyz'
-    name = 'category'
-    flowsNo = 3
+    [id, name, flowsNo] = ['xyz', 'category', 3]
     cat = """
-    <a id=\"cat_#{id}\" href=\"#\" class=\"list-group-item\">\
-    <span class=\"badge badge-primary\">#{flowsNo}</span>\
-    #{name}</a>
+    <a id="cat_#{id}" href="#" class="list-group-item">\
+    <span class="badge badge-primary">#{flowsNo}</span>#{name}</a>
     """
     element =
       React.createElement Category, {id: id, name: name, numberOfFlows: flowsNo}
     wrapper = shallow element
-    html = wrapper.html()
-    expect(html).to.equal cat
+    wrapper.html().should.equal cat

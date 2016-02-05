@@ -15,13 +15,13 @@ keyActions = [
 describe 'Action types', ->
   it 'should contain all key actions', ->
     for action in keyActions
-      ActionTypes.should.have.property(action)
+      ActionTypes.should.have.property action
 
   it 'should be a string', ->
     for property of ActionTypes
-      ActionTypes[property].should.be.a('string')
+      ActionTypes[property].should.be.a 'string'
 
   it 'should be uppercase', ->
     for property of ActionTypes
       value = ActionTypes[property]
-      value.should.equal(value.toUpperCase())
+      value.should.equal value.toUpperCase()
