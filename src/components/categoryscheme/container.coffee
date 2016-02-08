@@ -5,10 +5,9 @@
 mapStateToProps = (state) ->
   results = state.categoryschemes.get(0)
   return {
-    id: if results then state.categoryschemes.get(0).get('id') else "",
-    name: if results then state.categoryschemes.get(0).get('name') else "",
-    categories: if results then state.categoryschemes.get(0)?.
-     get('categories').toJS() else []
+    id: results?.get('id') ? '',
+    name: results?.get('name') ? '',
+    categories: results?.get('categories')?.toJS() ? []
   }
 
 mapDispatchToProps = (dispatch) ->

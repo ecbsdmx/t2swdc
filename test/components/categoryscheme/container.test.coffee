@@ -5,9 +5,7 @@ should = require('chai').should()
 {describeWithDOM, mount, spyLifecycle, shallow} = require 'enzyme'
 {csc} = require('../../../src/components/categoryscheme/container.coffee')
 csActions = require '../../../src/actions/cs-actions.coffee'
-{Provider} = require 'react-redux'
 jsdom = require 'mocha-jsdom'
-{spy} = require 'sinon'
 
 describe 'Category Scheme container component', ->
 
