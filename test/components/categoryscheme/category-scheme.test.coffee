@@ -3,6 +3,7 @@ should = require('chai').should()
   require '../../../src/components/categoryscheme/category-scheme.coffee'
 React = require 'react'
 {shallow} = require 'enzyme'
+{categorySelected} = require '../../../src/actions/cs-actions.coffee'
 
 describe 'Category Scheme component', ->
 
@@ -22,6 +23,7 @@ describe 'Category Scheme component', ->
     </div>
     """
     element =
-      React.createElement CategoryScheme, {id: id, name: name, categories: cats}
+      React.createElement CategoryScheme, {id: id, name: name, categories: cats,
+      onCategoryClick: categorySelected}
     wrapper = shallow element
     wrapper.html().should.equal scheme
