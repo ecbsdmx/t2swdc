@@ -6,7 +6,7 @@
 # @param [String] urn the SDMX urn of the selected category
 #
 categorySelected = (urn) ->
-  unless typeof urn is 'string' and urn.trim().length > 1
+  unless typeof urn is 'string' and urn.trim().length > 0
     throw TypeError 'The category id must be a non-empty string'
   createAction(ActionTypes.CATEGORY_SELECTED)(urn)
 
