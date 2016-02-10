@@ -1,20 +1,33 @@
+React = require 'react'
+{createStore} = require 'redux'
+{csReducers} = require '../../src/reducers/cs-reducers.coffee'
 should = require('chai').should()
-{store} = require '../../src/app/app.coffee'
+{shallow} = require 'enzyme'
 csActions = require '../../src/actions/cs-actions.coffee'
+jsdom = require 'mocha-jsdom'
+{App} = require '../../src/app/app.coffee'
 
-describe 'Store', ->
-  it 'should set an initial state with the default values', ->
-    state = store.getState()
-    state.should.be.an('object').with.property('selectedCategory').
-      that.is.a('null')
-    state.should.have.property 'categoryschemes'
-    state.categoryschemes.toJS().should.be.empty
+describe 'App component', ->
 
-  it 'should change the state when an action is dispatched', ->
-    id = 'test'
-    action = csActions.categorySelected id
-    store.dispatch(action)
-    state = store.getState()
-    state.should.have.property('selectedCategory').that.equals id
-    state.should.have.property 'categoryschemes'
-    state.categoryschemes.toJS().should.be.empty
+  jsdom()
+
+  it 'should populate an App component', ->
+    [id, name] = ['abcd', 'category scheme']
+    cats = [
+      {id:'A', name:'catA', dataflows:['flow1', 'flow2']},
+      {id:'B', name:'catB', dataflows:[]},
+    ]
+    payload = [{id: id, name: name, categories: cats}]
+    store = createStore csReducers
+    store.dispatch csActions.csLoaded payload
+    cscEle  = React.createElement App, {store: store}
+    wrapper = shallow cscEle
+    scheme = """
+    <div id="app"><div id="cs_#{id}" class="list-group">\
+    <a id="cat_A" href="#" class="list-group-item">\
+    <span class="badge badge-primary">2</span>catA</a>\
+    <a id="cat_B" href="#" class="list-group-item">\
+    <span class="badge badge-primary">0</span>catB</a>\
+    </div></div>
+    """
+    wrapper.html().should.equal scheme

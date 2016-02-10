@@ -1,7 +1,9 @@
-{createStore} = require 'redux'
-{csReducers} = require '../reducers/cs-reducers.coffee'
+React = require 'react'
+dom = React.DOM
+{csc} = require('../components/categoryscheme/container.coffee')
 
-store = createStore(csReducers)
+App = React.createClass
+  render: ->
+    dom.div {id: 'app'}, React.createElement csc, {store: @props.store}
 
-module.exports =
-  store: store
+exports.App = App
