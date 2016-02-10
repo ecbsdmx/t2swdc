@@ -4,8 +4,8 @@
   "description": "An SDMX Web Data Connector for Tableau",
   "main": "dist/index.js",
   "scripts": {
-    "prebuilds": "rm -rf dist && mkdir dist",
-    "build": "browserify --standalone wdc -t coffeeify --extension='.coffee' src/index.coffee > dist/index.js",
+    "prebuild": "rm -rf dist && mkdir dist",
+    "build": "browserify --standalone wdc -t coffeeify --extension='.coffee' src/index.coffee > dist/index.js && cp src/index.html dist/index.html",
     "commit": "git-cz",
     "compile": "coffee -c -m -o dist src || true",
     "check-coverage": "istanbul check-coverage --statements 80 --branches 80 --functions 80 --lines 80",

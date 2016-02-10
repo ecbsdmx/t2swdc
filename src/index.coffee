@@ -18,6 +18,6 @@ class Main
   run: () ->
     store = createStore csReducers
     populateStore store
+    ele = React.createElement App, {store: store}
     ReactDOM.render(ele, document.getElementById "wdc-app")
-
 module.exports = Main
