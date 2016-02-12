@@ -2,7 +2,7 @@ React = require 'react'
 {createStore} = require 'redux'
 {csReducers} = require '../../src/reducers/cs-reducers.coffee'
 should = require('chai').should()
-{shallow} = require 'enzyme'
+{mount} = require 'enzyme'
 csActions = require '../../src/actions/cs-actions.coffee'
 jsdom = require 'mocha-jsdom'
 {App} = require '../../src/app/app.coffee'
@@ -21,13 +21,10 @@ describe 'App component', ->
     store = createStore csReducers
     store.dispatch csActions.csLoaded payload
     cscEle  = React.createElement App, {store: store}
-    wrapper = shallow cscEle
-    scheme = """
-    <div id="app"><div id="cs_#{id}" class="list-group">\
-    <a id="cat_A" href="#" class="list-group-item">\
-    <span class="badge badge-primary">2</span>catA</a>\
-    <a id="cat_B" href="#" class="list-group-item">\
-    <span class="badge badge-primary">0</span>catB</a>\
-    </div></div>
-    """
-    wrapper.html().should.equal scheme
+    wrapper = mount cscEle
+    wrapper.find('div.wizard').should.have.length 1
+    wrapper.find('div.steps-container').should.have.length 1
+    wrapper.find('div.step-content').should.have.length 1
+    wrapper.find('div.step-pane').should.have.length 4
+    wrapper.find('div.active').should.have.length 1
+    wrapper.find('li.active').should.have.length 1
