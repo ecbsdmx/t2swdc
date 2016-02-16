@@ -20,3 +20,6 @@ exports.ActionTypes = class ActionTypes
 
   # Indicates that the user has selected the data he is interested in
   @DATA_SELECTED: 'DATA_SELECTED'
+
+  # Indicates that the step displayed in the wizard has changed
+  @WIZSTEP_CHANGED: 'WIZSTEP_CHANGED'
