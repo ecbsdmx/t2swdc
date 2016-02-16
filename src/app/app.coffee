@@ -1,10 +1,10 @@
 React = require 'react'
 dom = React.DOM
-{WizardSteps} = require('./wizard-steps.coffee')
-{WizardStepOne} = require('./wizard-step-1.coffee')
-{WizardStepTwo} = require('./wizard-step-2.coffee')
-{WizardStepThree} = require('./wizard-step-3.coffee')
-{WizardStepFour} = require('./wizard-step-4.coffee')
+{WizardSteps} = require('../components/wizard/wizard-steps.coffee')
+{WizardStepOne} = require('../components/wizard/wizard-step-1.coffee')
+{WizardStepTwo} = require('../components/wizard/wizard-step-2.coffee')
+{WizardStepThree} = require('../components/wizard/wizard-step-3.coffee')
+{WizardStepFour} = require('../components/wizard/wizard-step-4.coffee')
 
 App = React.createClass
   render: ->

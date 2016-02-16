@@ -1,6 +1,6 @@
 React = require 'react'
 dom = React.DOM
-{csc} = require('../components/categoryscheme/container.coffee')
+{csc} = require('../categoryscheme/container.coffee')
 
 Step = React.createClass
   render: ->
