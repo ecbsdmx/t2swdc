@@ -1,7 +1,9 @@
 React = require 'react'
 ReactDOM = require 'react-dom'
+wizard = require('./reducers/wiz-reducers.coffee').wizard
+categories = require('./reducers/cs-reducers.coffee').categories
+{combineReducers} = require 'redux'
 {createStore} = require 'redux'
-{csReducers} = require './reducers/cs-reducers.coffee'
 {App} = require './app/app.coffee'
 csActions = require './actions/cs-actions.coffee'
 
@@ -16,8 +18,10 @@ populateStore = (store) ->
 
 class Main
   run: () ->
-    store = createStore csReducers
+    reducers = combineReducers {categories, wizard}
+    store = createStore reducers
     populateStore store
     ele = React.createElement App, {store: store}
     ReactDOM.render(ele, document.getElementById "wdc-app")
+
 module.exports = Main

@@ -1,6 +1,6 @@
 should = require('chai').should()
 {ActionTypes} = require '../../src/constants/action-types.coffee'
-{wizReducers} = require '../../src/reducers/wiz-reducers.coffee'
+wizReducers = require('../../src/reducers/wiz-reducers.coffee').wizard
 actions = require '../../src/actions/wiz-actions.coffee'
 csActions = require '../../src/actions/cs-actions.coffee'
 

@@ -32,4 +32,4 @@ categoryschemes = (state = Immutable.List([]), action) ->
 reducers = combineReducers {selectedCategory, categoryschemes}
 
 module.exports =
-  csReducers: reducers
+  categories: reducers

@@ -3,7 +3,7 @@
 {CategoryScheme} = require './category-scheme.coffee'
 
 mapStateToProps = (state) ->
-  results = state.categoryschemes.get(0)
+  results = state.categories.categoryschemes.get(0)
   return {
     id: results?.get('id') ? '',
     name: results?.get('name') ? '',

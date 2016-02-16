@@ -9,7 +9,8 @@ dom = React.DOM
 App = React.createClass
   render: ->
     dom.div {className: 'wizard', 'data-initialize': 'wizard', id: 'wizard'},
-      React.createElement WizardSteps
+      React.createElement WizardSteps,
+        {step: @props.store.getState().wizard.selectedStep}
       dom.div {className: 'step-content'},
         React.createElement WizardStepOne, {store: @props.store}
         React.createElement WizardStepTwo

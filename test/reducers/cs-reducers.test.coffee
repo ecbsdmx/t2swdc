@@ -1,6 +1,6 @@
 should = require('chai').should()
 {ActionTypes} = require '../../src/constants/action-types.coffee'
-{csReducers} = require '../../src/reducers/cs-reducers.coffee'
+csReducers = require('../../src/reducers/cs-reducers.coffee').categories
 csActions = require '../../src/actions/cs-actions.coffee'
 
 describe 'Category scheme reducers', ->

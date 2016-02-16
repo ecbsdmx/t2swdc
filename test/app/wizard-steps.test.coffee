@@ -6,11 +6,11 @@ should = require('chai').should()
 describe 'Wizard steps component', ->
 
   it 'should have the expected 4 steps', ->
-    wrapper = shallow React.createElement WizardSteps
+    wrapper = shallow React.createElement WizardSteps, {step: 1}
     output = """
     <div class="steps-container">\
     <ul class="steps">\
-    <li class="active" data-step="1" data-name="topics">\
+    <li data-step="1" data-name="topics" class="active">\
     <span class="badge">1</span>Topics<span class="chevron"></span></li>\
     <li data-step="2" data-name="datasets">\
     <span class="badge">2</span>Data sets<span class="chevron"></span></li>\

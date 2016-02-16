@@ -1,6 +1,8 @@
 React = require 'react'
 {createStore} = require 'redux'
-{csReducers} = require '../../../src/reducers/cs-reducers.coffee'
+categories = require('../../../src/reducers/cs-reducers.coffee').categories
+wizard = require('../../../src/reducers/wiz-reducers.coffee').wizard
+{combineReducers} = require 'redux'
 should = require('chai').should()
 {describeWithDOM, mount, spyLifecycle, shallow} = require 'enzyme'
 {csc} = require('../../../src/components/categoryscheme/container.coffee')
@@ -18,7 +20,8 @@ describe 'Category Scheme container component', ->
       {id:'B', name:'catB', dataflows:[]},
     ]
     payload = [{id: id, name: name, categories: cats}]
-    store = createStore csReducers
+    reducers = combineReducers {categories, wizard}
+    store = createStore reducers
     store.dispatch csActions.csLoaded payload
     cscEle  = React.createElement csc, {store: store}
     wrapper = shallow cscEle
@@ -33,14 +36,16 @@ describe 'Category Scheme container component', ->
     wrapper.html().should.equal scheme
 
   it 'should start with an empty state', ->
-    store = createStore csReducers
+    reducers = combineReducers {categories, wizard}
+    store = createStore reducers
     cscEle  = React.createElement csc, {store: store}
     wrapper = shallow cscEle
     empty = '<div id="cs_" class="list-group"></div>'
     wrapper.html().should.equal empty
 
   it 'should call componentDidMount', ->
-    store = createStore csReducers
+    reducers = combineReducers {categories, wizard}
+    store = createStore reducers
     cscEle  = React.createElement csc, {store: store}
     spyLifecycle csc
     wrapper = mount cscEle
@@ -53,10 +58,11 @@ describe 'Category Scheme container component', ->
       {id:'B', name:'catB', dataflows:[]},
     ]
     payload = [{id: id, name: name, categories: cats}]
-    store = createStore csReducers
+    reducers = combineReducers {categories, wizard}
+    store = createStore reducers
     store.dispatch csActions.csLoaded payload
     cscEle  = React.createElement csc, {store: store}
     wrapper = mount cscEle
     wrapper.find('#cat_A').should.have.length 1
     wrapper.find('#cat_A').simulate 'click'
-    store.getState().selectedCategory.should.equal 'A'
+    store.getState().categories.selectedCategory.should.equal 'A'

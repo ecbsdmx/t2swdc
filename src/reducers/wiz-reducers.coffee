@@ -18,4 +18,4 @@ selectedStep = (state = 1, action) ->
 reducers = combineReducers {selectedStep}
 
 module.exports =
-  wizReducers: reducers
+  wizard: reducers

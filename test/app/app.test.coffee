@@ -1,6 +1,8 @@
 React = require 'react'
 {createStore} = require 'redux'
-{csReducers} = require '../../src/reducers/cs-reducers.coffee'
+categories = require('../../src/reducers/cs-reducers.coffee').categories
+wizard = require('../../src/reducers/wiz-reducers.coffee').wizard
+{combineReducers} = require 'redux'
 should = require('chai').should()
 {mount} = require 'enzyme'
 csActions = require '../../src/actions/cs-actions.coffee'
@@ -18,7 +20,8 @@ describe 'App component', ->
       {id:'B', name:'catB', dataflows:[]},
     ]
     payload = [{id: id, name: name, categories: cats}]
-    store = createStore csReducers
+    reducers = combineReducers {categories, wizard}
+    store = createStore reducers
     store.dispatch csActions.csLoaded payload
     cscEle  = React.createElement App, {store: store}
     wrapper = mount cscEle
