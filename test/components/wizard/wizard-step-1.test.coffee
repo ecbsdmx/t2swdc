@@ -16,11 +16,11 @@ describe 'Wizard step 1 component', ->
       {id:'A', name:'catA', dataflows:['flow1', 'flow2']},
       {id:'B', name:'catB', dataflows:[]},
     ]
-    payload = [{id: id, name: name, categories: cats}]
-    reducers = combineReducers {categories, wizard}
-    store = createStore reducers
-    store.dispatch csActions.csLoaded payload
-    step  = React.createElement WizardStepOne, {store: store}
+    scheme = {id: id, name: name, categories: cats}
+    onCategoryClick = (id) ->
+      console.log id
+    step  = React.createElement WizardStepOne,
+      {categoryscheme: scheme, action: onCategoryClick}
     wrapper = shallow step
     scheme = """
     <div class="step-pane active sample-pane" \
