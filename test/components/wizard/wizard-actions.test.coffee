@@ -13,7 +13,7 @@ describe 'Wizard actions component', ->
     <button type="button" class="btn btn-default btn-prev">\
 		<span class="glyphicon glyphicon-arrow-left"></span></button>\
     <button type="button" class="btn btn-default btn-next" \
-    data-last="Send to Tableau">\
+    data-last="Send to Tableau" disabled="">\
     <span class="glyphicon glyphicon-arrow-right"></span></button>\
     </div>\
     """

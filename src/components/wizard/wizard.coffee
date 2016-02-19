@@ -17,7 +17,7 @@ Wizard = React.createClass
       $('.btn-next').removeAttr('disabled')
 
   componentDidMount: ->
-    $('#wizard').on('changed.fu.wizard', @stepChanged)
+    if $? then $('#wizard').on('changed.fu.wizard', @stepChanged)
 
   render: ->
     dom.div {className: 'wizard', 'data-initialize': 'wizard', id: 'wizard'},
