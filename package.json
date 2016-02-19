@@ -45,6 +45,7 @@
     "enzyme": "1.4.1",
     "ghooks": "1.0.3",
     "istanbul": "0.4.1",
+    "jquery": "2.2.0",
     "jsdom": "7.2.2",
     "mocha": "2.3.4",
     "react-addons-test-utils": "0.14.6",

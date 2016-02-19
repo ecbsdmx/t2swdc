@@ -48,6 +48,22 @@ describe 'Wizard container component', ->
     steps.find('.active').should.have.length 1
     steps.find('.active').html().should.contain 'datasets'
 
+  it 'should populate a Wizard Actions component', ->
+    [id, name] = ['xyz', 'category scheme']
+    cats = [
+      {id:'A', name:'catA', dataflows:['flow1', 'flow2']},
+      {id:'B', name:'catB', dataflows:[]},
+    ]
+    payload = [{id: id, name: name, categories: cats}]
+    reducers = combineReducers {categories, wizard}
+    store = createStore reducers
+    store.dispatch csActions.csLoaded payload
+    ele  = React.createElement wiz, {store: store}
+    wrapper = mount ele
+    wrapper.find('.actions').should.have.length 1
+    steps = wrapper.find('.actions')
+    steps.find('button').should.have.length 2
+
   it 'should populate a Category Scheme component', ->
     [id, name] = ['xyz', 'category scheme']
     cats = [

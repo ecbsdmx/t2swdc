@@ -22,4 +22,7 @@ Steps = React.createClass
         createItem ++idx, @props.step, label\
           for label, idx in ['Topics', 'Data sets', 'Filters', 'Options']
 
+Steps.propTypes =
+  step: React.PropTypes.number.isRequired
+
 exports.WizardSteps = Steps

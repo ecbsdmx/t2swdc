@@ -6,12 +6,12 @@
 mapStateToProps = (state) ->
   results = state.categories.categoryschemes.get(0)
   return {
-    selectedStep: state.wizard.selectedStep,
-    categoryscheme: {
-      id: results?.get('id') ? '',
-      name: results?.get('name') ? '',
+    selectedStep: state.wizard.selectedStep
+    categoryscheme:
+      id: results?.get('id') ? ''
+      name: results?.get('name') ? ''
       categories: results?.get('categories')?.toJS() ? []
-    }
+    selectedCategory: state.categories.selectedCategory
   }
 
 mapDispatchToProps = (dispatch) ->
@@ -19,6 +19,7 @@ mapDispatchToProps = (dispatch) ->
     onCategoryClick: (id) ->
       dispatch categorySelected id
       dispatch wizstepChanged 2
+      if $? then $('#wizard').wizard 'next'
   }
 
 WizardContainer =
