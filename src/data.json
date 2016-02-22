@@ -1,0 +1,133 @@
+{
+  "id":"MOBILE_NAVI_PUB",
+  "agencyID":"ECB.DISS",
+  "version": "1.0",
+  "categories": [
+    {
+      "id":"01",
+      "name":"Monetary operations",
+      "dataflows": [
+        {
+          "id": "BSI_PUB",
+          "name": "Balance Sheet Items"
+        },
+        {
+          "id": "FM_PUB",
+          "name": "Financial market data"
+        },
+        {
+          "id": "ILM_PUB",
+          "name": "Internal Liquidity Management"
+        }
+      ]
+    },
+    {
+      "id":"02",
+      "name":"Prices, output, demand and labour market",
+      "dataflows": [
+        {
+          "id": "CPP_PUB",
+          "name": "Commercial Property Price statistics"
+        },
+        {
+          "id": "ICP_PUB",
+          "name": "Indices of Consumer prices"
+        },
+        {
+          "id": "JVC_PUB",
+          "name": "Eurostat Job Vacancy Statistics"
+        },
+        {
+          "id": "RPP_PUB",
+          "name": "Residential Property Price Index Statistics"
+        },
+        {
+          "id": "STS_PUB",
+          "name": "Short-Term Statistics"
+        }
+      ]
+    },
+    {
+      "id":"03",
+      "name":"Monetary and financial statistics",
+      "dataflows": [
+        {
+          "id": "BSI_PUB",
+          "name": "Balance Sheet Items"
+        },
+        {
+          "id": "FM_PUB",
+          "name": "Financial market data"
+        },
+        {
+          "id": "FVC_PUB",
+          "name": "Financial Vehicle Corporation"
+        },
+        {
+          "id": "IRS_PUB",
+          "name": "Interest rate statistics"
+        },
+        {
+          "id": "IVF_PUB",
+          "name": "Investment Funds Balance Sheet Statistics"
+        },
+        {
+          "id": "MIR_PUB",
+          "name": "MFI Interest Rate Statistics"
+        },
+        {
+          "id": "SEC_PUB",
+          "name": "Securities"
+        },
+        {
+          "id": "YC_PUB",
+          "name": "Financial market data - yield curve"
+        }
+      ]
+    },
+    {
+      "id":"04",
+      "name":"External transactions and positions",
+      "dataflows": [
+        {
+          "id": "TRD_PUB",
+          "name": "External Trade"
+        }
+      ]
+    },
+    {
+      "id":"05",
+      "name":"Exchange rates",
+      "dataflows": [
+        {
+          "id": "EXR_PUB",
+          "name": "Exchange rates"
+        }
+      ]
+    },
+    {
+      "id":"06",
+      "name":"Payments and securities trading, clearing, settlement",
+      "dataflows": [
+        {
+          "id": "BKN_PUB",
+          "name": "Banknotes statistics"
+        },
+        {
+          "id": "BSI_PUB",
+          "name": "Balance Sheet Items"
+        }
+      ]
+    },
+    {
+      "id":"07",
+      "name":"Banknotes and Coins",
+      "dataflows": [
+        {
+          "id": "BKN_PUB",
+          "name": "Banknotes statistics"
+        }
+      ]
+    }
+  ]
+}

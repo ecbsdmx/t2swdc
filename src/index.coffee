@@ -6,15 +6,10 @@ categories = require('./reducers/cs-reducers.coffee').categories
 {createStore} = require 'redux'
 {App} = require './app/app.coffee'
 csActions = require './actions/cs-actions.coffee'
+data = require './data.json'
 
 populateStore = (store) ->
-  [id, name] = ['abcd', 'category scheme']
-  cats = [
-    {id:'A', name:'catA', dataflows:['flow1', 'flow2']},
-    {id:'B', name:'catB', dataflows:[]},
-  ]
-  payload = [{id: id, name: name, categories: cats}]
-  store.dispatch csActions.csLoaded payload
+  store.dispatch csActions.csLoaded [data]
 
 class Main
   run: () ->
