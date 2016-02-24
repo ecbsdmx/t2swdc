@@ -5,15 +5,15 @@ dom = React.DOM
 Step = React.createClass
   render: ->
     opts =
-      id: @props.categoryscheme.id
-      name: @props.categoryscheme.name
-      categories: @props.categoryscheme.categories
+      id: @props.item.id
+      name: @props.item.name
+      categories: @props.item.categories
       onCategoryClick: @props.action
     dom.div {className: 'step-pane active sample-pane', 'data-step': '1'},
       React.createElement CategoryScheme, opts
 
 Step.propTypes = {
-  categoryscheme: React.PropTypes.object.isRequired,
+  item: React.PropTypes.object.isRequired,
   action: React.PropTypes.func.isRequired
 }
 

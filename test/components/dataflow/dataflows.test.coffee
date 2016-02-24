@@ -18,6 +18,6 @@ describe 'Dataflows component', ->
     </div>
     """
     element = React.createElement Dataflows,
-      {dataflows: flows, onClick: () -> console.log 'test'}
+      {dataflows: flows, onDataflowClick: () -> console.log 'test'}
     wrapper = shallow element
     wrapper.html().should.equal out
