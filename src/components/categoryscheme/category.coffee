@@ -1,6 +1,5 @@
 React = require 'react'
 dom = React.DOM
-{categorySelected} = require '../../actions/cs-actions.coffee'
 
 Category = React.createClass
   handleCategorySelected: (ev) ->
