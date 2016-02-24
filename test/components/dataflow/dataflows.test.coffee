@@ -17,6 +17,7 @@ describe 'Dataflows component', ->
     <a id="df_BP6" href="#" class="list-group-item">Balance of Payments</a>\
     </div>
     """
-    element = React.createElement Dataflows, {dataflows: flows}
+    element = React.createElement Dataflows,
+      {dataflows: flows, onClick: () -> console.log 'test'}
     wrapper = shallow element
     wrapper.html().should.equal out
