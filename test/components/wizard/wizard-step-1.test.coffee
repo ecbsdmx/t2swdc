@@ -1,11 +1,6 @@
 React = require 'react'
-{createStore} = require 'redux'
-categories = require('../../../src/reducers/cs-reducers.coffee').categories
-wizard = require('../../../src/reducers/wiz-reducers.coffee').wizard
-{combineReducers} = require 'redux'
 should = require('chai').should()
 {shallow} = require 'enzyme'
-csActions = require '../../../src/actions/cs-actions.coffee'
 {WizardStepOne} = require '../../../src/components/wizard/wizard-step-1.coffee'
 
 describe 'Wizard step 1 component', ->
@@ -20,7 +15,7 @@ describe 'Wizard step 1 component', ->
     onCategoryClick = (id) ->
       console.log id
     step  = React.createElement WizardStepOne,
-      {categoryscheme: scheme, action: onCategoryClick}
+      {item: scheme, action: onCategoryClick}
     wrapper = shallow step
     scheme = """
     <div class="step-pane active sample-pane" \

@@ -1,14 +1,17 @@
+jsdom = require 'mocha-jsdom'
 React = require 'react'
 {createStore} = require 'redux'
 categories = require('../../../src/reducers/cs-reducers.coffee').categories
 wizard = require('../../../src/reducers/wiz-reducers.coffee').wizard
+categories = require('../../../src/reducers/cs-reducers.coffee').categories
+dataflows = require('../../../src/reducers/df-reducers.coffee').dataflows
 {combineReducers} = require 'redux'
 should = require('chai').should()
 {describeWithDOM, mount, spyLifecycle, shallow} = require 'enzyme'
 wiz = require('../../../src/components/wizard/container.coffee').wizContainer
 csActions = require '../../../src/actions/cs-actions.coffee'
 wizActions = require '../../../src/actions/wiz-actions.coffee'
-jsdom = require 'mocha-jsdom'
+dfActions = require '../../../src/actions/df-actions.coffee'
 
 describe 'Wizard container component', ->
 
@@ -78,34 +81,18 @@ describe 'Wizard container component', ->
     wrapper = mount ele
     wrapper.find("#cs_#{id}").should.have.length 1
 
-  it 'should update the store with the selected category', ->
+  it 'should populate a Dataflows component', ->
     [id, name] = ['xyz', 'category scheme']
     cats = [
-      {id:'A', name:'catA', dataflows:['flow1', 'flow2']},
+      {id:'A', name:'catA', dataflows:[{id: 'flow1', name: 'flow1Name'}]},
       {id:'B', name:'catB', dataflows:[]},
     ]
     payload = [{id: id, name: name, categories: cats}]
     reducers = combineReducers {categories, wizard}
     store = createStore reducers
     store.dispatch csActions.csLoaded payload
+    store.dispatch csActions.categorySelected 'A'
     ele  = React.createElement wiz, {store: store}
     wrapper = mount ele
-    wrapper.find('#cat_A').should.have.length 1
-    wrapper.find('#cat_A').simulate 'click'
-    store.getState().categories.selectedCategory.should.equal 'A'
-
-  it 'should update the store with the next wizard step', ->
-    [id, name] = ['xyz', 'category scheme']
-    cats = [
-      {id:'A', name:'catA', dataflows:['flow1', 'flow2']},
-      {id:'B', name:'catB', dataflows:[]},
-    ]
-    payload = [{id: id, name: name, categories: cats}]
-    reducers = combineReducers {categories, wizard}
-    store = createStore reducers
-    store.dispatch csActions.csLoaded payload
-    ele  = React.createElement wiz, {store: store}
-    wrapper = mount ele
-    wrapper.find('#cat_A').should.have.length 1
-    wrapper.find('#cat_A').simulate 'click'
-    store.getState().wizard.selectedStep.should.equal 2
+    wrapper.find("#dataflows").should.have.length 1
+    wrapper.find("#df_flow1").should.have.length 1

@@ -11,7 +11,8 @@ Wizard = React.createClass
   stepChanged: (event, data) ->
     step = $('#wizard').wizard('selectedItem').step
     if step == 1 and not @props.selectedCategory \
-    or step == 2 and not @props.selectedDataflow
+    or step == 2 and not @props.selectedDataflow \
+    or step == 3 and not @props.selectedFilters
       $('.btn-next').attr('disabled', 'disabled')
     else
       $('.btn-next').removeAttr('disabled')
@@ -26,8 +27,9 @@ Wizard = React.createClass
         {step: @props.selectedStep, selectedCategory: @props.selectedCategory}
       dom.div {className: 'step-content'},
         React.createElement StepOne,
-         {categoryscheme: @props.categoryscheme, action: @props.onCategoryClick}
-        React.createElement StepTwo
+         {item: @props.categoryscheme, action: @props.onCategoryClick}
+        React.createElement StepTwo,
+         {items: @props.dataflows, action: @props.onDataflowClick}
         React.createElement StepThree
         React.createElement StepFour
 
@@ -36,5 +38,8 @@ Wizard.propTypes =
   categoryscheme: React.PropTypes.object.isRequired
   onCategoryClick: React.PropTypes.func.isRequired
   selectedCategory: React.PropTypes.string
+  dataflows: React.PropTypes.array.isRequired
+  onDataflowClick: React.PropTypes.func.isRequired
+  selectedFilters: React.PropTypes.object.isRequired
 
 exports.Wizard = Wizard
