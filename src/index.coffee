@@ -7,7 +7,7 @@ dataflows = require('./reducers/df-reducers.coffee').dataflows
 {createStore} = require 'redux'
 {App} = require './app/app.coffee'
 csActions = require './actions/cs-actions.coffee'
-data = require './data.json'
+data = require '../test/fixtures/data.json'
 
 populateStore = (store) ->
   store.dispatch csActions.csLoaded [data]
