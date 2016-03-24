@@ -32,6 +32,13 @@ csLoaded = (cs) ->
     throw TypeError 'The parameter must be a category scheme array'
   createAction(ActionTypes.FETCH_CS_SUCCESS)(cs)
 
+# Creates an action indicating that the process to load the category schemes has
+# started
+#
+csLoading = ->
+  createAction(ActionTypes.FETCH_CS)()
+
 module.exports =
   categorySelected: categorySelected
   csLoaded: csLoaded
+  csLoading: csLoading

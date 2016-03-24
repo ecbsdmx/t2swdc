@@ -28,8 +28,15 @@ categoryschemes = (state = Immutable.List([]), action) ->
     when ActionTypes.FETCH_CS_SUCCESS then Immutable.fromJS(action.payload)
     else return state
 
+# Updates the state to indicate that the process to fetch category schemes has
+# started
+isFetching = (state = false, action) ->
+  switch action.type
+    when ActionTypes.FETCH_CS then true
+    else return state
+
 # Combines together all the reducers related to category schemes
-reducers = combineReducers {selectedCategory, categoryschemes}
+reducers = combineReducers {selectedCategory, categoryschemes, isFetching}
 
 module.exports =
   categories: reducers
