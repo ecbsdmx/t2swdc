@@ -7,7 +7,10 @@ Filters = React.createClass
     filters = @props.dimensions?.map (d) ->
       React.createElement Filter,
         {key: "dim_#{d.id}", id: d.id, name: d.name, values: d.values}
-    dom.form {id: 'dimensionFilters'}, filters
+    dom.div (id: 'filters'),
+      dom.div {className: 'bg-info'},
+        "#{@props.series.length} series matching your query."
+      dom.form {id: 'dimensionFilters'}, filters
 
 Filters.propTypes = {
   dimensions: React.PropTypes.array.isRequired

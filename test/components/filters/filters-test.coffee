@@ -19,6 +19,8 @@ describe 'Filters component', ->
   it 'should render dimension filters as a form with select fields', ->
     element = React.createElement Filters, {series: s, dimensions: d}
     out = """
+    <div id="filters">\
+    <div class="bg-info">#{s.length} series matching your query.</div>\
     <form id="dimensionFilters">\
     <div class="form-group">\
     <label for="fltr_#{d[0].id}">#{d[0].name} (#{d[0].values.length})</label>\
@@ -57,7 +59,8 @@ describe 'Filters component', ->
     <option id=\"#{d[3].values[0].id}\">#{d[3].values[0].name}</option>\
     </select>\
     </div>\
-    </form>
+    </form>\
+    </div>
     """
     wrapper = mount element
     wrapper.html().should.equal out
