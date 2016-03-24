@@ -12,7 +12,7 @@ Immutable = require 'immutable'
 #
 selectedCategory = (state = null, action) ->
   switch action.type
-    when ActionTypes.CATEGORY_SELECTED then action.payload
+    when ActionTypes.SELECT_CATEGORY then action.payload
     else return state
 
 # Updates the state when the category schemes have been loaded
@@ -25,7 +25,7 @@ selectedCategory = (state = null, action) ->
 #
 categoryschemes = (state = Immutable.List([]), action) ->
   switch action.type
-    when ActionTypes.CS_LOADED then Immutable.fromJS(action.payload)
+    when ActionTypes.FETCH_CS_SUCCESS then Immutable.fromJS(action.payload)
     else return state
 
 # Combines together all the reducers related to category schemes

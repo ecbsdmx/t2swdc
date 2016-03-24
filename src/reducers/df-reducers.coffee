@@ -12,7 +12,7 @@ Immutable = require 'immutable'
 #
 selectedDataflow = (state = null, action) ->
   switch action.type
-    when ActionTypes.DATAFLOW_SELECTED then action.payload
+    when ActionTypes.SELECT_DATAFLOW then action.payload
     else return state
 
 # Combines together all the reducers related to dataflows

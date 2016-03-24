@@ -8,7 +8,7 @@
 dataflowSelected = (id) ->
   unless typeof id is 'string' and id.trim().length > 0
     throw TypeError 'The dataflow id must be a non-empty string'
-  createAction(ActionTypes.DATAFLOW_SELECTED)(id)
+  createAction(ActionTypes.SELECT_DATAFLOW)(id)
 
 module.exports =
   dataflowSelected: dataflowSelected

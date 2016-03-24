@@ -8,7 +8,7 @@
 categorySelected = (urn) ->
   unless typeof urn is 'string' and urn.trim().length > 0
     throw TypeError 'The category id must be a non-empty string'
-  createAction(ActionTypes.CATEGORY_SELECTED)(urn)
+  createAction(ActionTypes.SELECT_CATEGORY)(urn)
 
 # Validates the category schemes array
 #
@@ -30,7 +30,7 @@ validItems = (cs) ->
 csLoaded = (cs) ->
   unless cs instanceof Error or cs instanceof Array and validItems cs
     throw TypeError 'The parameter must be a category scheme array'
-  createAction(ActionTypes.CS_LOADED)(cs)
+  createAction(ActionTypes.FETCH_CS_SUCCESS)(cs)
 
 module.exports =
   categorySelected: categorySelected

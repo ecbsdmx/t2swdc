@@ -6,7 +6,7 @@ csActions = require '../../src/actions/cs-actions.coffee'
 describe 'Category scheme actions', ->
 
   describe 'Actions creators', ->
-    it 'should allow creating CATEGORY_SELECTED actions', ->
+    it 'should allow creating SELECT_CATEGORY actions', ->
       csActions.should.have.property 'categorySelected'
 
   describe 'Actions for category selection', ->
@@ -15,7 +15,7 @@ describe 'Category scheme actions', ->
     it 'should have the proper type', ->
       action = func 'urn'
       action.should.have.property 'type'
-      action.type.should.equal ActionTypes.CATEGORY_SELECTED
+      action.type.should.equal ActionTypes.SELECT_CATEGORY
 
     it 'should have the unique id of the category as payload', ->
       uid = 'test'
@@ -35,7 +35,7 @@ describe 'Category scheme actions', ->
     it 'should have the proper type', ->
       action = func payload
       action.should.have.property 'type'
-      action.type.should.equal ActionTypes.CS_LOADED
+      action.type.should.equal ActionTypes.FETCH_CS_SUCCESS
 
     it 'should have a valid category scheme object as payload', ->
       expect(func.bind(func, 2)).to.throw TypeError

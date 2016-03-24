@@ -3,13 +3,12 @@ should = require('chai').should()
 {ActionTypes} = require '../../src/constants/action-types.coffee'
 
 keyActions = [
-  'CS_LOADED'
-  'DSD_LOADED'
-  'DATA_LOADED'
-  'CATEGORY_SELECTED'
-  'DATAFLOW_SELECTED'
-  'FILTERS_CHANGED'
-  'DATA_SELECTED'
+  'FETCH_CS_SUCCESS'
+  'FETCH_DATA_SUCCESS'
+  'SELECT_CATEGORY'
+  'SELECT_DATAFLOW'
+  'CHANGE_FILTER'
+  'SELECT_DATA'
 ]
 
 describe 'Action types', ->
