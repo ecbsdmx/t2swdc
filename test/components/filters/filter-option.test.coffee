@@ -9,6 +9,6 @@ describe 'FilterOption component', ->
 
   it 'should render a dimension value used in a filter as a select option', ->
     element = React.createElement FilterOption, {id: id, name: name}
-    out = "<option id=\"#{id}\">#{name}</option>"
+    out = "<option id=\"#{id}\">#{id} - #{name}</option>"
     wrapper = shallow element
     wrapper.html().should.equal out

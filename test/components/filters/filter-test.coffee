@@ -20,11 +20,12 @@ describe 'Filter component', ->
     out = """
     <div class="form-group">\
     <label for="fltr_#{i}">#{n} (2)</label>\
-    <select id="fltr_#{i}" class="form-control" multiple="" data-placeholder=\
-    "Select an item or start typing to search" data-allow-clear="true" \
-    data-select-on-close="true" data-close-on-select="false">\
-    <option id=\"#{v[0].id}\">#{v[0].name}</option>\
-    <option id=\"#{v[1].id}\">#{v[1].name}</option>\
+    <select id="fltr_#{i}" class="form-control select2" multiple="" \
+    data-placeholder="Select an item or start typing to search" \
+    data-allow-clear="true" data-close-on-select="false" \
+    data-theme="bootstrap">\
+    <option id=\"#{v[0].id}\">#{v[0].id} - #{v[0].name}</option>\
+    <option id=\"#{v[1].id}\">#{v[1].id} - #{v[1].name}</option>\
     </select>\
     </div>
     """
@@ -36,11 +37,11 @@ describe 'Filter component', ->
     out = """
     <div class="form-group">\
     <label for="fltr_#{i}">#{n} (1)</label>\
-    <select id="fltr_#{i}" class="form-control" multiple="" disabled="" \
-     data-placeholder="Select an item or start typing to search" \
-     data-allow-clear="true" \
-     data-select-on-close="true" data-close-on-select="false">\
-    <option id=\"#{v[0].id}\">#{v[0].name}</option>\
+    <select id="fltr_#{i}" class="form-control select2" multiple="" \
+    disabled="" data-placeholder="Select an item or start typing to search" \
+    data-allow-clear="true" data-close-on-select="false" \
+    data-theme="bootstrap">\
+    <option id=\"#{v[0].id}\">#{v[0].id} - #{v[0].name}</option>\
     </select>\
     </div>
     """
