@@ -15,6 +15,12 @@ describe 'Filter component', ->
     {id: 'A', name: 'Annual'}
   ]
 
+  # Unsorted
+  u = [
+    {id: 'D', name: 'Daily'}
+    {id: 'A', name: 'Annual'}
+  ]
+
   it 'should render a dimension filter as a select field', ->
     element = React.createElement Filter, {id: i, name: n, values: v}
     out = """
@@ -42,6 +48,23 @@ describe 'Filter component', ->
     data-allow-clear="true" data-close-on-select="false" \
     data-theme="bootstrap">\
     <option id=\"#{v[0].id}\">#{v[0].id} - #{v[0].name}</option>\
+    </select>\
+    </div>
+    """
+    wrapper = shallow element
+    wrapper.html().should.equal out
+
+  it 'should sort by code ids', ->
+    element = React.createElement Filter, {id: i, name: n, values: u}
+    out = """
+    <div class="form-group">\
+    <label for="fltr_#{i}">#{n} (2)</label>\
+    <select id="fltr_#{i}" class="form-control select2" multiple="" \
+    data-placeholder="Select an item or start typing to search" \
+    data-allow-clear="true" data-close-on-select="false" \
+    data-theme="bootstrap">\
+    <option id=\"#{u[1].id}\">#{u[1].id} - #{u[1].name}</option>\
+    <option id=\"#{u[0].id}\">#{u[0].id} - #{u[0].name}</option>\
     </select>\
     </div>
     """

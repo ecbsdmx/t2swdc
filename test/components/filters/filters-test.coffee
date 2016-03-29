@@ -30,7 +30,7 @@ describe 'Filters component', ->
   s = ['A.NOK.EUR.SP00', 'A.CHF.EUR.SP00']
   d = [
     {id: 'FREQ', name: 'Frequency', values: [{id: 'A', name: 'Annual'}]}
-    {id: 'CURRENCY', name: 'Currency', values: [{id: 'NOK', name: 'Norwegian krone'}, {id: 'CHF', name: 'Swiss Franc'}]}
+    {id: 'CURRENCY', name: 'Currency', values: [{id: 'CHF', name: 'Swiss Franc'}, {id: 'NOK', name: 'Norwegian krone'}]}
     {id: 'CURRENCY_DENOM', name: 'Currency denominator', values: [{id: 'EUR', name: 'Euro'}]}
     {id: 'EXR_TYPE', name: 'Exchange rate type', values: [{id: 'SP00', name: 'Bilateral exchange rates'}]}
   ]

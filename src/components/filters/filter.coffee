@@ -4,7 +4,12 @@ dom = React.DOM
 
 Filter = React.createClass
   render: ->
-    options = @props.values?.map (v) ->
+    sorted = @props.values?.sort (a, b) ->
+      val = 0
+      if a.id < b.id then val = -1
+      else if a.id > b.id then val = 1
+      val
+    options = sorted.map (v) ->
       React.createElement FilterOption, {key: v.id, id: v.id, name: v.name}
     id = "fltr_#{@props.id}"
     size = @props.values?.length ? 0
