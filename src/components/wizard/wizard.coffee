@@ -6,6 +6,12 @@ StepOne = require('./wizard-step-1.coffee').WizardStepOne
 StepTwo = require('./wizard-step-2.coffee').WizardStepTwo
 StepThree = require('./wizard-step-3.coffee').WizardStepThree
 StepFour = require('./wizard-step-4.coffee').WizardStepFour
+data = require '../../../test/fixtures/ICP_PUB.json'
+
+dimensions = data.structure.dimensions.series
+series = []
+for own key, value of data.dataSets[0].series
+  series.push key
 
 Wizard = React.createClass
   stepChanged: (event, data) ->
@@ -30,7 +36,8 @@ Wizard = React.createClass
          {item: @props.categoryscheme, action: @props.onCategoryClick}
         React.createElement StepTwo,
          {items: @props.dataflows, action: @props.onDataflowClick}
-        React.createElement StepThree
+        React.createElement StepThree,
+         {dimensions: dimensions, series: series}
         React.createElement StepFour
 
 Wizard.propTypes =
