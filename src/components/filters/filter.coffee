@@ -2,15 +2,14 @@ React = require 'react'
 dom = React.DOM
 {FilterOption} = require './filter-option.coffee'
 
+createNode = (i) ->
+  React.createElement FilterOption, {key: i.id, id: i.id, name: i.name}
+
 Filter = React.createClass
   render: ->
     sorted = @props.values?.sort (a, b) ->
-      val = 0
-      if a.id < b.id then val = -1
-      else if a.id > b.id then val = 1
-      val
-    options = sorted.map (v) ->
-      React.createElement FilterOption, {key: v.id, id: v.id, name: v.name}
+      if a.id < b.id then -1 else 1
+    options = (createNode v for v in sorted when v)
     id = "fltr_#{@props.id}"
     size = @props.values?.length ? 0
     dom.div {className: 'form-group'},

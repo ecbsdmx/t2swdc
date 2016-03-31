@@ -9,9 +9,7 @@ StepFour = require('./wizard-step-4.coffee').WizardStepFour
 data = require '../../../test/fixtures/ICP_PUB.json'
 
 dimensions = data.structure.dimensions.series
-series = []
-for own key, value of data.dataSets[0].series
-  series.push key
+series =  data.dataSets[0].series
 
 Wizard = React.createClass
   stepChanged: (event, data) ->
@@ -27,6 +25,7 @@ Wizard = React.createClass
     if $? then $('#wizard').on('changed.fu.wizard', @stepChanged)
 
   render: ->
+    step = if $? then $('#wizard').wizard('selectedItem').step else 1
     dom.div {className: 'wizard', 'data-initialize': 'wizard', id: 'wizard'},
       React.createElement Steps, {step: @props.selectedStep}
       React.createElement Actions,
@@ -37,7 +36,7 @@ Wizard = React.createClass
         React.createElement StepTwo,
          {items: @props.dataflows, action: @props.onDataflowClick}
         React.createElement StepThree,
-         {dimensions: dimensions, series: series}
+         {dimensions: dimensions, series: series, step: step}
         React.createElement StepFour
 
 Wizard.propTypes =
