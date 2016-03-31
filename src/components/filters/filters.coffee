@@ -20,29 +20,40 @@ createFilter = (dimension, smd) ->
     values: codes
   filter
 
-createSelectField = (d) ->
+createSelectField = (d, idx) ->
   React.createElement Filter,
-      {key: "dim_#{d.id}", id: d.id, name: d.name, values: d.values}
+      {key: "dim_#{d.id}", id: d.id, name: d.name, values: d.values, pos: idx}
 
 Filters = React.createClass
 
-  universe: undefined
+  universe: {}
   dims: []
 
+  handleChanged: (ev) ->
+    fieldId = ev.currentTarget.id
+    fieldNo = fieldId.replace('fltr_', '')
+    values = $(ev.currentTarget).val()
+    if values
+      @dims[fieldNo].filterFunction (i) -> i in values
+    else
+      @dims[fieldNo].filterAll()
+    @forceUpdate()
+
   componentWillUpdate: (nextProps, nextState) ->
-    console.log 'In Filters Will Update'
-    series = (seriesKeyToObject key for key of nextProps.series)
-    @universe = crossfilter series
-    @dims.push @universe.dimension((d) -> d[k]) for k of series[0]
+    if not @universe.hasOwnProperty 'groupAll'
+      series = (seriesKeyToObject key for key of nextProps.series)
+      @universe = crossfilter series
+      @dims.push @universe.dimension((d) -> d[k]) for k of series[0]
 
   componentDidUpdate: ->
     if $? then $('select').select2()
+    if $? then $('select').on('select2:select', @handleChanged)
+    if $? then $('select').on('select2:unselect', @handleChanged)
 
   render: ->
-    if @universe
-      console.log 'In Filters Render'
+    if @universe.hasOwnProperty 'groupAll'
       filters = createFilters @dims, @props.dimensions
-      nodes = (createSelectField d for d in filters)
+      nodes = (createSelectField(d, idx) for d, idx in filters)
       dom.div (id: 'filters'),
         dom.div {className: 'bg-info text-right'},
           "#{@universe.groupAll().value()} series matching your query."
