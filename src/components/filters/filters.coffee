@@ -24,6 +24,10 @@ createSelectField = (d, idx) ->
   React.createElement Filter,
       {key: "dim_#{d.id}", id: d.id, name: d.name, values: d.values, pos: idx}
 
+formatSelection = (item, field) ->
+  $(field).parent().tooltip({title: item.text})
+  item.text.substring(0, item.text.indexOf(' -'))
+
 Filters = React.createClass
 
   universe: {}  # The crossfilter universe
@@ -49,9 +53,17 @@ Filters = React.createClass
       @smd = (addPositions i for i in nextProps.dimensions)
 
   componentDidUpdate: ->
-    if $? then $('select').select2()
+    console.log 'In componentDidUpdate'
+    if $? then $('select').select2({templateSelection: formatSelection})
     if $? then $('select').on('select2:select', @handleChanged)
     if $? then $('select').on('select2:unselect', @handleChanged)
+    if $? # If there is only one value in the field, it should be selected
+      $('select').each(() ->
+        select = $(this)
+        options = $(select).find('option')
+        if options.length is 1
+          $(select).val($(options[0]).val()).trigger('change')
+      )
 
   render: ->
     if @universe.hasOwnProperty 'groupAll'
