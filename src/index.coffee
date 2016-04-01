@@ -1,12 +1,12 @@
 React = require 'react'
 ReactDOM = require 'react-dom'
-wizard = require('./reducers/wiz-reducers.coffee').wizard
-categories = require('./reducers/cs-reducers.coffee').categories
-dataflows = require('./reducers/df-reducers.coffee').dataflows
+wizard = require('./reducers/wiz-reducers').wizard
+categories = require('./reducers/cs-reducers').categories
+dataflows = require('./reducers/df-reducers').dataflows
 {combineReducers} = require 'redux'
 {createStore} = require 'redux'
-{App} = require './app/app.coffee'
-csActions = require './actions/cs-actions.coffee'
+{App} = require './app/app'
+csActions = require './actions/cs-actions'
 data = require '../test/fixtures/data.json'
 
 populateStore = (store) ->

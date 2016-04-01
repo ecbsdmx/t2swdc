@@ -1,5 +1,5 @@
 {combineReducers} = require 'redux'
-{ActionTypes} = require '../constants/action-types.coffee'
+{ActionTypes} = require '../constants/action-types'
 Immutable = require 'immutable'
 
 # Updates the state when a user has selected a category
@@ -12,7 +12,7 @@ Immutable = require 'immutable'
 #
 selectedCategory = (state = null, action) ->
   switch action.type
-    when ActionTypes.CATEGORY_SELECTED then action.payload
+    when ActionTypes.SELECT_CATEGORY then action.payload
     else return state
 
 # Updates the state when the category schemes have been loaded
@@ -25,11 +25,18 @@ selectedCategory = (state = null, action) ->
 #
 categoryschemes = (state = Immutable.List([]), action) ->
   switch action.type
-    when ActionTypes.CS_LOADED then Immutable.fromJS(action.payload)
+    when ActionTypes.FETCH_CS_SUCCESS then Immutable.fromJS(action.payload)
+    else return state
+
+# Updates the state to indicate that the process to fetch category schemes has
+# started
+isFetching = (state = false, action) ->
+  switch action.type
+    when ActionTypes.FETCH_CS then true
     else return state
 
 # Combines together all the reducers related to category schemes
-reducers = combineReducers {selectedCategory, categoryschemes}
+reducers = combineReducers {selectedCategory, categoryschemes, isFetching}
 
 module.exports =
   categories: reducers

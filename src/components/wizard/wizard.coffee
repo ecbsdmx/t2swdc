@@ -1,11 +1,15 @@
 React = require 'react'
 dom = React.DOM
-Steps = require('./wizard-steps.coffee').WizardSteps
-Actions = require('./wizard-actions.coffee').WizardActions
-StepOne = require('./wizard-step-1.coffee').WizardStepOne
-StepTwo = require('./wizard-step-2.coffee').WizardStepTwo
-StepThree = require('./wizard-step-3.coffee').WizardStepThree
-StepFour = require('./wizard-step-4.coffee').WizardStepFour
+Steps = require('./wizard-steps').WizardSteps
+Actions = require('./wizard-actions').WizardActions
+StepOne = require('./wizard-step-1').WizardStepOne
+StepTwo = require('./wizard-step-2').WizardStepTwo
+StepThree = require('./wizard-step-3').WizardStepThree
+StepFour = require('./wizard-step-4').WizardStepFour
+data = require '../../../test/fixtures/ICP_PUB.json'
+
+dimensions = data.structure.dimensions.series
+series =  data.dataSets[0].series
 
 Wizard = React.createClass
   stepChanged: (event, data) ->
@@ -21,6 +25,7 @@ Wizard = React.createClass
     if $? then $('#wizard').on('changed.fu.wizard', @stepChanged)
 
   render: ->
+    step = if $? then $('#wizard').wizard('selectedItem').step else 1
     dom.div {className: 'wizard', 'data-initialize': 'wizard', id: 'wizard'},
       React.createElement Steps, {step: @props.selectedStep}
       React.createElement Actions,
@@ -30,7 +35,8 @@ Wizard = React.createClass
          {item: @props.categoryscheme, action: @props.onCategoryClick}
         React.createElement StepTwo,
          {items: @props.dataflows, action: @props.onDataflowClick}
-        React.createElement StepThree
+        React.createElement StepThree,
+         {dimensions: dimensions, series: series, step: step}
         React.createElement StepFour
 
 Wizard.propTypes =

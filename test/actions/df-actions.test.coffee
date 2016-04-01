@@ -6,7 +6,7 @@ dfActions = require '../../src/actions/df-actions.coffee'
 describe 'Dataflows actions', ->
 
   describe 'Actions creators', ->
-    it 'should allow creating DATAFLOW_SELECTED actions', ->
+    it 'should allow creating SELECT_DATAFLOW actions', ->
       dfActions.should.have.property 'dataflowSelected'
 
   describe 'Actions for dataflow selection', ->
@@ -15,7 +15,7 @@ describe 'Dataflows actions', ->
     it 'should have the proper type', ->
       action = func 'EXR'
       action.should.have.property 'type'
-      action.type.should.equal ActionTypes.DATAFLOW_SELECTED
+      action.type.should.equal ActionTypes.SELECT_DATAFLOW
 
     it 'should have the unique id of the dataflow as payload', ->
       id = 'EXR'

@@ -7,6 +7,7 @@ describe 'Category scheme reducers', ->
   initialState =
     selectedCategory: ''
     categoryschemes: []
+    isFetching: false
 
   describe 'Reducer for category selection', ->
     it 'should change the selected category', ->
@@ -42,3 +43,9 @@ describe 'Category scheme reducers', ->
       state.categoryschemes.toJS().should.deep.equal(scheme)
       scheme.push {categories: [], id: 'test'}
       state.categoryschemes.toJS().should.not.deep.equal(scheme)
+
+  describe 'Reducer for starting the load of category scheme', ->
+    it 'should toggle the isLoading property', ->
+      action = csActions.csLoading()
+      state = csReducers initialState, action
+      state.should.be.an('object').with.property('isFetching').that.equals true

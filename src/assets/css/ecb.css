@@ -37,3 +37,11 @@ h4 small {
 .badge-primary {
   background-color: #3A87AD;
 }
+
+form {
+  padding: 5px;
+}
+
+body {
+  color: #777777;
+}

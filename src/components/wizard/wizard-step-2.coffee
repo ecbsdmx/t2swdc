@@ -1,6 +1,6 @@
 React = require 'react'
 dom = React.DOM
-{Dataflows} = require '../dataflow/dataflows.coffee'
+{Dataflows} = require '../dataflow/dataflows'
 
 Step = React.createClass
   render: ->
