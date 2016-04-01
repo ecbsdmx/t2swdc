@@ -2,6 +2,7 @@ should = require('chai').should()
 {Filter} = require '../../../src/components/filters/filter.coffee'
 React = require 'react'
 {shallow} = require 'enzyme'
+jsdom = require 'mocha-jsdom'
 
 describe 'Filter component', ->
 
@@ -30,8 +31,8 @@ describe 'Filter component', ->
     data-placeholder="Select an item or start typing to search" \
     data-allow-clear="true" data-close-on-select="false" \
     data-theme="bootstrap">\
-    <option value="0">#{v[0].id} - #{v[0].name}</option>\
-    <option value="1">#{v[1].id} - #{v[1].name}</option>\
+    <option>#{v[0].id} - #{v[0].name}</option>\
+    <option>#{v[1].id} - #{v[1].name}</option>\
     </select>\
     </div>
     """
@@ -48,7 +49,7 @@ describe 'Filter component', ->
     disabled="" data-placeholder="Select an item or start typing to search" \
     data-allow-clear="true" data-close-on-select="false" \
     data-theme="bootstrap">\
-    <option value="0">#{v[0].id} - #{v[0].name}</option>\
+    <option>#{v[0].id} - #{v[0].name}</option>\
     </select>\
     </div>
     """
@@ -64,8 +65,8 @@ describe 'Filter component', ->
     data-placeholder="Select an item or start typing to search" \
     data-allow-clear="true" data-close-on-select="false" \
     data-theme="bootstrap">\
-    <option value="0">#{u[1].id} - #{u[1].name}</option>\
-    <option value="1">#{u[0].id} - #{u[0].name}</option>\
+    <option>#{u[1].id} - #{u[1].name}</option>\
+    <option>#{u[0].id} - #{u[0].name}</option>\
     </select>\
     </div>
     """

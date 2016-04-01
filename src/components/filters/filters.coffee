@@ -3,6 +3,10 @@ dom = React.DOM
 {Filter} = require './filter.coffee'
 crossfilter = require 'crossfilter2'
 
+addPositions = (dimension) ->
+  c.pos = idx for c, idx in dimension.values
+  dimension
+
 seriesKeyToObject = (item) ->
   object = {}
   object[idx] = v for v, idx in item.split(':')
@@ -14,11 +18,7 @@ createFilters = (dimensions, seriesDim) ->
 createFilter = (dimension, smd) ->
   indices = (i.key for i in dimension.group().all() when i.value isnt 0)
   codes = (smd.values[i] for i in indices)
-  filter =
-    id: smd.id
-    name: smd.name
-    values: codes
-  filter
+  {id: smd.id, name: smd.name, values: codes}
 
 createSelectField = (d, idx) ->
   React.createElement Filter,
@@ -26,12 +26,12 @@ createSelectField = (d, idx) ->
 
 Filters = React.createClass
 
-  universe: {}
-  dims: []
+  universe: {}  # The crossfilter universe
+  dims: []      # The crossfilter dimensions
+  smd: []       # The SDMX series dimensions
 
   handleChanged: (ev) ->
-    fieldId = ev.currentTarget.id
-    fieldNo = fieldId.replace('fltr_', '')
+    fieldNo = ev.currentTarget.id.replace('fltr_', '')
     values = $(ev.currentTarget).val()
     if values
       @dims[fieldNo].filterFunction (i) -> i in values
@@ -40,10 +40,13 @@ Filters = React.createClass
     @forceUpdate()
 
   componentWillUpdate: (nextProps, nextState) ->
-    if not @universe.hasOwnProperty 'groupAll'
+    # When getting new data, we need to create crossfilter universe & dimensions
+    if not @universe.hasOwnProperty 'groupAll' or
+    nextProps.series isnt @props.series
       series = (seriesKeyToObject key for key of nextProps.series)
       @universe = crossfilter series
       @dims.push @universe.dimension((d) -> d[k]) for k of series[0]
+      @smd = (addPositions i for i in nextProps.dimensions)
 
   componentDidUpdate: ->
     if $? then $('select').select2()
@@ -52,7 +55,7 @@ Filters = React.createClass
 
   render: ->
     if @universe.hasOwnProperty 'groupAll'
-      filters = createFilters @dims, @props.dimensions
+      filters = createFilters @dims, @smd
       nodes = (createSelectField(d, idx) for d, idx in filters)
       dom.div (id: 'filters'),
         dom.div {className: 'bg-info text-right'},
