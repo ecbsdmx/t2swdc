@@ -33,6 +33,7 @@ Filters = React.createClass
   universe: {}  # The crossfilter universe
   dims: []      # The crossfilter dimensions
   smd: []       # The SDMX series dimensions
+  isInitial: false
 
   handleChanged: (ev) ->
     fieldNo = ev.currentTarget.id.replace('fltr_', '')
@@ -51,18 +52,20 @@ Filters = React.createClass
       @universe = crossfilter series
       @dims.push @universe.dimension((d) -> d[k]) for k of series[0]
       @smd = (addPositions i for i in nextProps.dimensions)
+      @isInitial = true
 
   componentDidUpdate: ->
-    console.log 'In componentDidUpdate'
-    if $? then $('select').select2({templateSelection: formatSelection})
-    if $? then $('select').on('select2:select', @handleChanged)
-    if $? then $('select').on('select2:unselect', @handleChanged)
+    if @isInitial
+      if $? then $('select').select2({templateSelection: formatSelection})
+      if $? then $('select').on('select2:select', @handleChanged)
+      if $? then $('select').on('select2:unselect', @handleChanged)
+      @isInitial = false
     if $? # If there is only one value in the field, it should be selected
       $('select').each(() ->
         select = $(this)
-        options = $(select).find('option')
+        options = $(select).find 'option'
         if options.length is 1
-          $(select).val($(options[0]).val()).trigger('change')
+          $(select).val($(options[0]).val()).trigger 'change'
       )
 
   render: ->
