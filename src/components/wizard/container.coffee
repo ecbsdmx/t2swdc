@@ -1,8 +1,8 @@
 {connect} = require 'react-redux'
-{categorySelected} = require '../../actions/cs-actions.coffee'
-{wizstepChanged} = require '../../actions/wiz-actions.coffee'
-{dataflowSelected} = require '../../actions/df-actions.coffee'
-{Wizard} = require './wizard.coffee'
+{categorySelected} = require '../../actions/cs-actions'
+{wizstepChanged} = require '../../actions/wiz-actions'
+{dataflowSelected} = require '../../actions/df-actions'
+{Wizard} = require './wizard'
 
 findAttachedFlows = (state) ->
   categoryscheme = state.categories.categoryschemes.get(0).toJS()

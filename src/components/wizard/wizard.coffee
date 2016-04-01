@@ -1,11 +1,11 @@
 React = require 'react'
 dom = React.DOM
-Steps = require('./wizard-steps.coffee').WizardSteps
-Actions = require('./wizard-actions.coffee').WizardActions
-StepOne = require('./wizard-step-1.coffee').WizardStepOne
-StepTwo = require('./wizard-step-2.coffee').WizardStepTwo
-StepThree = require('./wizard-step-3.coffee').WizardStepThree
-StepFour = require('./wizard-step-4.coffee').WizardStepFour
+Steps = require('./wizard-steps').WizardSteps
+Actions = require('./wizard-actions').WizardActions
+StepOne = require('./wizard-step-1').WizardStepOne
+StepTwo = require('./wizard-step-2').WizardStepTwo
+StepThree = require('./wizard-step-3').WizardStepThree
+StepFour = require('./wizard-step-4').WizardStepFour
 data = require '../../../test/fixtures/ICP_PUB.json'
 
 dimensions = data.structure.dimensions.series

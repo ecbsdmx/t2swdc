@@ -1,5 +1,5 @@
 {combineReducers} = require 'redux'
-{ActionTypes} = require '../constants/action-types.coffee'
+{ActionTypes} = require '../constants/action-types'
 Immutable = require 'immutable'
 
 # Updates the state when a user has selected a dataflow

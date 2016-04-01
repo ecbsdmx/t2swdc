@@ -1,6 +1,6 @@
 React = require 'react'
 dom = React.DOM
-{Filter} = require './filter.coffee'
+{Filter} = require './filter'
 crossfilter = require 'crossfilter2'
 
 addPositions = (dimension) ->

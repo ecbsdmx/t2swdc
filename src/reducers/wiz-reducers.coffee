@@ -1,5 +1,5 @@
 {combineReducers} = require 'redux'
-{ActionTypes} = require '../constants/action-types.coffee'
+{ActionTypes} = require '../constants/action-types'
 
 # Updates the state when the step displayed in the wizard need to be changed
 #

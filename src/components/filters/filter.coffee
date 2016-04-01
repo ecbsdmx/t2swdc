@@ -1,6 +1,6 @@
 React = require 'react'
 dom = React.DOM
-{FilterOption} = require './filter-option.coffee'
+{FilterOption} = require './filter-option'
 
 createNode = (i) ->
   React.createElement FilterOption,

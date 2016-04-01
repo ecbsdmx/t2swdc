@@ -1,6 +1,6 @@
 should = require('chai').should()
 
-{ActionTypes} = require '../../src/constants/action-types.coffee'
+{ActionTypes} = require '../../src/constants/action-types'
 
 keyActions = [
   'FETCH_CS'

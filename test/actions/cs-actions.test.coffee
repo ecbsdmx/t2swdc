@@ -1,7 +1,7 @@
 should = require('chai').should()
 expect = require('chai').expect
-{ActionTypes} = require '../../src/constants/action-types.coffee'
-csActions = require '../../src/actions/cs-actions.coffee'
+{ActionTypes} = require '../../src/constants/action-types'
+csActions = require '../../src/actions/cs-actions'
 
 describe 'Category scheme actions', ->
 

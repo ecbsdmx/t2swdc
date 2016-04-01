@@ -1,5 +1,5 @@
 {createAction} = require 'redux-actions'
-{ActionTypes} = require '../constants/action-types.coffee'
+{ActionTypes} = require '../constants/action-types'
 
 # Creates an action indicating that the user has selected a dataflow
 #
