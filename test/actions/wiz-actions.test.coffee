@@ -11,7 +11,7 @@ describe 'Wizard actions', ->
     it 'should have the proper type', ->
       action = func 1
       action.should.have.property 'type'
-      action.type.should.equal ActionTypes.WIZSTEP_CHANGED
+      action.type.should.equal ActionTypes.CHANGE_WIZSTEP
 
     it 'should have the new step as payload', ->
       step = 2

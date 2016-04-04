@@ -1,17 +1,17 @@
 jsdom = require 'mocha-jsdom'
 React = require 'react'
 {createStore} = require 'redux'
-categories = require('../../../src/reducers/cs-reducers.coffee').categories
-wizard = require('../../../src/reducers/wiz-reducers.coffee').wizard
-categories = require('../../../src/reducers/cs-reducers.coffee').categories
-dataflows = require('../../../src/reducers/df-reducers.coffee').dataflows
+categories = require('../../../src/reducers/cs-reducers').categories
+wizard = require('../../../src/reducers/wiz-reducers').wizard
+categories = require('../../../src/reducers/cs-reducers').categories
+dataflows = require('../../../src/reducers/df-reducers').dataflows
 {combineReducers} = require 'redux'
 should = require('chai').should()
 {describeWithDOM, mount, spyLifecycle, shallow} = require 'enzyme'
-wiz = require('../../../src/components/wizard/container.coffee').wizContainer
-csActions = require '../../../src/actions/cs-actions.coffee'
-wizActions = require '../../../src/actions/wiz-actions.coffee'
-dfActions = require '../../../src/actions/df-actions.coffee'
+wiz = require('../../../src/components/wizard/container').wizContainer
+csActions = require '../../../src/actions/cs-actions'
+wizActions = require '../../../src/actions/wiz-actions'
+dfActions = require '../../../src/actions/df-actions'
 
 describe 'Wizard container component', ->
 

@@ -1,7 +1,7 @@
 React = require 'react'
 should = require('chai').should()
 {shallow} = require 'enzyme'
-{WizardStepTwo} = require '../../../src/components/wizard/wizard-step-2.coffee'
+{WizardStepTwo} = require '../../../src/components/wizard/wizard-step-2'
 
 describe 'Wizard step 2 component', ->
 

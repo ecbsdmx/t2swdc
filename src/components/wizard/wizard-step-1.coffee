@@ -1,6 +1,6 @@
 React = require 'react'
 dom = React.DOM
-{CategoryScheme} = require '../categoryscheme/category-scheme.coffee'
+{CategoryScheme} = require '../categoryscheme/category-scheme'
 
 Step = React.createClass
   render: ->

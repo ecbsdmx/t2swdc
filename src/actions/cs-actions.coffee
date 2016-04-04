@@ -1,5 +1,5 @@
 {createAction} = require 'redux-actions'
-{ActionTypes} = require '../constants/action-types.coffee'
+{ActionTypes} = require '../constants/action-types'
 
 # Creates an action indicating that the user has selected a category
 #
@@ -8,7 +8,7 @@
 categorySelected = (urn) ->
   unless typeof urn is 'string' and urn.trim().length > 0
     throw TypeError 'The category id must be a non-empty string'
-  createAction(ActionTypes.CATEGORY_SELECTED)(urn)
+  createAction(ActionTypes.SELECT_CATEGORY)(urn)
 
 # Validates the category schemes array
 #
@@ -30,8 +30,15 @@ validItems = (cs) ->
 csLoaded = (cs) ->
   unless cs instanceof Error or cs instanceof Array and validItems cs
     throw TypeError 'The parameter must be a category scheme array'
-  createAction(ActionTypes.CS_LOADED)(cs)
+  createAction(ActionTypes.FETCH_CS_SUCCESS)(cs)
+
+# Creates an action indicating that the process to load the category schemes has
+# started
+#
+csLoading = ->
+  createAction(ActionTypes.FETCH_CS)()
 
 module.exports =
   categorySelected: categorySelected
   csLoaded: csLoaded
+  csLoading: csLoading

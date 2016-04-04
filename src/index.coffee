@@ -1,8 +1,8 @@
 React = require 'react'
 ReactDOM = require 'react-dom'
-wizard = require('./reducers/wiz-reducers.coffee').wizard
-categories = require('./reducers/cs-reducers.coffee').categories
-dataflows = require('./reducers/df-reducers.coffee').dataflows
+wizard = require('./reducers/wiz-reducers').wizard
+categories = require('./reducers/cs-reducers').categories
+dataflows = require('./reducers/df-reducers').dataflows
 {combineReducers} = require 'redux'
 {createStore} = require 'redux'
 csActions = require './actions/cs-actions.coffee'

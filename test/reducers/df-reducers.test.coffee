@@ -1,8 +1,8 @@
 should = require('chai').should()
-{ActionTypes} = require '../../src/constants/action-types.coffee'
-dfReducers = require('../../src/reducers/df-reducers.coffee').dataflows
-dfActions = require '../../src/actions/df-actions.coffee'
-csActions = require '../../src/actions/cs-actions.coffee'
+{ActionTypes} = require '../../src/constants/action-types'
+dfReducers = require('../../src/reducers/df-reducers').dataflows
+dfActions = require '../../src/actions/df-actions'
+csActions = require '../../src/actions/cs-actions'
 
 describe 'Dataflow reducers', ->
   initialState =

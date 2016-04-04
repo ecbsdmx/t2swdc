@@ -1,25 +1,28 @@
 exports.ActionTypes = class ActionTypes
 
-  # Indicates that the process to load the category schemes is finished
-  @CS_LOADED: 'CS_LOADED'
+  # Indicates that the process to load the category schemes has started
+  @FETCH_CS: 'FETCH_CS'
 
-  # Indicates that the process to load the DSD and its constraints is finished
-  @DSD_LOADED: 'DSD_LOADED'
+  # Indicates that the process to load the category schemes is finished
+  @FETCH_CS_SUCCESS: 'FETCH_CS_SUCCESS'
+
+  # Indicates that the process to load the category schemes has failed
+  @FETCH_CS_FAILURE: 'FETCH_CS_FAILURE'
 
   # Indicates that the process to load the data is finished
-  @DATA_LOADED: 'DATA_LOADED'
+  @FETCH_DATA_SUCCESS: 'FETCH_DATA_SUCCESS'
 
   # Indicates that the user has selected a category
-  @CATEGORY_SELECTED: 'CATEGORY_SELECTED'
+  @SELECT_CATEGORY: 'SELECT_CATEGORY'
 
   # Indicates that the user has selected a dataflow
-  @DATAFLOW_SELECTED: 'DATAFLOW_SELECTED'
+  @SELECT_DATAFLOW: 'SELECT_DATAFLOW'
 
-  # Indicates that the user has changed the dimension filters
-  @FILTERS_CHANGED: 'FILTERS_CHANGED'
+  # Indicates that the user has changed a dimension filter
+  @CHANGE_FILTER: 'CHANGE_FILTER'
 
   # Indicates that the user has selected the data he is interested in
-  @DATA_SELECTED: 'DATA_SELECTED'
+  @SELECT_DATA: 'SELECT_DATA'
 
   # Indicates that the step displayed in the wizard has changed
-  @WIZSTEP_CHANGED: 'WIZSTEP_CHANGED'
+  @CHANGE_WIZSTEP: 'CHANGE_WIZSTEP'
