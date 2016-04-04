@@ -5,19 +5,19 @@ categories = require('./reducers/cs-reducers').categories
 dataflows = require('./reducers/df-reducers').dataflows
 {combineReducers} = require 'redux'
 {createStore} = require 'redux'
-{App} = require './app/app'
-csActions = require './actions/cs-actions'
+csActions = require './actions/cs-actions.coffee'
 data = require '../test/fixtures/data.json'
+wizContainer = require('./components/wizard/container.coffee').wizContainer
+{Provider} = require 'react-redux'
 
 populateStore = (store) ->
   store.dispatch csActions.csLoaded [data]
 
-class Main
-  run: () ->
-    reducers = combineReducers {categories, wizard, dataflows}
-    store = createStore reducers
-    populateStore store
-    ele = React.createElement App, {store: store}
-    ReactDOM.render(ele, document.getElementById "wdc-app")
+reducers = combineReducers {categories, wizard, dataflows}
+store = createStore reducers
+populateStore store
 
-module.exports = Main
+provider = React.createElement Provider, { store },
+  React.createElement wizContainer
+
+ReactDOM.render(provider, document.getElementById "wdc-app")
