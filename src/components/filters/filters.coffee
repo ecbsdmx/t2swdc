@@ -1,6 +1,7 @@
 React = require 'react'
 dom = React.DOM
 {Filter} = require './filter'
+{MatchingSeries} = require './matching-series'
 crossfilter = require 'crossfilter2'
 
 addPositions = (dimension) ->
@@ -73,8 +74,8 @@ Filters = React.createClass
       filters = createFilters @dims, @smd
       nodes = (createSelectField(d, idx) for d, idx in filters)
       dom.div (id: 'filters'),
-        dom.div {className: 'bg-info text-right'},
-          "#{@universe.groupAll().value()} series matching your query."
+        React.createElement MatchingSeries,
+          {number: @universe.groupAll().value()}
         dom.form {id: 'dimensionFilters'}, nodes
     else false
 

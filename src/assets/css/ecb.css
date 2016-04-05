@@ -45,3 +45,13 @@ form {
 body {
   color: #777777;
 }
+
+.no-top-margin {
+  margin-top: 0;
+}
+
+#MatchingSeries {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 5px;
+}
