@@ -9,7 +9,6 @@ keyActions = [
   'FETCH_DATA_SUCCESS'
   'SELECT_CATEGORY'
   'SELECT_DATAFLOW'
-  'CHANGE_FILTER'
   'SELECT_DATA'
   'CHANGE_WIZSTEP'
 ]
@@ -22,7 +21,6 @@ describe 'Action types', ->
       keyActions.should.contain value
       count++
     count.should.equal keyActions.length
-
 
   it 'should be a string', ->
     for property of ActionTypes
