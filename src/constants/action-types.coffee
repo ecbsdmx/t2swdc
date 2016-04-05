@@ -18,9 +18,6 @@ exports.ActionTypes = class ActionTypes
   # Indicates that the user has selected a dataflow
   @SELECT_DATAFLOW: 'SELECT_DATAFLOW'
 
-  # Indicates that the user has changed a dimension filter
-  @CHANGE_FILTER: 'CHANGE_FILTER'
-
   # Indicates that the user has selected the data he is interested in
   @SELECT_DATA: 'SELECT_DATA'
 
