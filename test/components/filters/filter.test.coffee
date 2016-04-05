@@ -25,7 +25,8 @@ describe 'Filter component', ->
   it 'should render a dimension filter as a select field', ->
     element = React.createElement Filter, {id: i, name: n, values: v, pos: 0}
     out = """
-    <div class="form-group">\
+    <div class="form-group row">\
+    <div class="col-sm-9 col-md-10 col-lg-11">\
     <label for="fltr_0">#{n} (2)</label>\
     <select id="fltr_0" class="form-control select2" multiple="" \
     data-placeholder="Select an item or start typing to search" \
@@ -34,6 +35,10 @@ describe 'Filter component', ->
     <option>#{v[0].id} - #{v[0].name}</option>\
     <option>#{v[1].id} - #{v[1].name}</option>\
     </select>\
+    </div>\
+    <div class="col-sm-3 col-md-2 col-lg-1 bottom-align-text">\
+    <input type="checkbox" data-toggle="toggle"/>\
+    </div>\
     </div>
     """
     wrapper = shallow element
@@ -43,7 +48,8 @@ describe 'Filter component', ->
     element = React.createElement Filter,
       {id: i, name: n, values: singleValue, pos: 0}
     out = """
-    <div class="form-group">\
+    <div class="form-group row">\
+    <div class="col-sm-9 col-md-10 col-lg-11">\
     <label for="fltr_0">#{n} (1)</label>\
     <select id="fltr_0" class="form-control select2" multiple="" \
     disabled="" data-placeholder="Select an item or start typing to search" \
@@ -51,6 +57,10 @@ describe 'Filter component', ->
     data-theme="bootstrap">\
     <option>#{v[0].id} - #{v[0].name}</option>\
     </select>\
+    </div>\
+    <div class="col-sm-3 col-md-2 col-lg-1 bottom-align-text">\
+    <input type="checkbox" data-toggle="toggle"/>\
+    </div>\
     </div>
     """
     wrapper = shallow element
@@ -59,7 +69,8 @@ describe 'Filter component', ->
   it 'should sort by code ids', ->
     element = React.createElement Filter, {id: i, name: n, values: u, pos: 0}
     out = """
-    <div class="form-group">\
+    <div class="form-group row">\
+    <div class="col-sm-9 col-md-10 col-lg-11">\
     <label for="fltr_0">#{n} (2)</label>\
     <select id="fltr_0" class="form-control select2" multiple="" \
     data-placeholder="Select an item or start typing to search" \
@@ -68,6 +79,10 @@ describe 'Filter component', ->
     <option>#{u[1].id} - #{u[1].name}</option>\
     <option>#{u[0].id} - #{u[0].name}</option>\
     </select>\
+    </div>\
+    <div class="col-sm-3 col-md-2 col-lg-1 bottom-align-text">\
+    <input type="checkbox" data-toggle="toggle"/>\
+    </div>\
     </div>
     """
     wrapper = shallow element

@@ -31,7 +31,7 @@ describe 'Wizard container component', ->
     wrapper = mount ele
     wrapper.find('.steps-container').should.have.length 1
     steps = wrapper.find('.steps-container')
-    steps.find('li').should.have.length 4
+    steps.find('li').should.have.length 3
 
   it 'should update a Wizard Steps component with the next step', ->
     [id, name] = ['xyz', 'category scheme']

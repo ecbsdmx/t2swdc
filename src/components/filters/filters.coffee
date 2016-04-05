@@ -61,6 +61,8 @@ Filters = React.createClass
       if $? then $('select').select2({templateSelection: formatSelection})
       if $? then $('select').on('select2:select', @handleChanged)
       if $? then $('select').on('select2:unselect', @handleChanged)
+      #if $? then $("[name='measure']").bootstrapSwitch()
+      if $? then $(':checkbox').bootstrapToggle()
       @isInitial = false
     if $? # If there is only one value in the field, it should be selected
       $('select').each(() ->
@@ -75,9 +77,9 @@ Filters = React.createClass
       filters = createFilters @dims, @smd
       nodes = (createSelectField(d, idx) for d, idx in filters)
       dom.div (id: 'filters'),
+        React.createElement MeasureInfo, {}
         React.createElement MatchingSeries,
           {number: @universe.groupAll().value()}
-        React.createElement MeasureInfo, {}
         dom.form {id: 'dimensionFilters'}, nodes
     else false
 

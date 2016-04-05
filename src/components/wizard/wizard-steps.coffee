@@ -20,7 +20,7 @@ Steps = React.createClass
     div {className: 'steps-container'},
       ul {className: 'steps'},
         createItem ++idx, @props.step, label\
-          for label, idx in ['Topics', 'Data sets', 'Filters', 'Options']
+          for label, idx in ['Topics', 'Data sets', 'Filters']
 
 Steps.propTypes =
   step: React.PropTypes.number.isRequired

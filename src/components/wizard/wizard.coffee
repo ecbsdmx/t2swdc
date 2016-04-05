@@ -5,7 +5,6 @@ Actions = require('./wizard-actions').WizardActions
 StepOne = require('./wizard-step-1').WizardStepOne
 StepTwo = require('./wizard-step-2').WizardStepTwo
 StepThree = require('./wizard-step-3').WizardStepThree
-StepFour = require('./wizard-step-4').WizardStepFour
 data = require '../../../test/fixtures/ICP_PUB.json'
 
 dimensions = data.structure.dimensions.series
@@ -37,7 +36,6 @@ Wizard = React.createClass
          {items: @props.dataflows, action: @props.onDataflowClick}
         React.createElement StepThree,
          {dimensions: dimensions, series: series, step: step}
-        React.createElement StepFour
 
 Wizard.propTypes =
   selectedStep: React.PropTypes.number.isRequired

@@ -11,11 +11,11 @@ describe 'MatchingSeries component', ->
     <div class="bg-info alert alert-info alert-dismissible fade in">\
     <button type="button" class="close" data-dismiss="alert">\
     <span>×</span></button>\
-    <p>Please select the data you are interested in using the filters below. \
-    If you want to import all the data into Tableau, simply press the button above.</p>\
-    <p>Tableau allows you to easily compare multiple measures. Should you wish \
-    to use the values of a dimension as measures in Tableau, please use the \
-    switch next to the filter for that dimension.</p>\
+    <div>Please <strong>select the data</strong> you are interested in <strong>using the filters below</strong>. \
+    If you want to import <strong>all the data</strong> into Tableau, simply <strong>press the button</strong> above.<br/><br/></div>\
+    <div>Tableau allows you to easily compare <strong>multiple measures</strong>. Should you wish \
+    to use the values of a dimension as measures in Tableau, please <strong>use the \
+    switch</strong> next to the filter for that dimension.</div>\
     </div>
     """
     wrapper = shallow element
