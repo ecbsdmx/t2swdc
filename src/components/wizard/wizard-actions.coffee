@@ -5,12 +5,13 @@ li = React.DOM.li
 span = React.DOM.span
 button = React.DOM.button
 
-createButton = (isNext, props) ->
+createButton = (isNext) ->
   btnOpts =
     type: 'button'
     className: 'btn btn-default ' + if isNext then 'btn-next' else 'btn-prev'
-  if isNext then btnOpts['data-last'] = 'Send to Tableau'
-  if isNext then btnOpts['disabled'] = true
+  if isNext
+    btnOpts['data-last'] = 'Send to Tableau'
+    btnOpts['disabled'] = true
 
   spanOpts =
     className: 'glyphicon ' \
@@ -24,7 +25,7 @@ Actions = React.createClass
   render: ->
     div {className: 'actions'},
       createButton false
-      createButton true, @props
+      createButton true
 
 Actions.propTypes =
   step: React.PropTypes.number.isRequired,
