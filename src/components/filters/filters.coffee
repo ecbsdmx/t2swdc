@@ -2,6 +2,7 @@ React = require 'react'
 dom = React.DOM
 {Filter} = require './filter'
 {MatchingSeries} = require './matching-series'
+{MeasureInfo} = require './measure-info'
 crossfilter = require 'crossfilter2'
 
 addPositions = (dimension) ->
@@ -76,6 +77,7 @@ Filters = React.createClass
       dom.div (id: 'filters'),
         React.createElement MatchingSeries,
           {number: @universe.groupAll().value()}
+        React.createElement MeasureInfo, {}
         dom.form {id: 'dimensionFilters'}, nodes
     else false
 
