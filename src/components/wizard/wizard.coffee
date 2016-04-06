@@ -24,7 +24,10 @@ Wizard = React.createClass
       else filters.push []
     )
     url = sdmxrest.getUrl {flow: @props.selectedDataflow, key: filters}, 'ECB_S'
-    @props.onImportClick url
+    index = null
+    $('#filters input:checkbox').each () ->
+      index = $(this).val()
+    @props.onImportClick url, index
 
   stepChanged: (event, data) ->
     step = getStep()

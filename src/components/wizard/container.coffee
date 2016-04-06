@@ -33,8 +33,9 @@ mapDispatchToProps = (dispatch) ->
     onDataflowClick: (id) ->
       dispatch dataflowSelected id
       if $? then $('#wizard').wizard 'next'
-    onImportClick: (url) ->
+    onImportClick: (url, index) ->
       dispatch dataSelected url
+      dispatch measureSelected index
   }
 
 WizardContainer =
