@@ -27,3 +27,25 @@ describe 'Filters actions', ->
       expect(func.bind(func, 2)).to.throw TypeError
       expect(func.bind(func, '')).to.throw TypeError
       expect(func.bind(func, ' ')).to.throw TypeError
+
+  describe 'Actions for measure selection', ->
+    func = fltrActions.measureSelected
+
+    it 'should have the proper type', ->
+      action = func 1
+      action.should.have.property 'type'
+      action.type.should.equal ActionTypes.SELECT_MEASURE
+
+    it 'should have the position of the dimension as payload', ->
+      action = func 1
+      action.should.have.property 'payload'
+      action.payload.should.equal 1
+
+    it 'should be possible to reset the measure dimension', ->
+      action = func null
+      action.should.be.an('object').with.property('payload').that.is.a 'null'
+
+    it 'should have an integer as iput', ->
+      expect(func.bind(func, 'test')).to.throw TypeError
+      expect(func.bind(func, [])).to.throw TypeError
+      expect(func.bind(func, {})).to.throw TypeError

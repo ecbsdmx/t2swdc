@@ -21,5 +21,5 @@ exports.ActionTypes = class ActionTypes
   # Indicates that the user has selected the data he is interested in
   @SELECT_DATA: 'SELECT_DATA'
 
-  # Indicates that the step displayed in the wizard has changed
-  @CHANGE_WIZSTEP: 'CHANGE_WIZSTEP'
+  # Indicate that the user has selected a dimension to be used as measure
+  @SELECT_MEASURE: 'SELECT_MEASURE'

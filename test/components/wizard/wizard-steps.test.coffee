@@ -16,8 +16,7 @@ describe 'Wizard steps component', ->
     <span class="badge">2</span>Data sets<span class="chevron"></span></li>\
     <li data-step="3" data-name="filters"><span class="badge">3</span>Filters\
     <span class="chevron"></span></li>\
-    <li data-step="4" data-name="options">\
-    <span class="badge">4</span>Options<span class="chevron"></span></li></ul>\
+    </ul>\
     </div>
     """
     wrapper.html().should.equal output

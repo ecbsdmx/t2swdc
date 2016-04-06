@@ -5,31 +5,48 @@ Actions = require('./wizard-actions').WizardActions
 StepOne = require('./wizard-step-1').WizardStepOne
 StepTwo = require('./wizard-step-2').WizardStepTwo
 StepThree = require('./wizard-step-3').WizardStepThree
-StepFour = require('./wizard-step-4').WizardStepFour
-data = require '../../../test/fixtures/ICP_PUB.json'
+data = require '../../../test/fixtures/SAFE.json'
+sdmxrest = require 'sdmx-rest'
 
 dimensions = data.structure.dimensions.series
 series =  data.dataSets[0].series
+getStep = () ->
+  return if $? then $('#wizard').wizard('selectedItem').step ? 1 else 1
 
 Wizard = React.createClass
+
+  handleImport: () ->
+    throw ReferenceError 'Expected import handler' unless @props.onImportClick
+    filters = []
+    $('select').each((idx, ele) ->
+      if $(ele).val()
+        filters.push (dimensions[idx].values[pos].id for pos in $(ele).val())
+      else filters.push []
+    )
+    url = sdmxrest.getUrl {flow: @props.selectedDataflow, key: filters}, 'ECB_S'
+    index = null
+    $('#filters input:checkbox:checked').each () ->
+      index = $(this).val()
+    @props.onImportClick url, parseInt(index)
+
   stepChanged: (event, data) ->
-    step = $('#wizard').wizard('selectedItem').step
-    if step == 1 and not @props.selectedCategory \
-    or step == 2 and not @props.selectedDataflow \
-    or step == 3 and not @props.selectedFilters
+    step = getStep()
+    if step is 1 and not @props.selectedCategory \
+    or step is 2 and not @props.selectedDataflow
       $('.btn-next').attr('disabled', 'disabled')
     else
       $('.btn-next').removeAttr('disabled')
 
   componentDidMount: ->
-    if $? then $('#wizard').on('changed.fu.wizard', @stepChanged)
+    if $?
+      $('#wizard').on('changed.fu.wizard', @stepChanged)
+      $('#wizard').on('finished.fu.wizard', @handleImport)
 
   render: ->
-    step = if $? then $('#wizard').wizard('selectedItem').step else 1
+    step = getStep()
     dom.div {className: 'wizard', 'data-initialize': 'wizard', id: 'wizard'},
-      React.createElement Steps, {step: @props.selectedStep}
-      React.createElement Actions,
-        {step: @props.selectedStep, selectedCategory: @props.selectedCategory}
+      React.createElement Steps, {step: step}
+      React.createElement Actions
       dom.div {className: 'step-content'},
         React.createElement StepOne,
          {item: @props.categoryscheme, action: @props.onCategoryClick}
@@ -37,15 +54,14 @@ Wizard = React.createClass
          {items: @props.dataflows, action: @props.onDataflowClick}
         React.createElement StepThree,
          {dimensions: dimensions, series: series, step: step}
-        React.createElement StepFour
 
 Wizard.propTypes =
-  selectedStep: React.PropTypes.number.isRequired
   categoryscheme: React.PropTypes.object.isRequired
   onCategoryClick: React.PropTypes.func.isRequired
   selectedCategory: React.PropTypes.string
   dataflows: React.PropTypes.array.isRequired
   onDataflowClick: React.PropTypes.func.isRequired
   selectedFilters: React.PropTypes.object.isRequired
+  onImportClick: React.PropTypes.func.isRequired
 
 exports.Wizard = Wizard

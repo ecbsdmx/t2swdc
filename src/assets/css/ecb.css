@@ -44,4 +44,30 @@ form {
 
 body {
   color: #777777;
+  padding-bottom: 10px;
+}
+
+.no-top-margin {
+  margin-top: 0;
+}
+
+#MatchingSeries {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+#filters .alert {
+  border-radius: 0px;
+}
+
+.row {
+ position: relative;
+}
+
+.bottom-align-text {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

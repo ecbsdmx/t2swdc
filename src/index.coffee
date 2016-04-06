@@ -1,6 +1,5 @@
 React = require 'react'
 ReactDOM = require 'react-dom'
-wizard = require('./reducers/wiz-reducers').wizard
 categories = require('./reducers/cs-reducers').categories
 dataflows = require('./reducers/df-reducers').dataflows
 {combineReducers} = require 'redux'
@@ -13,7 +12,7 @@ wizContainer = require('./components/wizard/container.coffee').wizContainer
 populateStore = (store) ->
   store.dispatch csActions.csLoaded [data]
 
-reducers = combineReducers {categories, wizard, dataflows}
+reducers = combineReducers {categories, dataflows}
 store = createStore reducers
 populateStore store
 

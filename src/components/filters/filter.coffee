@@ -22,9 +22,12 @@ Filter = React.createClass
       'data-allow-clear': true
       'data-close-on-select': false
       'data-theme': 'bootstrap'
-    dom.div {className: 'form-group'},
-      dom.label {htmlFor: id}, "#{@props.name} (#{size})"
-      dom.select opts, codes
+    dom.div {className: 'form-group row'},
+      dom.div {className: 'col-sm-9 col-md-10 col-lg-11'},
+        dom.label {htmlFor: id}, "#{@props.name} (#{size})"
+        dom.select opts, codes
+      dom.div {className: 'col-sm-3 col-md-2 col-lg-1 bottom-align-text'},
+        dom.input {type: 'checkbox', 'data-toggle': 'toggle', value: @props.pos}
 
 Filter.propTypes = {
   id: React.PropTypes.string.isRequired

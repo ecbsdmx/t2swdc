@@ -1,6 +1,8 @@
 React = require 'react'
 dom = React.DOM
 {Filter} = require './filter'
+{MatchingSeries} = require './matching-series'
+{MeasureInfo} = require './measure-info'
 crossfilter = require 'crossfilter2'
 
 addPositions = (dimension) ->
@@ -44,6 +46,11 @@ Filters = React.createClass
       @dims[fieldNo].filterAll()
     @forceUpdate()
 
+  handleCheckboxChanged: (ev) ->
+    $('#filters input:checkbox:checked').each () ->
+      if $(this).val() isnt $(ev.currentTarget).val()
+        $(this).attr('checked', false)
+
   componentWillUpdate: (nextProps, nextState) ->
     # When getting new data, we need to create crossfilter universe & dimensions
     if not @universe.hasOwnProperty 'groupAll' or
@@ -55,10 +62,13 @@ Filters = React.createClass
       @isInitial = true
 
   componentDidUpdate: ->
-    if @isInitial
-      if $? then $('select').select2({templateSelection: formatSelection})
-      if $? then $('select').on('select2:select', @handleChanged)
-      if $? then $('select').on('select2:unselect', @handleChanged)
+    if @isInitial and $?
+      $('select').select2({templateSelection: formatSelection})
+      $('select').on('select2:select', @handleChanged)
+      $('select').on('select2:unselect', @handleChanged)
+      $('#filters :checkbox').bootstrapToggle()
+      $('#filters :checkbox').click @handleCheckboxChanged
+
       @isInitial = false
     if $? # If there is only one value in the field, it should be selected
       $('select').each(() ->
@@ -73,8 +83,9 @@ Filters = React.createClass
       filters = createFilters @dims, @smd
       nodes = (createSelectField(d, idx) for d, idx in filters)
       dom.div (id: 'filters'),
-        dom.div {className: 'bg-info text-right'},
-          "#{@universe.groupAll().value()} series matching your query."
+        React.createElement MeasureInfo, {}
+        React.createElement MatchingSeries,
+          {number: @universe.groupAll().value()}
         dom.form {id: 'dimensionFilters'}, nodes
     else false
 
