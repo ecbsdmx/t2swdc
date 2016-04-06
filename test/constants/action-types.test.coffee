@@ -10,7 +10,6 @@ keyActions = [
   'SELECT_CATEGORY'
   'SELECT_DATAFLOW'
   'SELECT_DATA'
-  'CHANGE_WIZSTEP'
 ]
 
 describe 'Action types', ->

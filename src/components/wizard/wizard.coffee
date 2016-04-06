@@ -5,17 +5,18 @@ Actions = require('./wizard-actions').WizardActions
 StepOne = require('./wizard-step-1').WizardStepOne
 StepTwo = require('./wizard-step-2').WizardStepTwo
 StepThree = require('./wizard-step-3').WizardStepThree
-data = require '../../../test/fixtures/ICP_PUB.json'
+data = require '../../../test/fixtures/SAFE.json'
 
 dimensions = data.structure.dimensions.series
 series =  data.dataSets[0].series
+getStep = () ->
+  return if $? then $('#wizard').wizard('selectedItem').step ? 1 else 1
 
 Wizard = React.createClass
   stepChanged: (event, data) ->
-    step = $('#wizard').wizard('selectedItem').step
-    if step == 1 and not @props.selectedCategory \
-    or step == 2 and not @props.selectedDataflow \
-    or step == 3 and not @props.selectedFilters
+    step = getStep()
+    if step is 1 and not @props.selectedCategory \
+    or step is 2 and not @props.selectedDataflow
       $('.btn-next').attr('disabled', 'disabled')
     else
       $('.btn-next').removeAttr('disabled')
@@ -24,9 +25,9 @@ Wizard = React.createClass
     if $? then $('#wizard').on('changed.fu.wizard', @stepChanged)
 
   render: ->
-    step = if $? then $('#wizard').wizard('selectedItem').step else 1
+    step = getStep()
     dom.div {className: 'wizard', 'data-initialize': 'wizard', id: 'wizard'},
-      React.createElement Steps, {step: @props.selectedStep}
+      React.createElement Steps, {step: step}
       React.createElement Actions,
         {step: @props.selectedStep, selectedCategory: @props.selectedCategory}
       dom.div {className: 'step-content'},
@@ -38,7 +39,6 @@ Wizard = React.createClass
          {dimensions: dimensions, series: series, step: step}
 
 Wizard.propTypes =
-  selectedStep: React.PropTypes.number.isRequired
   categoryscheme: React.PropTypes.object.isRequired
   onCategoryClick: React.PropTypes.func.isRequired
   selectedCategory: React.PropTypes.string

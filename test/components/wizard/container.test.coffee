@@ -2,15 +2,12 @@ jsdom = require 'mocha-jsdom'
 React = require 'react'
 {createStore} = require 'redux'
 categories = require('../../../src/reducers/cs-reducers').categories
-wizard = require('../../../src/reducers/wiz-reducers').wizard
-categories = require('../../../src/reducers/cs-reducers').categories
 dataflows = require('../../../src/reducers/df-reducers').dataflows
 {combineReducers} = require 'redux'
 should = require('chai').should()
 {describeWithDOM, mount, spyLifecycle, shallow} = require 'enzyme'
 wiz = require('../../../src/components/wizard/container').wizContainer
 csActions = require '../../../src/actions/cs-actions'
-wizActions = require '../../../src/actions/wiz-actions'
 dfActions = require '../../../src/actions/df-actions'
 
 describe 'Wizard container component', ->
@@ -24,7 +21,7 @@ describe 'Wizard container component', ->
       {id:'B', name:'catB', dataflows:[]},
     ]
     payload = [{id: id, name: name, categories: cats}]
-    reducers = combineReducers {categories, wizard}
+    reducers = combineReducers {categories}
     store = createStore reducers
     store.dispatch csActions.csLoaded payload
     ele  = React.createElement wiz, {store: store}
@@ -33,24 +30,6 @@ describe 'Wizard container component', ->
     steps = wrapper.find('.steps-container')
     steps.find('li').should.have.length 3
 
-  it 'should update a Wizard Steps component with the next step', ->
-    [id, name] = ['xyz', 'category scheme']
-    cats = [
-      {id:'A', name:'catA', dataflows:['flow1', 'flow2']},
-      {id:'B', name:'catB', dataflows:[]},
-    ]
-    payload = [{id: id, name: name, categories: cats}]
-    reducers = combineReducers {categories, wizard}
-    store = createStore reducers
-    store.dispatch csActions.csLoaded payload
-    store.dispatch wizActions.wizstepChanged 2
-    ele  = React.createElement wiz, {store: store}
-    wrapper = mount ele
-    wrapper.find('.steps-container').should.have.length 1
-    steps = wrapper.find('.steps-container')
-    steps.find('.active').should.have.length 1
-    steps.find('.active').html().should.contain 'datasets'
-
   it 'should populate a Wizard Actions component', ->
     [id, name] = ['xyz', 'category scheme']
     cats = [
@@ -58,7 +37,7 @@ describe 'Wizard container component', ->
       {id:'B', name:'catB', dataflows:[]},
     ]
     payload = [{id: id, name: name, categories: cats}]
-    reducers = combineReducers {categories, wizard}
+    reducers = combineReducers {categories}
     store = createStore reducers
     store.dispatch csActions.csLoaded payload
     ele  = React.createElement wiz, {store: store}
@@ -74,7 +53,7 @@ describe 'Wizard container component', ->
       {id:'B', name:'catB', dataflows:[]},
     ]
     payload = [{id: id, name: name, categories: cats}]
-    reducers = combineReducers {categories, wizard}
+    reducers = combineReducers {categories}
     store = createStore reducers
     store.dispatch csActions.csLoaded payload
     ele  = React.createElement wiz, {store: store}
@@ -88,7 +67,7 @@ describe 'Wizard container component', ->
       {id:'B', name:'catB', dataflows:[]},
     ]
     payload = [{id: id, name: name, categories: cats}]
-    reducers = combineReducers {categories, wizard}
+    reducers = combineReducers {categories}
     store = createStore reducers
     store.dispatch csActions.csLoaded payload
     store.dispatch csActions.categorySelected 'A'
