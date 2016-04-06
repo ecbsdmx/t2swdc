@@ -6,6 +6,7 @@ StepOne = require('./wizard-step-1').WizardStepOne
 StepTwo = require('./wizard-step-2').WizardStepTwo
 StepThree = require('./wizard-step-3').WizardStepThree
 data = require '../../../test/fixtures/SAFE.json'
+sdmxrest = require 'sdmx-rest'
 
 dimensions = data.structure.dimensions.series
 series =  data.dataSets[0].series
@@ -13,6 +14,18 @@ getStep = () ->
   return if $? then $('#wizard').wizard('selectedItem').step ? 1 else 1
 
 Wizard = React.createClass
+
+  handleImport: () ->
+    throw ReferenceError 'Expected import handler' unless @props.onImportClick
+    filters = []
+    $('select').each((idx, ele) ->
+      if $(ele).val()
+        filters.push (dimensions[idx].values[pos].id for pos in $(ele).val())
+      else filters.push []
+    )
+    url = sdmxrest.getUrl {flow: @props.selectedDataflow, key: filters}, 'ECB_S'
+    @props.onImportClick url
+
   stepChanged: (event, data) ->
     step = getStep()
     if step is 1 and not @props.selectedCategory \
@@ -22,7 +35,9 @@ Wizard = React.createClass
       $('.btn-next').removeAttr('disabled')
 
   componentDidMount: ->
-    if $? then $('#wizard').on('changed.fu.wizard', @stepChanged)
+    if $?
+      $('#wizard').on('changed.fu.wizard', @stepChanged)
+      $('#wizard').on('finished.fu.wizard', @handleImport)
 
   render: ->
     step = getStep()
@@ -44,5 +59,6 @@ Wizard.propTypes =
   dataflows: React.PropTypes.array.isRequired
   onDataflowClick: React.PropTypes.func.isRequired
   selectedFilters: React.PropTypes.object.isRequired
+  onImportClick: React.PropTypes.func.isRequired
 
 exports.Wizard = Wizard

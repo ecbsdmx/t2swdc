@@ -1,6 +1,7 @@
 {connect} = require 'react-redux'
 {categorySelected} = require '../../actions/cs-actions'
 {dataflowSelected} = require '../../actions/df-actions'
+{dataSelected} = require '../../actions/fltr-actions'
 {Wizard} = require './wizard'
 
 findAttachedFlows = (state) ->
@@ -32,6 +33,8 @@ mapDispatchToProps = (dispatch) ->
     onDataflowClick: (id) ->
       dispatch dataflowSelected id
       if $? then $('#wizard').wizard 'next'
+    onImportClick: (url) ->
+      dispatch dataSelected url
   }
 
 WizardContainer =

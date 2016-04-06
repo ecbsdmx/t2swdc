@@ -57,12 +57,12 @@ Filters = React.createClass
       @isInitial = true
 
   componentDidUpdate: ->
-    if @isInitial
-      if $? then $('select').select2({templateSelection: formatSelection})
-      if $? then $('select').on('select2:select', @handleChanged)
-      if $? then $('select').on('select2:unselect', @handleChanged)
-      #if $? then $("[name='measure']").bootstrapSwitch()
-      if $? then $(':checkbox').bootstrapToggle()
+    if @isInitial and $?
+      $('select').select2({templateSelection: formatSelection})
+      $('select').on('select2:select', @handleChanged)
+      $('select').on('select2:unselect', @handleChanged)
+      $(':checkbox').bootstrapToggle()
+
       @isInitial = false
     if $? # If there is only one value in the field, it should be selected
       $('select').each(() ->
