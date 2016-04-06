@@ -1,7 +1,7 @@
 {connect} = require 'react-redux'
 {categorySelected} = require '../../actions/cs-actions'
 {dataflowSelected} = require '../../actions/df-actions'
-{dataSelected} = require '../../actions/fltr-actions'
+{dataSelected, measureSelected} = require '../../actions/fltr-actions'
 {Wizard} = require './wizard'
 
 findAttachedFlows = (state) ->

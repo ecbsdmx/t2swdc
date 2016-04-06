@@ -18,7 +18,7 @@ dataSelected = (url) ->
 #
 measureSelected = (idx) ->
   throw TypeError 'The input must be an integer indicating the position of
-    the dimension' if idx and typeof idx isnt 'number'
+    the dimension' if idx? and typeof idx isnt 'number'
   createAction(ActionTypes.SELECT_MEASURE)(idx)
 
 module.exports =

@@ -66,7 +66,8 @@ Filters = React.createClass
       $('select').select2({templateSelection: formatSelection})
       $('select').on('select2:select', @handleChanged)
       $('select').on('select2:unselect', @handleChanged)
-      $(':checkbox').click @handleCheckboxChanged
+      $('#filters :checkbox').bootstrapToggle()
+      $('#filters :checkbox').click @handleCheckboxChanged
 
       @isInitial = false
     if $? # If there is only one value in the field, it should be selected
