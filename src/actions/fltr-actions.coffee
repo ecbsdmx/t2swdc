@@ -11,5 +11,17 @@ dataSelected = (url) ->
     throw TypeError 'The input must be an SDMX 2.1 data query url'
   createAction(ActionTypes.SELECT_DATA)(url)
 
+# Creates an action indicating that the user has selected a dimension to be used
+# as measure dimension in Tableau
+#
+# @param [Number] the position of the dimension to be used as measure dimension
+#
+measureSelected = (idx) ->
+  unless typeof idx is 'number'
+    throw TypeError 'The input must be an integer indicating the position of
+     the dimension'
+  createAction(ActionTypes.SELECT_MEASURE)(idx)
+
 module.exports =
   dataSelected: dataSelected
+  measureSelected: measureSelected

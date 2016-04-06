@@ -20,3 +20,6 @@ exports.ActionTypes = class ActionTypes
 
   # Indicates that the user has selected the data he is interested in
   @SELECT_DATA: 'SELECT_DATA'
+
+  # Indicate that the user has selected a dimension to be used as measure
+  @SELECT_MEASURE: 'SELECT_MEASURE'

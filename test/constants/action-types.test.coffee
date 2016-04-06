@@ -10,6 +10,7 @@ keyActions = [
   'SELECT_CATEGORY'
   'SELECT_DATAFLOW'
   'SELECT_DATA'
+  'SELECT_MEASURE'
 ]
 
 describe 'Action types', ->
