@@ -27,10 +27,4 @@ Actions = React.createClass
       createButton false
       createButton true
 
-Actions.propTypes =
-  step: React.PropTypes.number.isRequired,
-  selectedCategory: React.PropTypes.string,
-  selectedDataflow: React.PropTypes.string,
-  selectedFilters: React.PropTypes.array
-
 exports.WizardActions = Actions

@@ -28,8 +28,7 @@ Wizard = React.createClass
     step = getStep()
     dom.div {className: 'wizard', 'data-initialize': 'wizard', id: 'wizard'},
       React.createElement Steps, {step: step}
-      React.createElement Actions,
-        {step: @props.selectedStep, selectedCategory: @props.selectedCategory}
+      React.createElement Actions
       dom.div {className: 'step-content'},
         React.createElement StepOne,
          {item: @props.categoryscheme, action: @props.onCategoryClick}
