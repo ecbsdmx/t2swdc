@@ -46,6 +46,11 @@ Filters = React.createClass
       @dims[fieldNo].filterAll()
     @forceUpdate()
 
+  handleCheckboxChanged: (ev) ->
+    $('input:checkbox:checked').each () ->
+      if $(this).val() isnt $(ev.currentTarget).val()
+        $(this).attr('checked', false)
+
   componentWillUpdate: (nextProps, nextState) ->
     # When getting new data, we need to create crossfilter universe & dimensions
     if not @universe.hasOwnProperty 'groupAll' or
@@ -61,7 +66,8 @@ Filters = React.createClass
       $('select').select2({templateSelection: formatSelection})
       $('select').on('select2:select', @handleChanged)
       $('select').on('select2:unselect', @handleChanged)
-      $(':checkbox').bootstrapToggle()
+      #$(':checkbox').bootstrapToggle()
+      $(':checkbox').click @handleCheckboxChanged
 
       @isInitial = false
     if $? # If there is only one value in the field, it should be selected

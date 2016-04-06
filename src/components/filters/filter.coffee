@@ -27,7 +27,7 @@ Filter = React.createClass
         dom.label {htmlFor: id}, "#{@props.name} (#{size})"
         dom.select opts, codes
       dom.div {className: 'col-sm-3 col-md-2 col-lg-1 bottom-align-text'},
-        dom.input {type: 'checkbox', 'data-toggle': 'toggle'}
+        dom.input {type: 'checkbox', 'data-toggle': 'toggle', value: @props.pos}
 
 Filter.propTypes = {
   id: React.PropTypes.string.isRequired

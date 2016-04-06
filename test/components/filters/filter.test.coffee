@@ -37,7 +37,7 @@ describe 'Filter component', ->
     </select>\
     </div>\
     <div class="col-sm-3 col-md-2 col-lg-1 bottom-align-text">\
-    <input type="checkbox" data-toggle="toggle"/>\
+    <input type="checkbox" data-toggle="toggle" value="0"/>\
     </div>\
     </div>
     """
@@ -59,7 +59,7 @@ describe 'Filter component', ->
     </select>\
     </div>\
     <div class="col-sm-3 col-md-2 col-lg-1 bottom-align-text">\
-    <input type="checkbox" data-toggle="toggle"/>\
+    <input type="checkbox" data-toggle="toggle" value="0"/>\
     </div>\
     </div>
     """
@@ -81,7 +81,7 @@ describe 'Filter component', ->
     </select>\
     </div>\
     <div class="col-sm-3 col-md-2 col-lg-1 bottom-align-text">\
-    <input type="checkbox" data-toggle="toggle"/>\
+    <input type="checkbox" data-toggle="toggle" value="0"/>\
     </div>\
     </div>
     """
