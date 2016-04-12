@@ -8,6 +8,10 @@ describe 'Filters actions', ->
   describe 'Actions creators', ->
     it 'should allow creating SELECT_DATA actions', ->
       fltrActions.should.have.property 'dataSelected'
+    it 'should allow creating SELECT_MEASURE actions', ->
+      fltrActions.should.have.property 'measureSelected'
+    it 'should allow creating SELECT_DATA actions', ->
+      fltrActions.should.have.property 'dataLoading'
 
   describe 'Actions for data selection', ->
     func = fltrActions.dataSelected
@@ -49,3 +53,39 @@ describe 'Filters actions', ->
       expect(func.bind(func, 'test')).to.throw TypeError
       expect(func.bind(func, [])).to.throw TypeError
       expect(func.bind(func, {})).to.throw TypeError
+
+  describe 'Actions for data loading', ->
+    describe 'Actions indicating data is being loaded', ->
+      it 'should have the proper type', ->
+        action = fltrActions.dataLoading()
+        action.should.have.property 'type'
+        action.type.should.equal ActionTypes.FETCH_DATA
+        should.not.exist(action.payload)
+        should.not.exist(action.error)
+
+    describe 'Actions after data successfully loaded', ->
+      func = fltrActions.dataLoaded
+      payload = {header: {}, structure: {}, dataSets: []}
+
+      it 'should have the proper type', ->
+        action = func payload
+        action.should.have.property 'type'
+        action.type.should.equal ActionTypes.FETCH_DATA
+        action.payload.should.not.be.undefined
+        should.not.exist(action.error)
+
+      it 'should have a valid SDMX-JSON data object as payload', ->
+        action = func payload
+        action.should.have.property 'payload'
+        action.payload.should.equal payload
+
+      it 'should perform basic type validation', ->
+        expect(func.bind(func, 2)).to.throw TypeError
+        expect(func.bind(func, null)).to.throw TypeError
+        expect(func.bind(func, [])).to.throw TypeError
+
+      it 'should allow passing error information', ->
+        error = new Error('Could not retrieve the data')
+        action = func error
+        action.error.should.be.true
+        action.payload.should.equal error

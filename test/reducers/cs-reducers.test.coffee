@@ -24,14 +24,12 @@ describe 'Category scheme reducers', ->
 
   describe 'Reducer for loading of category schemes', ->
     it 'should change the category schemes array', ->
-      console.log 'In test 3'
       scheme = [{categories: []}]
       action = csActions.csLoaded scheme
       state = csReducers initialState, action
       state.should.be.an('object').with.property 'categoryschemes'
       state.categoryschemes.toJS().should.deep.equal(scheme)
     it 'should have an empty array as default for the category schemes', ->
-      console.log 'In test 4'
       id = 'test'
       action = csActions.categorySelected id
       state = csReducers {}, action
