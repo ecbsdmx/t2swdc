@@ -24,9 +24,9 @@ describe 'Category scheme actions', ->
       action.payload.should.equal uid
 
     it 'should have a non-empty string as unique id', ->
-      expect(func.bind(func, 2)).to.throw TypeError
-      expect(func.bind(func, '')).to.throw TypeError
-      expect(func.bind(func, ' ')).to.throw TypeError
+      (func.bind(func, 2)).should.throw TypeError
+      (func.bind(func, '')).should.throw TypeError
+      (func.bind(func, ' ')).should.throw TypeError
 
   describe 'Actions for category scheme loading', ->
 
@@ -35,6 +35,7 @@ describe 'Category scheme actions', ->
         action = csActions.csLoading()
         action.should.have.property 'type'
         action.type.should.equal ActionTypes.FETCH_CS
+        should.not.exist(action.payload)
 
     describe 'Actions after category scheme successfully loaded', ->
       func = csActions.csLoaded
@@ -43,7 +44,8 @@ describe 'Category scheme actions', ->
       it 'should have the proper type', ->
         action = func payload
         action.should.have.property 'type'
-        action.type.should.equal ActionTypes.FETCH_CS_SUCCESS
+        action.type.should.equal ActionTypes.FETCH_CS
+        action.payload.should.not.be.undefined
 
       it 'should have a valid category scheme object as payload', ->
         expect(func.bind(func, 2)).to.throw TypeError

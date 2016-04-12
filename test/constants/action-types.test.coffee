@@ -4,9 +4,7 @@ should = require('chai').should()
 
 keyActions = [
   'FETCH_CS'
-  'FETCH_CS_SUCCESS'
-  'FETCH_CS_FAILURE'
-  'FETCH_DATA_SUCCESS'
+  'FETCH_DATA'
   'SELECT_CATEGORY'
   'SELECT_DATAFLOW'
   'SELECT_DATA'
