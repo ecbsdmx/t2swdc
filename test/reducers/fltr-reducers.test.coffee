@@ -31,4 +31,34 @@ describe 'Data reducers', ->
       action = csActions.csLoaded [{categories: []}]
       state = fltrReducers {}, action
       state.should.be.an('object').with.property('selectedMeasure').
-        that.is.a('null')
+        that.is.a 'null'
+
+  describe 'Reducer for starting the data loading', ->
+    it 'should toggle the isLoading property', ->
+      action = fltrActions.dataLoading()
+      state = fltrReducers initialState, action
+      state.should.be.an('object').with.property('isFetching').that.equals true
+
+
+  describe 'Reducer for data loading', ->
+    it 'should change the data object', ->
+      data = {header:{}, structure:{}, dataSets:[]}
+      action = fltrActions.dataLoaded data
+      state = fltrReducers initialState, action
+      state.should.be.an('object').with.property 'data'
+      state.data.toJS().should.deep.equal data
+    it 'should have an empty object as default for the data', ->
+      id = 'test'
+      action = fltrActions.measureSelected 2
+      state = fltrReducers {}, action
+      state.should.be.an('object').with.property 'data'
+      state.data.toJS().should.deep.equal {}
+    it 'should generate an immutable object', ->
+      data = {header:{}, structure:{}, dataSets:[]}
+      action = fltrActions.dataLoaded data
+      state = fltrReducers initialState, action
+      state.should.be.an('object').with.property 'data'
+      state.data.toJS().should.deep.equal data
+      data.error = 'test'
+      state.data.toJS().should.not.deep.equal data
+      state.data.toJS().should.not.have.property 'data'
