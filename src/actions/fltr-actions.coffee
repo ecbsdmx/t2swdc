@@ -1,5 +1,7 @@
 {createAction} = require 'redux-actions'
 {ActionTypes} = require '../constants/action-types'
+fetch = require 'isomorphic-fetch'
+sdmxrest = require 'sdmx-rest'
 
 # Creates an action indicating that the user has selected the data he is
 # interested in using dimension filters.
@@ -36,8 +38,17 @@ dataLoaded = (data) ->
 dataLoading = ->
   createAction(ActionTypes.FETCH_DATA)()
 
+# Async action to fetch data
+fetchData = (url) ->
+  (dispatch) ->
+    dispatch dataLoading()
+    sdmxrest.request(url)
+      .then((response) -> dispatch dataLoaded(JSON.parse response))
+      .catch((error) -> dispatch dataLoaded(error))
+
 module.exports =
   dataSelected: dataSelected
   measureSelected: measureSelected
   dataLoading: dataLoading
   dataLoaded: dataLoaded
+  fetchData: fetchData

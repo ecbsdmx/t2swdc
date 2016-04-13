@@ -1,7 +1,13 @@
-should = require('chai').should()
-expect = require('chai').expect
 {ActionTypes} = require '../../src/constants/action-types.coffee'
 fltrActions = require '../../src/actions/fltr-actions.coffee'
+chai = require 'chai'
+chaiAsPromised = require 'chai-as-promised'
+chai.use chaiAsPromised
+should = chai.should()
+expect = chai.expect
+assert = chai.assert
+nock = require 'nock'
+sinon = require 'sinon'
 
 describe 'Filters actions', ->
 
@@ -89,3 +95,52 @@ describe 'Filters actions', ->
         action = func error
         action.error.should.be.true
         action.payload.should.equal error
+
+  describe 'Actions for data fetching', ->
+
+    func = fltrActions.fetchData
+
+    it 'should return a function', ->
+      func.should.be.a 'function'
+
+    it 'should call the dispatch function twice', ->
+      json = {"header": {}, "structure": {}, "dataSets": []}
+      query = nock('http://sdw-wsrest.ecb.europa.eu')
+        .get((uri) -> uri.indexOf('EXR') > -1)
+        .reply 200, json
+      dispatch = sinon.spy()
+      out = func('http://sdw-wsrest.ecb.europa.eu/service/data/EXR')(dispatch)
+      out.should.be.fulfilled
+      out.should.not.be.rejected
+      out.should.eventually.equal json
+      out.then(null, null, dispatch).then(->
+        dispatch.calledTwice.should.be.true
+        firstAction = dispatch.firstCall.args[0]
+        secondAction = dispatch.secondCall.args[0]
+        firstAction.type.should.equal 'FETCH_DATA'
+        should.not.exist(firstAction.payload)
+        should.not.exist(firstAction.error)
+        secondAction.type.should.equal 'FETCH_DATA'
+        secondAction.payload.should.deep.equal json
+        should.not.exist(secondAction.error)
+      )
+
+    it 'should dispatch an error in case of problems', ->
+      query = nock('http://sdw-wsrest.ecb.europa.eu')
+        .get((uri) -> uri.indexOf('BSI') > -1)
+        .reply 500
+      dispatch = sinon.spy()
+      out = func('http://sdw-wsrest.ecb.europa.eu/service/data/BSI')(dispatch)
+      out.should.be.fulfilled
+      out.should.not.be.rejected
+      out.then(null, null, dispatch).then(->
+        dispatch.calledTwice.should.be.true
+        firstAction = dispatch.firstCall.args[0]
+        secondAction = dispatch.secondCall.args[0]
+        firstAction.type.should.equal 'FETCH_DATA'
+        should.not.exist(firstAction.payload)
+        should.not.exist(firstAction.error)
+        secondAction.type.should.equal 'FETCH_DATA'
+        should.exist(secondAction.payload)
+        secondAction.error.should.be.true
+      )
