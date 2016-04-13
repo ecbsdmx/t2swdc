@@ -42,7 +42,7 @@ dataLoading = ->
 fetchData = (url) ->
   (dispatch) ->
     dispatch dataLoading()
-    sdmxrest.request(url)
+    sdmxrest.request(url,{headers:{accept:sdmxrest.data.DataFormat.SDMX_JSON}})
       .then((response) -> dispatch dataLoaded(JSON.parse response))
       .catch((error) -> dispatch dataLoaded(error))
 

@@ -53,10 +53,13 @@ Filters = React.createClass
 
   componentWillUpdate: (nextProps, nextState) ->
     # When getting new data, we need to create crossfilter universe & dimensions
-    if not @universe.hasOwnProperty 'groupAll' or
-    nextProps.series isnt @props.series
+    if 'groupAll' not of @universe or nextProps.series isnt @props.series
+      @universe = {}
+      @dims = []
+      @smd = []
       series = (seriesKeyToObject key for key of nextProps.series)
       @universe = crossfilter series
+      @dims = []
       @dims.push @universe.dimension((d) -> d[k]) for k of series[0]
       @smd = (addPositions i for i in nextProps.dimensions)
       @isInitial = true

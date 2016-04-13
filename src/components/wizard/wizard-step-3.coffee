@@ -5,8 +5,8 @@ dom = React.DOM
 Step = React.createClass
   render: ->
     opts =
-      dimensions: @props.dimensions
-      series: @props.series
+      dimensions: @props?.data?.structure?.dimensions.series ? []
+      series: @props?.data?.dataSets?[0].series ? {}
     dom.div {className: 'step-pane sample-pane', 'data-step': '3'},
       React.createElement Filters, opts
 
@@ -14,8 +14,7 @@ Step = React.createClass
     nextProps.step is 3
 
 Step.propTypes = {
-  dimensions: React.PropTypes.array.isRequired
-  series: React.PropTypes.object.isRequired
+  data: React.PropTypes.object.isRequired
   step: React.PropTypes.number.isRequired
 }
 

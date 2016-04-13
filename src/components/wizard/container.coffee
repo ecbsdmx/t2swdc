@@ -1,8 +1,10 @@
 {connect} = require 'react-redux'
 {categorySelected} = require '../../actions/cs-actions'
 {dataflowSelected} = require '../../actions/df-actions'
+{fetchData} = require '../../actions/fltr-actions'
 {dataSelected, measureSelected} = require '../../actions/fltr-actions'
 {Wizard} = require './wizard'
+sdmxrest = require 'sdmx-rest'
 
 findAttachedFlows = (state) ->
   categoryscheme = state.categories.categoryschemes.get(0).toJS()
@@ -23,6 +25,7 @@ mapStateToProps = (state) ->
     dataflows:
       if state.categories.selectedCategory then findAttachedFlows state else []
     selectedFilters: {}
+    data: state.filters?.data.toJS()
   }
 
 mapDispatchToProps = (dispatch) ->
@@ -33,6 +36,11 @@ mapDispatchToProps = (dispatch) ->
     onDataflowClick: (id) ->
       dispatch dataflowSelected id
       if $? then $('#wizard').wizard 'next'
+      query =
+        flow: id
+        detail: sdmxrest.data.DataDetail.SERIES_KEYS_ONLY
+      url = sdmxrest.getUrl query, 'ECB_S'
+      dispatch fetchData url
     onImportClick: (url, index) ->
       dispatch dataSelected url
       dispatch measureSelected index
