@@ -1,8 +1,9 @@
 jsdom = require 'mocha-jsdom'
 React = require 'react'
 {createStore} = require 'redux'
-categories = require('../../../src/reducers/cs-reducers').categories
-dataflows = require('../../../src/reducers/df-reducers').dataflows
+{categories} = require('../../../src/reducers/cs-reducers')
+{dataflows} = require('../../../src/reducers/df-reducers')
+{filters} = require('../../../src/reducers/fltr-reducers')
 {combineReducers} = require 'redux'
 should = require('chai').should()
 {describeWithDOM, mount, spyLifecycle, shallow} = require 'enzyme'
@@ -21,7 +22,7 @@ describe 'Wizard container component', ->
       {id:'B', name:'catB', dataflows:[]},
     ]
     payload = [{id: id, name: name, categories: cats}]
-    reducers = combineReducers {categories}
+    reducers = combineReducers {categories, dataflows, filters}
     store = createStore reducers
     store.dispatch csActions.csLoaded payload
     ele  = React.createElement wiz, {store: store}
@@ -37,7 +38,7 @@ describe 'Wizard container component', ->
       {id:'B', name:'catB', dataflows:[]},
     ]
     payload = [{id: id, name: name, categories: cats}]
-    reducers = combineReducers {categories}
+    reducers = combineReducers {categories, dataflows, filters}
     store = createStore reducers
     store.dispatch csActions.csLoaded payload
     ele  = React.createElement wiz, {store: store}
@@ -53,7 +54,7 @@ describe 'Wizard container component', ->
       {id:'B', name:'catB', dataflows:[]},
     ]
     payload = [{id: id, name: name, categories: cats}]
-    reducers = combineReducers {categories}
+    reducers = combineReducers {categories, dataflows, filters}
     store = createStore reducers
     store.dispatch csActions.csLoaded payload
     ele  = React.createElement wiz, {store: store}
@@ -67,7 +68,7 @@ describe 'Wizard container component', ->
       {id:'B', name:'catB', dataflows:[]},
     ]
     payload = [{id: id, name: name, categories: cats}]
-    reducers = combineReducers {categories}
+    reducers = combineReducers {categories, dataflows, filters}
     store = createStore reducers
     store.dispatch csActions.csLoaded payload
     store.dispatch csActions.categorySelected 'A'

@@ -1,5 +1,7 @@
 {createAction} = require 'redux-actions'
 {ActionTypes} = require '../constants/action-types'
+fetch = require 'isomorphic-fetch'
+sdmxrest = require 'sdmx-rest'
 
 # Creates an action indicating that the user has selected the data he is
 # interested in using dimension filters.
@@ -21,6 +23,32 @@ measureSelected = (idx) ->
     the dimension' if idx? and typeof idx isnt 'number'
   createAction(ActionTypes.SELECT_MEASURE)(idx)
 
+# Creates an action indicating that the process to load data is finished
+#
+# @param [Object] data the SDMX-JSON data object
+#
+dataLoaded = (data) ->
+  unless data instanceof Error or data instanceof Object \
+  and not Array.isArray data
+    throw TypeError 'The parameter must be an SDMX-JSON data message'
+  createAction(ActionTypes.FETCH_DATA)(data)
+
+# Creates an action indicating that the process to load data has started
+#
+dataLoading = ->
+  createAction(ActionTypes.FETCH_DATA)()
+
+# Async action to fetch data
+fetchData = (url) ->
+  (dispatch) ->
+    dispatch dataLoading()
+    sdmxrest.request(url,{headers:{accept:sdmxrest.data.DataFormat.SDMX_JSON}})
+      .then((response) -> dispatch dataLoaded(JSON.parse response))
+      .catch((error) -> dispatch dataLoaded(error))
+
 module.exports =
   dataSelected: dataSelected
   measureSelected: measureSelected
+  dataLoading: dataLoading
+  dataLoaded: dataLoaded
+  fetchData: fetchData

@@ -5,11 +5,8 @@ Actions = require('./wizard-actions').WizardActions
 StepOne = require('./wizard-step-1').WizardStepOne
 StepTwo = require('./wizard-step-2').WizardStepTwo
 StepThree = require('./wizard-step-3').WizardStepThree
-data = require '../../../test/fixtures/SAFE.json'
 sdmxrest = require 'sdmx-rest'
 
-dimensions = data.structure.dimensions.series
-series =  data.dataSets[0].series
 getStep = () ->
   return if $? then $('#wizard').wizard('selectedItem').step ? 1 else 1
 
@@ -53,15 +50,19 @@ Wizard = React.createClass
         React.createElement StepTwo,
          {items: @props.dataflows, action: @props.onDataflowClick}
         React.createElement StepThree,
-         {dimensions: dimensions, series: series, step: step}
+         {data: @props.data, step: step, error: @props.error,
+         busy: @props.isFetching}
 
 Wizard.propTypes =
   categoryscheme: React.PropTypes.object.isRequired
-  onCategoryClick: React.PropTypes.func.isRequired
   selectedCategory: React.PropTypes.string
   dataflows: React.PropTypes.array.isRequired
-  onDataflowClick: React.PropTypes.func.isRequired
   selectedFilters: React.PropTypes.object.isRequired
+  data: React.PropTypes.object.isRequired
+  onCategoryClick: React.PropTypes.func.isRequired
+  onDataflowClick: React.PropTypes.func.isRequired
   onImportClick: React.PropTypes.func.isRequired
+  error: React.PropTypes.object.isRequired
+  isFetching: React.PropTypes.bool.isRequired
 
 exports.Wizard = Wizard

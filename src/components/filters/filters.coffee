@@ -4,6 +4,7 @@ dom = React.DOM
 {MatchingSeries} = require './matching-series'
 {MeasureInfo} = require './measure-info'
 crossfilter = require 'crossfilter2'
+Immutable = require 'immutable'
 
 addPositions = (dimension) ->
   c.pos = idx for c, idx in dimension.values
@@ -53,12 +54,15 @@ Filters = React.createClass
 
   componentWillUpdate: (nextProps, nextState) ->
     # When getting new data, we need to create crossfilter universe & dimensions
-    if not @universe.hasOwnProperty 'groupAll' or
-    nextProps.series isnt @props.series
-      series = (seriesKeyToObject key for key of nextProps.series)
+    if nextProps.series.equals? and not nextProps.series.equals?(@props.series)
+      @universe = {}
+      @dims = []
+      @smd = []
+      series = (seriesKeyToObject key for key of nextProps.series.toJS())
       @universe = crossfilter series
+      @dims = []
       @dims.push @universe.dimension((d) -> d[k]) for k of series[0]
-      @smd = (addPositions i for i in nextProps.dimensions)
+      @smd = (addPositions i for i in nextProps.dimensions.toJS())
       @isInitial = true
 
   componentDidUpdate: ->
@@ -79,7 +83,12 @@ Filters = React.createClass
       )
 
   render: ->
-    if @universe.hasOwnProperty 'groupAll'
+    if @props.busy
+      dom.div {id: 'loading', className: 'text-center'},
+        dom.span {className: 'glyphicon glyphicon-repeat gly-spin'}
+    else if @props.error
+      dom.div {className: 'alert alert-danger'}, @props.error.message
+    else if @universe.hasOwnProperty 'groupAll'
       filters = createFilters @dims, @smd
       nodes = (createSelectField(d, idx) for d, idx in filters)
       dom.div (id: 'filters'),
@@ -90,8 +99,8 @@ Filters = React.createClass
     else false
 
 Filters.propTypes = {
-  dimensions: React.PropTypes.array.isRequired
-  series: React.PropTypes.object.isRequired
+  dimensions: React.PropTypes.instanceOf(Immutable.List).isRequired
+  series: React.PropTypes.instanceOf(Immutable.Map).isRequired
 }
 
 exports.Filters = Filters

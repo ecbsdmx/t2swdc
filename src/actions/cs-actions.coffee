@@ -30,7 +30,7 @@ validItems = (cs) ->
 csLoaded = (cs) ->
   unless cs instanceof Error or cs instanceof Array and validItems cs
     throw TypeError 'The parameter must be a category scheme array'
-  createAction(ActionTypes.FETCH_CS_SUCCESS)(cs)
+  createAction(ActionTypes.FETCH_CS)(cs)
 
 # Creates an action indicating that the process to load the category schemes has
 # started
