@@ -62,3 +62,16 @@ describe 'Data reducers', ->
       data.error = 'test'
       state.data.toJS().should.not.deep.equal data
       state.data.toJS().should.not.have.property 'data'
+
+  describe 'Reducer handling data loading errors', ->
+    it 'should change the error property', ->
+      error = new Error 'Problem'
+      action = fltrActions.dataLoaded error
+      state = fltrReducers initialState, action
+      state.should.be.an('object').with.property 'error'
+      state.error.should.equal error
+    it 'should have null as default value for the error property', ->
+      action = fltrActions.measureSelected 2
+      state = fltrReducers {}, action
+      state.should.be.an('object').with.property('error').
+        that.is.a('null')

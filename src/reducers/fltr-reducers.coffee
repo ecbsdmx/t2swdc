@@ -3,26 +3,13 @@
 Immutable = require 'immutable'
 
 # Updates the state when a user has selected data using the dimension filters
-#
-# @param [String] the current value for the selectedData property
-# @param [Object] the action received
-#
-# @return the new value for the selectedData property if the action is of
-# the expected type
-#
 selectedData = (state = null, action) ->
   switch action.type
     when ActionTypes.SELECT_DATA then action.payload
     else return state
 
-# Updates the state when a user has selected a measure dimension
-#
-# @param [Number] the index of the current measure dimension
-# @param [Object] the action received
-#
-# @return the new value for the selectedMeasure property if the action is of
-# the expected type
-#
+# Updates the state when a user has selected a measure dimension. The index of
+# the current measure dimension will be passed
 selectedMeasure = (state = null, action) ->
   switch action.type
     when ActionTypes.SELECT_MEASURE then action.payload
@@ -36,13 +23,6 @@ isFetching = (state = false, action) ->
     else state
 
 # Updates the state when the data have been loaded
-#
-# @param [Object] the current value for the data property
-# @param [Object] the action received
-#
-# @return the new value for the data property if the action is of
-# the expected type
-#
 data = (state = Immutable.Map({}), action) ->
   switch action.type
     when ActionTypes.FETCH_DATA
@@ -51,7 +31,15 @@ data = (state = Immutable.Map({}), action) ->
       else state
     else state
 
-reducers = combineReducers {selectedData, selectedMeasure, isFetching, data}
+# Updates the state when there was an error loading the data
+error = (state = null, action) ->
+  switch action.type
+    when ActionTypes.FETCH_DATA
+      if action.error then action.payload else null
+    else state
+
+reducers =
+  combineReducers {selectedData, selectedMeasure, isFetching, data, error}
 
 module.exports =
   filters: reducers
