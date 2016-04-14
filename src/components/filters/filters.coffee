@@ -84,7 +84,9 @@ Filters = React.createClass
       )
 
   render: ->
-    if @universe.hasOwnProperty 'groupAll'
+    if @props.error
+      dom.div {className: 'alert alert-danger'}, @props.error.message
+    else if @universe.hasOwnProperty 'groupAll'
       filters = createFilters @dims, @smd
       nodes = (createSelectField(d, idx) for d, idx in filters)
       dom.div (id: 'filters'),

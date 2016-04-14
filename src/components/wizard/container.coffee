@@ -26,6 +26,7 @@ mapStateToProps = (state) ->
       if state.categories.selectedCategory then findAttachedFlows state else []
     selectedFilters: {}
     data: state.filters?.data
+    error: state.filters?.error
   }
 
 mapDispatchToProps = (dispatch) ->
