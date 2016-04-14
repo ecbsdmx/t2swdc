@@ -50,7 +50,8 @@ Wizard = React.createClass
         React.createElement StepTwo,
          {items: @props.dataflows, action: @props.onDataflowClick}
         React.createElement StepThree,
-         {data: @props.data, step: step, error: @props.error}
+         {data: @props.data, step: step, error: @props.error,
+         busy: @props.isFetching}
 
 Wizard.propTypes =
   categoryscheme: React.PropTypes.object.isRequired
@@ -62,5 +63,6 @@ Wizard.propTypes =
   onDataflowClick: React.PropTypes.func.isRequired
   onImportClick: React.PropTypes.func.isRequired
   error: React.PropTypes.object.isRequired
+  isFetching: React.PropTypes.bool.isRequired
 
 exports.Wizard = Wizard

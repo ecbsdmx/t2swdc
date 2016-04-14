@@ -12,6 +12,8 @@ Step = React.createClass
       series: @props?.data?.get('dataSets')?.get(0).get('series') ?
         Immutable.Map({})
       error: @props.error
+      busy: @props.busy
+
     dom.div {className: 'step-pane sample-pane', 'data-step': '3'},
       React.createElement Filters, opts
 
@@ -22,6 +24,7 @@ Step.propTypes = {
   data: React.PropTypes.instanceOf(Immutable.Map).isRequired
   step: React.PropTypes.number.isRequired
   error: React.PropTypes.object.isRequired
+  busy: React.PropTypes.bool.isRequired
 }
 
 exports.WizardStepThree = Step

@@ -55,7 +55,6 @@ Filters = React.createClass
   componentWillUpdate: (nextProps, nextState) ->
     # When getting new data, we need to create crossfilter universe & dimensions
     if nextProps.series.equals? and not nextProps.series.equals?(@props.series)
-      console.log 'Building universe'
       @universe = {}
       @dims = []
       @smd = []
@@ -84,7 +83,10 @@ Filters = React.createClass
       )
 
   render: ->
-    if @props.error
+    if @props.busy
+      dom.div {id: 'loading', className: 'text-center'},
+        dom.span {className: 'glyphicon glyphicon-repeat gly-spin'}
+    else if @props.error
       dom.div {className: 'alert alert-danger'}, @props.error.message
     else if @universe.hasOwnProperty 'groupAll'
       filters = createFilters @dims, @smd

@@ -27,6 +27,7 @@ mapStateToProps = (state) ->
     selectedFilters: {}
     data: state.filters?.data
     error: state.filters?.error
+    isFetching: state.filters.isFetching
   }
 
 mapDispatchToProps = (dispatch) ->
