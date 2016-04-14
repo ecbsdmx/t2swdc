@@ -3,18 +3,21 @@ should = require('chai').should()
 React = require 'react'
 {mount} = require 'enzyme'
 jsdom = require 'mocha-jsdom'
+Immutable = require 'immutable'
 
 describe 'Filters component', ->
 
   jsdom()
 
-  s = {'A.NOK.EUR.SP00': {}, 'A.CHF.EUR.SP00': {}}
-  d = [
+  series = {'A.NOK.EUR.SP00': {}, 'A.CHF.EUR.SP00': {}}
+  dimensions = [
     {id: 'FREQ', name: 'Frequency', values: [{id: 'A', name: 'Annual'}]}
     {id: 'CURRENCY', name: 'Currency', values: [{id: 'CHF', name: 'Swiss Franc'}, {id: 'NOK', name: 'Norwegian krone'}]}
     {id: 'CURRENCY_DENOM', name: 'Currency denominator', values: [{id: 'EUR', name: 'Euro'}]}
     {id: 'EXR_TYPE', name: 'Exchange rate type', values: [{id: 'SP00', name: 'Bilateral exchange rates'}]}
   ]
+  s = Immutable.Map series
+  d = Immutable.List d
 
   it 'should render dimension filters as a form with select fields', ->
     # I did not manage to find a good way to test this component, as it

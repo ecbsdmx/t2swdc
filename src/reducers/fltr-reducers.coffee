@@ -32,7 +32,7 @@ selectedMeasure = (state = null, action) ->
 isFetching = (state = false, action) ->
   switch action.type
     when ActionTypes.FETCH_DATA
-      if not action.payload and not action.error then true else state
+      if not action.payload and not action.error then true else false
     else state
 
 # Updates the state when the data have been loaded

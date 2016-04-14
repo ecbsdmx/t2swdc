@@ -25,7 +25,7 @@ mapStateToProps = (state) ->
     dataflows:
       if state.categories.selectedCategory then findAttachedFlows state else []
     selectedFilters: {}
-    data: state.filters?.data.toJS()
+    data: state.filters?.data
   }
 
 mapDispatchToProps = (dispatch) ->
