@@ -2,8 +2,10 @@
 React = require 'react'
 ReactDOM = require 'react-dom'
 
+
 require './assets/css/ecb.css'
 require './assets/css/select2-bootstrap.min.css'
+
 
 # Redux actions
 csActions = require './actions/cs-actions'
@@ -41,9 +43,7 @@ provider = React.createElement Provider, { store },
         <h4 className="title text-primary">ECB SDMX Web Data Connectors <small>Bringing SDMX data into Tableau</small></h4>
       </div>
     </div>
-    <div id="wdc-app">
-      <WizardContainer/>
-    </div>
+    <WizardContainer id="wdc-app"/>
   </div>
 
 app = document.createElement 'div' 
