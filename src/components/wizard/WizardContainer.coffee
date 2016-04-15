@@ -51,4 +51,4 @@ mapDispatchToProps = (dispatch) ->
 WizardContainer =
   connect(mapStateToProps, mapDispatchToProps)(Wizard)
 
-exports.wizContainer = WizardContainer
+exports.WizardContainer = WizardContainer

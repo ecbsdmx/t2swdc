@@ -9,7 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   cache: true,
-  entry: './src/index.coffee',
+  entry: './src/index.cjsx',
   output: {
     path: './dist',
     filename: 'index.js',
@@ -60,7 +60,11 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
-    
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      title: "ECB SDMX Web Data Connectors",
+      template: "src/indexTpl.ejs",
+      xhtml: true
+    })    
   ]
 };
