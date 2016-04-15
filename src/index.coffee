@@ -2,6 +2,9 @@
 React = require 'react'
 ReactDOM = require 'react-dom'
 
+require './assets/css/ecb.css'
+require './assets/css/select2-bootstrap.min.css'
+
 # Redux actions
 csActions = require './actions/cs-actions.coffee'
 fltrActions = require './actions/fltr-actions.coffee'
@@ -30,5 +33,9 @@ populateStore store
 
 provider = React.createElement Provider, { store },
   React.createElement wizContainer
+
+# app = document.createElement('div');
+# document.body.appendChild(app);
+# ReactDOM.render provider, app
 
 ReactDOM.render(provider, document.getElementById "wdc-app")
