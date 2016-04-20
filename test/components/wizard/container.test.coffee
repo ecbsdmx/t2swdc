@@ -1,4 +1,3 @@
-jsdom = require 'mocha-jsdom'
 React = require 'react'
 {createStore} = require 'redux'
 {categories} = require('../../../src/reducers/cs-reducers')
@@ -7,13 +6,11 @@ React = require 'react'
 {combineReducers} = require 'redux'
 should = require('chai').should()
 {describeWithDOM, mount, spyLifecycle, shallow} = require 'enzyme'
-wiz = require('../../../src/components/wizard/container').wizContainer
+{WizardContainer} = require('../../../src/components/wizard/container')
 csActions = require '../../../src/actions/cs-actions'
 dfActions = require '../../../src/actions/df-actions'
 
 describe 'Wizard container component', ->
-
-  jsdom()
 
   it 'should populate a Wizard Steps component', ->
     [id, name] = ['xyz', 'category scheme']
@@ -25,7 +22,7 @@ describe 'Wizard container component', ->
     reducers = combineReducers {categories, dataflows, filters}
     store = createStore reducers
     store.dispatch csActions.csLoaded payload
-    ele  = React.createElement wiz, {store: store}
+    ele  = React.createElement WizardContainer, {store: store}
     wrapper = mount ele
     wrapper.find('.steps-container').should.have.length 1
     steps = wrapper.find('.steps-container')
@@ -41,7 +38,7 @@ describe 'Wizard container component', ->
     reducers = combineReducers {categories, dataflows, filters}
     store = createStore reducers
     store.dispatch csActions.csLoaded payload
-    ele  = React.createElement wiz, {store: store}
+    ele  = React.createElement WizardContainer, {store: store}
     wrapper = mount ele
     wrapper.find('.actions').should.have.length 1
     steps = wrapper.find('.actions')
@@ -57,7 +54,7 @@ describe 'Wizard container component', ->
     reducers = combineReducers {categories, dataflows, filters}
     store = createStore reducers
     store.dispatch csActions.csLoaded payload
-    ele  = React.createElement wiz, {store: store}
+    ele  = React.createElement WizardContainer, {store: store}
     wrapper = mount ele
     wrapper.find("#cs_#{id}").should.have.length 1
 
@@ -72,7 +69,7 @@ describe 'Wizard container component', ->
     store = createStore reducers
     store.dispatch csActions.csLoaded payload
     store.dispatch csActions.categorySelected 'A'
-    ele  = React.createElement wiz, {store: store}
+    ele  = React.createElement WizardContainer, {store: store}
     wrapper = mount ele
     wrapper.find("#dataflows").should.have.length 1
     wrapper.find("#df_flow1").should.have.length 1

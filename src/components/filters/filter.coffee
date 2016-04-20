@@ -8,7 +8,8 @@ createNode = (i) ->
 
 Filter = React.createClass
   render: ->
-    sorted = @props.values?.sort (a, b) ->
+    sorted = @props.values?.concat()
+    sorted.sort (a, b) ->
       if a.id < b.id then -1 else 1
     codes = (createNode v for v in sorted when v)
     id = "fltr_#{@props.pos}"

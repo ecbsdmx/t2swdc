@@ -2,12 +2,9 @@ should = require('chai').should()
 {Filters} = require '../../../src/components/filters/filters'
 React = require 'react'
 {mount} = require 'enzyme'
-jsdom = require 'mocha-jsdom'
 Immutable = require 'immutable'
 
 describe 'Filters component', ->
-
-  jsdom()
 
   series = {'A.NOK.EUR.SP00': {}, 'A.CHF.EUR.SP00': {}}
   dimensions = [

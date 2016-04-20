@@ -11,7 +11,7 @@ getStep = () ->
   return if $? then $('#wizard').wizard('selectedItem').step ? 1 else 1
 
 Wizard = React.createClass
-
+  displayName: "Wizard"
   handleImport: () ->
     throw ReferenceError 'Expected import handler' unless @props.onImportClick
     filters = []
