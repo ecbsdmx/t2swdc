@@ -1,15 +1,15 @@
-should = require('chai').should()
 assert = require('chai').assert
 {Category} = require '../../../src/components/categoryscheme/category.coffee'
 React = require 'react'
-{shallow, mount} = require 'enzyme'
-{categorySelected} = require '../../../src/actions/cs-actions.coffee'
+{shallow} = require 'enzyme'
 sinon = require 'sinon'
-jsdom = require 'mocha-jsdom'
+chai = require 'chai'
+sinonChai = require 'sinon-chai'
+
+chai.should()
+chai.use sinonChai
 
 describe 'Category component', ->
-
-  jsdom()
 
   [id, name, flowsNo, categoryClicked] = ['xyz', 'category', 3, sinon.spy()]
 
@@ -30,13 +30,13 @@ describe 'Category component', ->
       {id: id, name: name, numberOfFlows: flowsNo, onClick: spy}
     wrapper = shallow element
     wrapper.find('a').simulate 'click'
-    spy.calledOnce.should.be.true
-    spy.calledWithExactly(id).should.be.true
+    spy.should.have.been.calledOnce
+    spy.should.have.been.calledWithExactly id
 
   it 'should handle the case where there is no on click handler', ->
     element = React.createElement Category,
       {id: id, name: name, numberOfFlows: flowsNo}
-    wrapper = mount element
+    wrapper = shallow element
     try
       wrapper.find('a').simulate 'click'
       assert.fail 'A ReferenceError should have been triggered'

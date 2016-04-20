@@ -17,7 +17,7 @@ fltrActions = require './actions/fltr-actions'
 {filters} = require('./reducers/fltr-reducers')
 
 # Redux container
-{WizardContainer} = require('./components/wizard/WizardContainer')
+{WizardContainer} = require('./components/wizard/container')
 
 # Redux core
 {createStore, applyMiddleware, combineReducers} = require 'redux'
