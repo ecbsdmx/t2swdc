@@ -6,24 +6,21 @@
 {Wizard} = require './wizard'
 sdmxrest = require 'sdmx-rest'
 
-findAttachedFlows = (state) ->
-  categoryscheme = state.categories.categoryschemes.get(0).toJS()
-  out = category.dataflows \
-    for category in categoryscheme.categories \
-    when category.id is state.categories.selectedCategory
-  return out
+findAttachedFlows = (cs, selCat) ->
+  return cat.dataflows for cat in cs.categories when cat.id is selCat
 
 mapStateToProps = (state) ->
-  results = state.categories.categoryschemes.get(0)
+  cs = state.categories.categoryschemes.get(0)?.toJS()
+  selCat = state.categories.selectedCategory
   return {
     categoryscheme:
-      id: results?.get('id') ? ''
-      name: results?.get('name') ? ''
-      categories: results?.get('categories')?.toJS() ? []
-    selectedCategory: state.categories.selectedCategory
+      id: cs?.id ? ''
+      name: cs?.name ? ''
+      categories: cs?.categories ? []
+    selectedCategory: selCat
     selectedDataflow: state.dataflows?.selectedDataflow
     dataflows:
-      if state.categories.selectedCategory then findAttachedFlows state else []
+      if selCat then findAttachedFlows(cs, selCat) else []
     selectedFilters: {}
     data: state.filters?.data
     error: state.filters?.error
