@@ -6,6 +6,7 @@ dom = React.DOM
 crossfilter = require 'crossfilter2'
 Immutable = require 'immutable'
 
+prevCheck = null
 addPositions = (dimension) ->
   c.pos = idx for c, idx in dimension.values
   dimension
@@ -25,7 +26,7 @@ createFilter = (dimension, smd) ->
 
 createSelectField = (d, idx) ->
   React.createElement Filter,
-      {key: "dim_#{d.id}", id: d.id, name: d.name, values: d.values, pos: idx}
+    {key: "dim_#{d.id}", id: d.id, name: d.name, values: d.values, pos: idx}
 
 formatSelection = (item, field) ->
   $(field).parent().tooltip({title: item.text})
@@ -48,9 +49,9 @@ Filters = React.createClass
     @forceUpdate()
 
   handleCheckboxChanged: (ev) ->
-    $('#filters input:checkbox:checked').each () ->
-      if $(this).val() isnt $(ev.currentTarget).val()
-        $(this).attr('checked', false)
+    if prevCheck and prevCheck isnt ev.currentTarget
+      $(prevCheck).prop('checked', false).change()
+    prevCheck = ev.currentTarget
 
   componentWillUpdate: (nextProps, nextState) ->
     # When getting new data, we need to create crossfilter universe & dimensions
@@ -71,7 +72,7 @@ Filters = React.createClass
       $('select').on('select2:select', @handleChanged)
       $('select').on('select2:unselect', @handleChanged)
       $('#filters :checkbox').bootstrapToggle()
-      $('#filters :checkbox').click @handleCheckboxChanged
+      $('#filters :checkbox').change @handleCheckboxChanged
 
       @isInitial = false
     if $? # If there is only one value in the field, it should be selected
