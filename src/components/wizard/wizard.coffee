@@ -15,9 +15,10 @@ Wizard = React.createClass
   handleImport: () ->
     throw ReferenceError 'Expected import handler' unless @props.onImportClick
     filters = []
+    dims = @props.data?.get('structure')?.get('dimensions').get('series').toJS()
     $('select').each((idx, ele) ->
       if $(ele).val()
-        filters.push (dimensions[idx].values[pos].id for pos in $(ele).val())
+        filters.push (dims[idx].values[pos].id for pos in $(ele).val())
       else filters.push []
     )
     url = sdmxrest.getUrl {flow: @props.selectedDataflow, key: filters}, 'ECB_S'

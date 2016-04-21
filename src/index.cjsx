@@ -1,6 +1,12 @@
 # React stuff
 React = require 'react'
 ReactDOM = require 'react-dom'
+createLogger = require 'redux-logger'
+loggerMiddleware = createLogger(
+  level: 'log'
+  duration: true
+  collapsed: true
+)
 
 
 require './assets/css/ecb.css'
@@ -30,7 +36,7 @@ populateStore = (store) ->
   store.dispatch csActions.csLoaded [data]
 
 reducers = combineReducers {categories, dataflows, filters}
-store = createStore reducers, applyMiddleware thunkMiddleware
+store = createStore reducers, applyMiddleware thunkMiddleware, loggerMiddleware
 populateStore store
 
 provider = React.createElement Provider, { store },
