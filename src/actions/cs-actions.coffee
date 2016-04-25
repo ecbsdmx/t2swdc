@@ -56,7 +56,7 @@ fetchCS = (url) ->
             for cat in artefact.categories
               cat.dataflows = cat.children
             schemes.push artefact
-                
+
         dispatch csLoaded schemes)
       .catch((error) -> dispatch csLoaded error)
 
