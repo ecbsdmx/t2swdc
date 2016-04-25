@@ -9,6 +9,7 @@ describe 'Category scheme reducers', ->
     categoryschemes: []
     isFetching: false
 
+
   describe 'Reducer for category selection', ->
     it 'should change the selected category', ->
       id = 'test'
@@ -49,3 +50,16 @@ describe 'Category scheme reducers', ->
       action = csActions.csLoading()
       state = csReducers initialState, action
       state.should.be.an('object').with.property('isFetching').that.equals true
+
+  describe 'Reducer handling errors when fetching the category schemes', ->
+    it 'should change the error property', ->
+      error = new Error 'Problem'
+      action = csActions.csLoaded error
+      state = csReducers initialState, action
+      state.should.be.an('object').with.property 'error'
+      state.error.should.equal error
+    it 'should have null as default value for the error property', ->
+      action = csActions.categorySelected '2'
+      state = csReducers {}, action
+      state.should.be.an('object').with.property('error').
+        that.is.a('null')
