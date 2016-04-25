@@ -85,6 +85,7 @@
     "redux-actions": "0.9.1",
     "redux-logger": "2.6.1",
     "redux-thunk": "2.0.1",
-    "sdmx-rest": "2.3.0"
+    "sdmx-rest": "2.3.0",
+    "sdmxmllib": "0.7.0"
   }
 }

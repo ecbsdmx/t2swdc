@@ -1,5 +1,8 @@
 {createAction} = require 'redux-actions'
 {ActionTypes} = require '../constants/action-types'
+fetch = require 'isomorphic-fetch'
+sdmxrest = require 'sdmx-rest'
+{sdmxmllib} = require 'sdmxmllib'
 
 # Creates an action indicating that the user has selected a category
 #
@@ -38,7 +41,27 @@ csLoaded = (cs) ->
 csLoading = ->
   createAction(ActionTypes.FETCH_CS)()
 
+# Async action to fetch a category scheme
+fetchCS = (url) ->
+  (dispatch) ->
+    dispatch csLoading()
+    sdmxrest.request(url)
+      .then((response) ->
+        str = sdmxmllib.mapSDMXMLResponse response
+        schemes = []
+        for key of str.resources
+          artefact = str.resources[key]
+          if artefact.class is 'CategoryScheme'
+            artefact.categories = artefact.items
+            for cat in artefact.categories
+              cat.dataflows = cat.children
+            schemes.push artefact
+                
+        dispatch csLoaded schemes)
+      .catch((error) -> dispatch csLoaded error)
+
 module.exports =
   categorySelected: categorySelected
   csLoaded: csLoaded
   csLoading: csLoading
+  fetchCS: fetchCS
