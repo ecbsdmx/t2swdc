@@ -10,14 +10,17 @@ nock = require 'nock'
 sinon = require 'sinon'
 
 describe 'Filters actions', ->
-
   describe 'Actions creators', ->
     it 'should allow creating SELECT_DATA actions', ->
       fltrActions.should.have.property 'dataSelected'
     it 'should allow creating SELECT_MEASURE actions', ->
       fltrActions.should.have.property 'measureSelected'
-    it 'should allow creating SELECT_DATA actions', ->
+    it 'should allow creating FETCH_DATA (state: Loading) actions', ->
       fltrActions.should.have.property 'dataLoading'
+    it 'should allow creating FETCH_DATA (state: Loaded) actions', ->
+      fltrActions.should.have.property 'dataLoaded'
+    it 'should allow creating the async action to fetch data', ->
+      fltrActions.should.have.property 'fetchData'
 
   describe 'Actions for data selection', ->
     func = fltrActions.dataSelected
