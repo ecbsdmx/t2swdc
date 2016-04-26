@@ -1,6 +1,5 @@
 {createAction} = require 'redux-actions'
 {ActionTypes} = require '../constants/action-types'
-fetch = require 'isomorphic-fetch'
 sdmxrest = require 'sdmx-rest'
 sdmxmllib = require 'sdmxmllib'
 
@@ -47,7 +46,6 @@ fetchCS = (url) ->
     dispatch csLoading()
     sdmxrest.request(url)
       .then((response) ->
-        console.log sdmxmllib
         str = sdmxmllib.mapSDMXMLResponse response
         schemes = []
         for key of str.resources
