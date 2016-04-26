@@ -1,6 +1,5 @@
 {createAction} = require 'redux-actions'
 {ActionTypes} = require '../constants/action-types'
-fetch = require 'isomorphic-fetch'
 sdmxrest = require 'sdmx-rest'
 
 # Creates an action indicating that the user has selected the data he is
