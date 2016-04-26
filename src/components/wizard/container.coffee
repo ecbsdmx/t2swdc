@@ -23,8 +23,10 @@ mapStateToProps = (state) ->
       if selCat then findAttachedFlows(cs, selCat) else []
     selectedFilters: {}
     data: state.filters?.data
-    error: state.filters?.error
-    isFetching: state.filters.isFetching
+    smdError: state.categories?.error
+    dataError: state.filters?.error
+    isFetchingData: state.filters.isFetching
+    isFetchingSmd: state.categories.isFetching
   }
 
 mapDispatchToProps = (dispatch) ->

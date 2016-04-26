@@ -47,12 +47,13 @@ Wizard = React.createClass
       React.createElement Actions
       dom.div {className: 'step-content'},
         React.createElement StepOne,
-         {item: @props.categoryscheme, action: @props.onCategoryClick}
+         {item: @props.categoryscheme, action: @props.onCategoryClick,
+         error: @props.smdError, busy: @props.isFetchingSmd}
         React.createElement StepTwo,
          {items: @props.dataflows, action: @props.onDataflowClick}
         React.createElement StepThree,
-         {data: @props.data, step: step, error: @props.error,
-         busy: @props.isFetching}
+         {data: @props.data, step: step, error: @props.dataError,
+         busy: @props.isFetchingData}
 
 Wizard.propTypes =
   categoryscheme: React.PropTypes.object.isRequired
@@ -63,7 +64,9 @@ Wizard.propTypes =
   onCategoryClick: React.PropTypes.func.isRequired
   onDataflowClick: React.PropTypes.func.isRequired
   onImportClick: React.PropTypes.func.isRequired
-  error: React.PropTypes.object.isRequired
-  isFetching: React.PropTypes.bool.isRequired
+  dataError: React.PropTypes.object.isRequired
+  smdError: React.PropTypes.object.isRequired
+  isFetchingData: React.PropTypes.bool.isRequired
+  isFetchingSmd: React.PropTypes.bool.isRequired
 
 exports.Wizard = Wizard

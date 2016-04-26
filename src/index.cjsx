@@ -8,10 +8,8 @@ loggerMiddleware = createLogger(
   collapsed: true
 )
 
-
 require './assets/css/ecb.css'
 require './assets/css/select2-bootstrap.min.css'
-
 
 # Redux actions
 csActions = require './actions/cs-actions'
@@ -30,14 +28,18 @@ fltrActions = require './actions/fltr-actions'
 {Provider} = require 'react-redux'
 thunkMiddleware = require('redux-thunk').default
 
-data = require '../test/fixtures/data.json'
-
-populateStore = (store) ->
-  store.dispatch csActions.csLoaded [data]
+sdmxrest = require 'sdmx-rest'
 
 reducers = combineReducers {categories, dataflows, filters}
 store = createStore reducers, applyMiddleware thunkMiddleware, loggerMiddleware
-populateStore store
+
+query =
+  resource: 'categoryscheme'
+  id: 'MOBILE_NAVI_PUB'
+  agency: 'ECB.DISS'
+  references: 'parentsandsiblings'
+url = sdmxrest.getUrl query, 'ECB_S'
+store.dispatch csActions.fetchCS url
 
 provider = React.createElement Provider, { store },
   <div className="container">
@@ -52,7 +54,7 @@ provider = React.createElement Provider, { store },
     <WizardContainer id="wdc-app"/>
   </div>
 
-app = document.createElement 'div' 
+app = document.createElement 'div'
 app.className = "fuelux"
-document.body.appendChild app 
+document.body.appendChild app
 ReactDOM.render provider, app

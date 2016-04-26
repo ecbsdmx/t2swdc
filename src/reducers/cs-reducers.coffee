@@ -36,11 +36,19 @@ categoryschemes = (state = Immutable.List([]), action) ->
 isFetching = (state = false, action) ->
   switch action.type
     when ActionTypes.FETCH_CS
-      if not action.payload and not action.error then true else state
+      if not action.payload and not action.error then true else false
+    else state
+
+# Updates the state when there was an error loading the metadata
+error = (state = null, action) ->
+  switch action.type
+    when ActionTypes.FETCH_CS
+      if action.error then action.payload else null
     else state
 
 # Combines together all the reducers related to category schemes
-reducers = combineReducers {selectedCategory, categoryschemes, isFetching}
+reducers =
+  combineReducers {selectedCategory, categoryschemes, isFetching, error}
 
 module.exports =
   categories: reducers
