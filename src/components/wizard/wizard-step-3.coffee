@@ -11,6 +11,7 @@ Step = React.createClass
           Immutable.List([])
       series: @props?.data?.get('dataSets')?.get(0).get('series') ?
         Immutable.Map({})
+      name: @props?.data?.get('structure')?.get('name')
       error: @props.error
       busy: @props.busy
 
