@@ -53,7 +53,12 @@ fetchCS = (url) ->
           if artefact.class is 'CategoryScheme'
             artefact.categories = artefact.items
             for cat in artefact.categories
-              cat.dataflows = cat.children
+              cat.dataflows = []
+              usedIds = []
+              for flow in cat.children
+                if usedIds.indexOf(flow.id) is -1
+                  cat.dataflows.push flow
+                  usedIds.push flow.id
             schemes.push artefact
 
         dispatch csLoaded schemes)
