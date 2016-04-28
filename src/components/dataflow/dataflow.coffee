@@ -6,6 +6,9 @@ Dataflow = React.createClass
     throw ReferenceError 'Expected onClick handler' unless @props.onClick
     @props.onClick @props.id
 
+  shouldComponentUpdate: (nextProps, nextState) ->
+    nextProps.id isnt @props.id
+
   render: ->
     dom.a(
       {id: "df_#{@props.id}", href: '#', className: 'list-group-item',

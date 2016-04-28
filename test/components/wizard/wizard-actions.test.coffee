@@ -10,11 +10,8 @@ describe 'Wizard actions component', ->
       {step: 1, selectedCategory: 'a'}
     output = """\
     <div class="actions">\
-    <button type="button" class="btn btn-default btn-prev">\
-		<span class="glyphicon glyphicon-arrow-left"></span></button>\
-    <button type="button" class="btn btn-default btn-next" \
-    data-last="Send to Tableau" disabled="">\
-    <span class="glyphicon glyphicon-arrow-right"></span></button>\
-    </div>\
+    <button type="button" class="btn btn-default btn-next" disabled="">\
+    Import into Tableau\
+    </button></div>\
     """
     wrapper.html().should.equal output

@@ -83,6 +83,9 @@ Filters = React.createClass
           $(select).val($(options[0]).val()).trigger 'change'
       )
 
+  shouldComponentUpdate: (nextProps, nextState) ->
+    nextProps.series isnt @props.series or nextProps.busy or nextProps.error
+
   render: ->
     if @props.busy
       dom.div {id: 'loading', className: 'text-center'},
@@ -92,16 +95,18 @@ Filters = React.createClass
     else if @universe.hasOwnProperty 'groupAll'
       filters = createFilters @dims, @smd
       nodes = (createSelectField(d, idx) for d, idx in filters)
+      $('.btn-next').removeAttr('disabled') if $
       dom.div (id: 'filters'),
         React.createElement MeasureInfo, {}
         React.createElement MatchingSeries,
-          {number: @universe.groupAll().value()}
+          {name: @props.name, number: @universe.groupAll().value()}
         dom.form {id: 'dimensionFilters'}, nodes
     else false
 
 Filters.propTypes = {
   dimensions: React.PropTypes.instanceOf(Immutable.List).isRequired
   series: React.PropTypes.instanceOf(Immutable.Map).isRequired
+  name: React.PropTypes.string.isRequired
 }
 
 exports.Filters = Filters

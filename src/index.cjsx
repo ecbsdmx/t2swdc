@@ -48,7 +48,7 @@ provider = React.createElement Provider, { store },
         <img src="http://sdmx.org/wp-content/uploads/sdmx-logo_2.png"/>
       </div>
       <div className="col-xs-9 col-sm-8 col-md-6 col-lg-6 text-right">
-        <h4 className="title text-primary">ECB SDMX Web Data Connectors <small>Bringing SDMX data into Tableau</small></h4>
+        <h4 className="title text-primary">ECB SDMX Web Data Connectors <small>ECB Public Statistical Data Warehouse</small></h4>
       </div>
     </div>
     <WizardContainer id="wdc-app"/>

@@ -3,6 +3,8 @@ dom = React.DOM
 {Category} = require './category'
 
 CategoryScheme = React.createClass
+  shouldComponentUpdate: (nextProps, nextState) ->
+    nextProps.id isnt @props.id
   render: ->
     if @props.busy
       dom.div {id: 'loading', className: 'text-center'},
