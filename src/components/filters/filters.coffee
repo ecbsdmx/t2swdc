@@ -83,6 +83,9 @@ Filters = React.createClass
           $(select).val($(options[0]).val()).trigger 'change'
       )
 
+  shouldComponentUpdate: (nextProps, nextState) ->
+    nextProps.series isnt @props.series or nextProps.busy or nextProps.error
+
   render: ->
     if @props.busy
       dom.div {id: 'loading', className: 'text-center'},

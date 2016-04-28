@@ -22,6 +22,8 @@ createButton = (isNext) ->
 
 
 Actions = React.createClass
+  shouldComponentUpdate: (nextProps, nextState) ->
+    false
   render: ->
     div {className: 'actions'},
       createButton false
