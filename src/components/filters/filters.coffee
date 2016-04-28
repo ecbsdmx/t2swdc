@@ -95,13 +95,14 @@ Filters = React.createClass
       dom.div (id: 'filters'),
         React.createElement MeasureInfo, {}
         React.createElement MatchingSeries,
-          {number: @universe.groupAll().value()}
+          {name: @props.name, number: @universe.groupAll().value()}
         dom.form {id: 'dimensionFilters'}, nodes
     else false
 
 Filters.propTypes = {
   dimensions: React.PropTypes.instanceOf(Immutable.List).isRequired
   series: React.PropTypes.instanceOf(Immutable.Map).isRequired
+  name: React.PropTypes.string.isRequired
 }
 
 exports.Filters = Filters
