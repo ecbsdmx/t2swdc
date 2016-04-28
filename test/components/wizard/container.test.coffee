@@ -42,7 +42,7 @@ describe 'Wizard container component', ->
     wrapper = mount ele
     wrapper.find('.actions').should.have.length 1
     steps = wrapper.find('.actions')
-    steps.find('button').should.have.length 2
+    steps.find('button').should.have.length 1
 
   it 'should populate a Category Scheme component', ->
     [id, name] = ['xyz', 'category scheme']

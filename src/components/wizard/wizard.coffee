@@ -8,7 +8,7 @@ StepThree = require('./wizard-step-3').WizardStepThree
 sdmxrest = require 'sdmx-rest'
 
 getStep = () ->
-  return if $? then $('#wizard').wizard('selectedItem').step ? 1 else 1
+  return if $? then $('#wizard').wizard('selectedItem').step else 1
 
 Wizard = React.createClass
   displayName: "Wizard"
@@ -29,11 +29,7 @@ Wizard = React.createClass
 
   stepChanged: (event, data) ->
     step = getStep()
-    if step is 1 and not @props.selectedCategory \
-    or step is 2 and not @props.selectedDataflow
-      $('.btn-next').attr('disabled', 'disabled')
-    else
-      $('.btn-next').removeAttr('disabled')
+    $('.btn-next').attr('disabled', true) if $?
 
   componentDidMount: ->
     if $?
@@ -43,14 +39,15 @@ Wizard = React.createClass
   render: ->
     step = getStep()
     dom.div {className: 'wizard', 'data-initialize': 'wizard', id: 'wizard'},
-      React.createElement Steps, {step: step}
+      React.createElement Steps
       React.createElement Actions
       dom.div {className: 'step-content'},
         React.createElement StepOne,
          {item: @props.categoryscheme, action: @props.onCategoryClick,
          error: @props.smdError, busy: @props.isFetchingSmd}
         React.createElement StepTwo,
-         {items: @props.dataflows, action: @props.onDataflowClick}
+         {items: @props.dataflows, action: @props.onDataflowClick,
+         selectedDataflow: @props.selectedDataflow}
         React.createElement StepThree,
          {data: @props.data, step: step, error: @props.dataError,
          busy: @props.isFetchingData}
@@ -59,6 +56,7 @@ Wizard.propTypes =
   categoryscheme: React.PropTypes.object.isRequired
   selectedCategory: React.PropTypes.string
   dataflows: React.PropTypes.array.isRequired
+  selectedDataflow: React.PropTypes.string.isRequired
   selectedFilters: React.PropTypes.object.isRequired
   data: React.PropTypes.object.isRequired
   onCategoryClick: React.PropTypes.func.isRequired
