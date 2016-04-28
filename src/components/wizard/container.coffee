@@ -34,14 +34,15 @@ mapDispatchToProps = (dispatch) ->
     onCategoryClick: (id) ->
       dispatch categorySelected id
       if $? then $('#wizard').wizard 'next'
-    onDataflowClick: (id) ->
-      dispatch dataflowSelected id
+    onDataflowClick: (id, hasChanged) ->
+      if hasChanged
+        dispatch dataflowSelected id
+        query =
+          flow: id
+          detail: sdmxrest.data.DataDetail.SERIES_KEYS_ONLY
+        url = sdmxrest.getUrl query, 'ECB_S'
+        dispatch fetchData url
       if $? then $('#wizard').wizard 'next'
-      query =
-        flow: id
-        detail: sdmxrest.data.DataDetail.SERIES_KEYS_ONLY
-      url = sdmxrest.getUrl query, 'ECB_S'
-      dispatch fetchData url
     onImportClick: (url, index) ->
       dispatch dataSelected url
       dispatch measureSelected index
