@@ -8,7 +8,7 @@ StepThree = require('./wizard-step-3').WizardStepThree
 sdmxrest = require 'sdmx-rest'
 
 getStep = () ->
-  return if $? then $('#wizard').wizard('selectedItem').step ? 1 else 1
+  return if $? then $('#wizard').wizard('selectedItem').step else 1
 
 Wizard = React.createClass
   displayName: "Wizard"
@@ -29,11 +29,7 @@ Wizard = React.createClass
 
   stepChanged: (event, data) ->
     step = getStep()
-    if step is 1 and not @props.selectedCategory \
-    or step is 2 and not @props.selectedDataflow
-      $('.btn-next').attr('disabled', 'disabled')
-    else
-      $('.btn-next').removeAttr('disabled')
+    $('.btn-next').attr('disabled', true) if $?
 
   componentDidMount: ->
     if $?

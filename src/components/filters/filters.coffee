@@ -95,6 +95,7 @@ Filters = React.createClass
     else if @universe.hasOwnProperty 'groupAll'
       filters = createFilters @dims, @smd
       nodes = (createSelectField(d, idx) for d, idx in filters)
+      $('.btn-next').removeAttr('disabled') if $
       dom.div (id: 'filters'),
         React.createElement MeasureInfo, {}
         React.createElement MatchingSeries,
