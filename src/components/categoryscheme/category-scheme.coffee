@@ -4,7 +4,7 @@ dom = React.DOM
 
 CategoryScheme = React.createClass
   shouldComponentUpdate: (nextProps, nextState) ->
-    nextProps.id isnt @props.id
+    nextProps.id isnt @props.id or nextProps.busy isnt @props.busy
   render: ->
     if @props.busy
       dom.div {id: 'loading', className: 'text-center'},
