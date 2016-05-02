@@ -1,5 +1,8 @@
 exports.ActionTypes = class ActionTypes
 
+  # Indicates that the process to load the countries hierarchical CL is running
+  @FETCH_HCL: 'FETCH_HCL'
+
   # Indicates that the process to load the category schemes is running
   @FETCH_CS: 'FETCH_CS'
 

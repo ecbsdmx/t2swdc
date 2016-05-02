@@ -3,6 +3,7 @@ should = require('chai').should()
 {ActionTypes} = require '../../src/constants/action-types'
 
 keyActions = [
+  'FETCH_HCL'
   'FETCH_CS'
   'FETCH_DATA'
   'SELECT_CATEGORY'
