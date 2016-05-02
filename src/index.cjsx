@@ -14,11 +14,13 @@ require './assets/css/select2-bootstrap.min.css'
 # Redux actions
 csActions = require './actions/cs-actions'
 fltrActions = require './actions/fltr-actions'
+hclActions = require './actions/hcl-actions'
 
 # Redux reducers
 {categories} = require('./reducers/cs-reducers')
 {dataflows} = require('./reducers/df-reducers')
 {filters} = require('./reducers/fltr-reducers')
+{hierarchies} = require('./reducers/hcl-reducers')
 
 # Redux container
 {WizardContainer} = require('./components/wizard/container')
@@ -30,16 +32,23 @@ thunkMiddleware = require('redux-thunk').default
 
 sdmxrest = require 'sdmx-rest'
 
-reducers = combineReducers {categories, dataflows, filters}
+reducers = combineReducers {categories, dataflows, filters, hierarchies}
 store = createStore reducers, applyMiddleware thunkMiddleware, loggerMiddleware
 
-query =
+hQuery =
+  resource: 'hierarchicalcodelist'
+  id: 'HCL_COUNTRY_GROUPINGS'
+  agency: 'ECB.DISS'
+hUrl = sdmxrest.getUrl hQuery, 'ECB_S'
+store.dispatch hclActions.fetchHCL hUrl
+
+csQuery =
   resource: 'categoryscheme'
   id: 'MOBILE_NAVI_PUB'
   agency: 'ECB.DISS'
   references: 'parentsandsiblings'
-url = sdmxrest.getUrl query, 'ECB_S'
-store.dispatch csActions.fetchCS url
+csUrl = sdmxrest.getUrl csQuery, 'ECB_S'
+store.dispatch csActions.fetchCS csUrl
 
 provider = React.createElement Provider, { store },
   <div className="container">

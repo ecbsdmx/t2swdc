@@ -73,33 +73,33 @@ describe 'Hierarchical codelist actions', ->
           <str:HierarchicalCodelists>
               <str:HierarchicalCodelist id="HCL_COUNTRY_GROUPINGS" agencyID="TUX" version="1.0" urn="urn:sdmx:org.sdmx.infomodel.codelist.HierarchicalCodelist=TUX:HCL_COUNTRY_GROUPINGS(1.0)">
               <com:Name>List of country groupings</com:Name>
-              <str:Hierarchy id="EU_GROUPINGS" urn="urn:sdmx:org.sdmx.infomodel.codelist.Hierarchy=TUX:HCL_COUNTRY_GROUPINGS(1.0).EU_GROUPINGS">
+              <str:Hierarchy id="EU_GROUPINGS_PROTOCOL" urn="urn:sdmx:org.sdmx.infomodel.codelist.Hierarchy=TUX:HCL_COUNTRY_GROUPINGS(1.0).EU_GROUPINGS_PROTOCOL">
                 <com:Name>EU countries sorted by protocol order</com:Name>
-                <str:HierarchicalCode id="1" urn="urn:sdmx:org.sdmx.infomodel.codelist.Hierarchy=TUX:HCL_COUNTRY_GROUPINGS(1.0).EU_GROUPINGS.1">
+                <str:HierarchicalCode id="1" urn="urn:sdmx:org.sdmx.infomodel.codelist.Hierarchy=TUX:HCL_COUNTRY_GROUPINGS(1.0).EU_GROUPINGS_PROTOCOL.1">
                   <str:Code>
                     <Ref id="EA" maintainableParentID="CL_COUNTRY_GROUPINGS" maintainableParentVersion="1.0" agencyID="ECB.DISS" package="codelist" class="Code"/>
                   </str:Code>
-                  <str:HierarchicalCode id="1" urn="urn:sdmx:org.sdmx.infomodel.codelist.Hierarchy=TUX:HCL_COUNTRY_GROUPINGS(1.0).EU_GROUPINGS.1.1">
+                  <str:HierarchicalCode id="1" urn="urn:sdmx:org.sdmx.infomodel.codelist.Hierarchy=TUX:HCL_COUNTRY_GROUPINGS(1.0).EU_GROUPINGS_PROTOCOL.1.1">
                     <str:Code>
                       <Ref id="BE" maintainableParentID="CL_AREA_EE" maintainableParentVersion="1.0" agencyID="ECB" package="codelist" class="Code"/>
                     </str:Code>
                   </str:HierarchicalCode>
-                  <str:HierarchicalCode id="2" urn="urn:sdmx:org.sdmx.infomodel.codelist.Hierarchy=TUX:HCL_COUNTRY_GROUPINGS(1.0).EU_GROUPINGS.1.2">
+                  <str:HierarchicalCode id="2" urn="urn:sdmx:org.sdmx.infomodel.codelist.Hierarchy=TUX:HCL_COUNTRY_GROUPINGS(1.0).EU_GROUPINGS_PROTOCOL.1.2">
                     <str:Code>
                       <Ref id="NL" maintainableParentID="CL_AREA_EE" maintainableParentVersion="1.0" agencyID="ECB" package="codelist" class="Code"/>
                     </str:Code>
                   </str:HierarchicalCode>
-                  <str:HierarchicalCode id="3" urn="urn:sdmx:org.sdmx.infomodel.codelist.Hierarchy=TUX:HCL_COUNTRY_GROUPINGS(1.0).EU_GROUPINGS.1.3">
+                  <str:HierarchicalCode id="3" urn="urn:sdmx:org.sdmx.infomodel.codelist.Hierarchy=TUX:HCL_COUNTRY_GROUPINGS(1.0).EU_GROUPINGS_PROTOCOL.1.3">
                     <str:Code>
                       <Ref id="LU" maintainableParentID="CL_AREA_EE" maintainableParentVersion="1.0" agencyID="ECB" package="codelist" class="Code"/>
                     </str:Code>
                   </str:HierarchicalCode>
                 </str:HierarchicalCode>
-                <str:HierarchicalCode id="2" urn="urn:sdmx:org.sdmx.infomodel.codelist.Hierarchy=TUX:HCL_COUNTRY_GROUPINGS(1.0).EU_GROUPINGS.2">
+                <str:HierarchicalCode id="2" urn="urn:sdmx:org.sdmx.infomodel.codelist.Hierarchy=TUX:HCL_COUNTRY_GROUPINGS(1.0).EU_GROUPINGS_PROTOCOL.2">
                   <str:Code>
                     <Ref id="NEA" maintainableParentID="CL_COUNTRY_GROUPINGS" maintainableParentVersion="1.0" agencyID="ECB.DISS" package="codelist" class="Code"/>
                   </str:Code>
-                  <str:HierarchicalCode id="1" urn="urn:sdmx:org.sdmx.infomodel.codelist.Hierarchy=TUX:HCL_COUNTRY_GROUPINGS(1.0).EU_GROUPINGS.2.1">
+                  <str:HierarchicalCode id="1" urn="urn:sdmx:org.sdmx.infomodel.codelist.Hierarchy=TUX:HCL_COUNTRY_GROUPINGS(1.0).EU_GROUPINGS_PROTOCOL.2.1">
                     <str:Code>
                       <Ref id="DK" maintainableParentID="CL_AREA_EE" maintainableParentVersion="1.0" agencyID="ECB" package="codelist" class="Code"/>
                     </str:Code>

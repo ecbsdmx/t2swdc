@@ -6,7 +6,7 @@ sdmxmllib = require 'sdmxmllib'
 getId = (urn) ->
   urn.substring(urn.lastIndexOf('.') + 1)
 
-handleHierarchy = (h) ->
+handleH = (h) ->
   out = { 'mu': [], 'nmu': []}
   for i in h.items
     codeId = getId i.code.href
@@ -40,7 +40,7 @@ fetchHCL = (url) ->
       .then((response) ->
         str = sdmxmllib.mapSDMXMLResponse response
         items = str.resources[0].items
-        hcl = (handleHierarchy h for h in items when h.id is 'EU_GROUPINGS')
+        hcl = (handleH h for h in items when h.id is 'EU_GROUPINGS_PROTOCOL')
         dispatch hclLoaded hcl[0])
       .catch((error) -> dispatch hclLoaded error)
 
