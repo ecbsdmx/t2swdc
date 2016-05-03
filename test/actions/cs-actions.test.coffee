@@ -170,7 +170,6 @@ describe 'Category scheme actions', ->
         cs.categories.should.have.length 2
         for cat in cs.categories
           cat.should.include.keys ['id', 'name', 'dataflows']
-          console.log cat
           cat.dataflows.should.have.length 2 if cat.id is '01'
           cat.dataflows.should.have.length 1 if cat.id is '02'
         should.not.exist(secondAction.error)
