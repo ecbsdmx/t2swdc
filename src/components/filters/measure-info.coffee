@@ -14,6 +14,12 @@ secondItem = () ->
    filter for that dimension.'}
 
 MeasureInfo = React.createClass
+  dismissAlert: (ev) ->
+    ev.preventDefault()
+    ev.stopImmediatePropagation()
+    $('.alert-dismissible').hide()
+  componentDidMount: ->
+    $('.alert-dismissible').on('close.bs.alert', @dismissAlert) if $?
   render: ->
     dom.div {className:'bg-info alert alert-info alert-dismissible fade in'},
       dom.button {type:'button', className:'close', 'data-dismiss':'alert'},
