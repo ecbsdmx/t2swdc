@@ -1,9 +1,14 @@
 React = require 'react'
 dom = React.DOM
 
+cntryGrps = ['0EU', '0MU', '0NMU']
+
 FilterOption = React.createClass
   render: ->
-    dom.option {value: @props.pos}, "#{@props.id} - #{@props.name}"
+    if @props.id in cntryGrps
+      dom.option {value: @props.id}, "#{@props.name}"
+    else
+      dom.option {value: @props.pos}, "#{@props.id} - #{@props.name}"
 
 FilterOption.propTypes =
   id: React.PropTypes.string.isRequired
