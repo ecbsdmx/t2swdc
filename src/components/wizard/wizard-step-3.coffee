@@ -14,6 +14,7 @@ Step = React.createClass
       name: @props?.data?.get('structure')?.get('name')
       error: @props.error
       busy: @props.busy
+      hierarchies: @props.hierarchies
 
     dom.div {className: 'step-pane sample-pane', 'data-step': '3'},
       React.createElement Filters, opts
@@ -21,11 +22,11 @@ Step = React.createClass
   shouldComponentUpdate: (nextProps, nextState) ->
     nextProps.step is 3
 
-Step.propTypes = {
+Step.propTypes =
   data: React.PropTypes.instanceOf(Immutable.Map).isRequired
   step: React.PropTypes.number.isRequired
   error: React.PropTypes.object.isRequired
   busy: React.PropTypes.bool.isRequired
-}
+  hierarchies: React.PropTypes.object.isRequired
 
 exports.WizardStepThree = Step

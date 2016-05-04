@@ -22,6 +22,10 @@ createFilters = (dimensions, seriesDim) ->
 createFilter = (dimension, smd) ->
   indices = (i.key for i in dimension.group().all() when i.value isnt 0)
   codes = (smd.values[i] for i in indices)
+  if smd.id is 'REF_AREA'
+    codes.unshift {id: '0EU', name: 'All EU countries'}
+    codes.unshift {id: '0MU', name: 'All MU countries'}
+    codes.unshift {id: '0NMU', name: 'EU countries excluding MU'}
   {id: smd.id, name: smd.name, values: codes}
 
 createSelectField = (d, idx) ->
@@ -37,12 +41,27 @@ Filters = React.createClass
   universe: {}  # The crossfilter universe
   dims: []      # The crossfilter dimensions
   smd: []       # The SDMX series dimensions
+  areas: {}   # The indices for the country groups
   isInitial: false
+
+  handleCountryGroupings: (values, grp, field) ->
+    v1 = (val for val in values when val isnt grp)
+    v2 = (@areas.mu[k] for k of @areas.mu \
+      when @areas.mu[k] not in v1 and grp isnt '0NMU')
+    v3 = (@areas.nmu[k] for k of @areas.nmu \
+      when @areas.nmu[k] not in v1 and grp isnt '0MU')
+    values = v1.concat v2, v3
+    $(field).val(values).trigger 'change'
+    values
 
   handleChanged: (ev) ->
     fieldNo = ev.currentTarget.id.replace('fltr_', '')
     values = $(ev.currentTarget).val()
     if values
+      fld = $(ev.currentTarget)
+      values = @handleCountryGroupings(values, '0EU', fld) if '0EU' in values
+      values = @handleCountryGroupings(values, '0MU', fld) if '0MU' in values
+      values = @handleCountryGroupings(values, '0NMU', fld) if '0NMU' in values
       @dims[fieldNo].filterFunction (i) -> i in values
     else
       @dims[fieldNo].filterAll()
@@ -57,13 +76,20 @@ Filters = React.createClass
     # When getting new data, we need to create crossfilter universe & dimensions
     if nextProps.series.equals? and not nextProps.series.equals?(@props.series)
       @universe = {}
+      @areas = {mu: {}, nmu: {}}
       @dims = []
       @smd = []
       series = (seriesKeyToObject key for key of nextProps.series.toJS())
       @universe = crossfilter series
-      @dims = []
       @dims.push @universe.dimension((d) -> d[k]) for k of series[0]
       @smd = (addPositions i for i in nextProps.dimensions.toJS())
+      @isInitial = true
+      @areas.mu[c] = undefined for c in @props.hierarchies.mu
+      @areas.nmu[c] = undefined for c in @props.hierarchies.nmu
+      for dim in @smd when dim.id is 'REF_AREA'
+        for val in dim.values
+          if val.id of @areas.mu then @areas.mu[val.id] = "#{val.pos}"
+          else if val.id of @areas.nmu then @areas.nmu[val.id] = "#{val.pos}"
       @isInitial = true
 
   componentDidUpdate: ->
@@ -103,10 +129,12 @@ Filters = React.createClass
         dom.form {id: 'dimensionFilters'}, nodes
     else false
 
-Filters.propTypes = {
+Filters.propTypes =
   dimensions: React.PropTypes.instanceOf(Immutable.List).isRequired
   series: React.PropTypes.instanceOf(Immutable.Map).isRequired
   name: React.PropTypes.string.isRequired
-}
+  error: React.PropTypes.object.isRequired
+  busy: React.PropTypes.bool.isRequired
+  hierarchies: React.PropTypes.object.isRequired
 
 exports.Filters = Filters
