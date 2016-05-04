@@ -50,7 +50,7 @@ Wizard = React.createClass
          selectedDataflow: @props.selectedDataflow}
         React.createElement StepThree,
          {data: @props.data, step: step, error: @props.dataError,
-         busy: @props.isFetchingData}
+         busy: @props.isFetchingData, hierarchies: @props.hierarchies}
 
 Wizard.propTypes =
   categoryscheme: React.PropTypes.object.isRequired
@@ -66,5 +66,6 @@ Wizard.propTypes =
   smdError: React.PropTypes.object.isRequired
   isFetchingData: React.PropTypes.bool.isRequired
   isFetchingSmd: React.PropTypes.bool.isRequired
+  hierarchies: React.PropTypes.object.isRequired
 
 exports.Wizard = Wizard

@@ -44,8 +44,8 @@ store.dispatch hclActions.fetchHCL hUrl
 
 csQuery =
   resource: 'categoryscheme'
-  id: 'MOBILE_NAVI_PUB'
-  agency: 'ECB.DISS'
+  id: 'MOBILE_NAVI'
+  agency: 'ECB'
   references: 'parentsandsiblings'
 csUrl = sdmxrest.getUrl csQuery, 'ECB_S'
 store.dispatch csActions.fetchCS csUrl

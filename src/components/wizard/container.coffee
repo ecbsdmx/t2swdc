@@ -1,7 +1,7 @@
 {connect} = require 'react-redux'
 {categorySelected} = require '../../actions/cs-actions'
 {dataflowSelected} = require '../../actions/df-actions'
-{fetchData} = require '../../actions/fltr-actions'
+{fetchData, dataLoaded} = require '../../actions/fltr-actions'
 {dataSelected, measureSelected} = require '../../actions/fltr-actions'
 {Wizard} = require './wizard'
 sdmxrest = require 'sdmx-rest'
@@ -18,15 +18,15 @@ mapStateToProps = (state) ->
       name: cs?.name ? ''
       categories: cs?.categories ? []
     selectedCategory: selCat
-    selectedDataflow: state.dataflows?.selectedDataflow
-    dataflows:
-      if selCat then findAttachedFlows(cs, selCat) else []
+    selectedDataflow: state.dataflows?.selectedDataflow ? ''
+    dataflows: if selCat then findAttachedFlows(cs, selCat) else []
     selectedFilters: {}
     data: state.filters?.data
-    smdError: state.categories?.error
+    smdError: state.hierarchies?.error ? state.categories?.error
     dataError: state.filters?.error
     isFetchingData: state.filters.isFetching
-    isFetchingSmd: state.categories.isFetching
+    isFetchingSmd: state.hierarchies.isFetching or state.categories.isFetching
+    hierarchies: state.hierarchies.hierarchies?.toJS()
   }
 
 mapDispatchToProps = (dispatch) ->
@@ -42,6 +42,7 @@ mapDispatchToProps = (dispatch) ->
           detail: sdmxrest.data.DataDetail.SERIES_KEYS_ONLY
         url = sdmxrest.getUrl query, 'ECB_S'
         dispatch fetchData url
+
       if $? then $('#wizard').wizard 'next'
     onImportClick: (url, index) ->
       dispatch dataSelected url
