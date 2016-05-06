@@ -34,12 +34,11 @@ describe 'Filter component', ->
     wrapper.find('select').childAt(0).text().should.equal("#{v[0].id} - #{v[0].name}")
     wrapper.find('select').childAt(1).text().should.equal("#{v[1].id} - #{v[1].name}")
     wrapper.find('input').should.exist
-    wrapper.find('input').prop('type').should.equal('checkbox')
-    wrapper.find('input').prop('data-toggle').should.equal('toggle')
+    wrapper.find('button').prop('type').should.equal('button')
 
   it 'should disable selection in case only one value is available', ->
     element = React.createElement Filter,
-      {id: i, name: n, values: singleValue, pos: 0}   
+      {id: i, name: n, values: singleValue, pos: 0}
     wrapper = mount element
     wrapper.should.have.length 1
     wrapper.find('select').should.exist
