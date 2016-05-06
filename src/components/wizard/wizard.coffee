@@ -23,8 +23,9 @@ Wizard = React.createClass
     )
     url = sdmxrest.getUrl {flow: @props.selectedDataflow, key: filters}, 'ECB_S'
     index = null
-    $('#filters input:checkbox:checked').each () ->
-      index = $(this).val()
+    $('#filters button').each () ->
+      sel = $(this).val() is 'selected'
+      index = $(this).attr('id').replace('meas_', '') if sel
     @props.onImportClick url, parseInt(index)
 
   stepChanged: (event, data) ->

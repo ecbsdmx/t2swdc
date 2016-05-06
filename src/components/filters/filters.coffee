@@ -66,9 +66,15 @@ Filters = React.createClass
       @dims[fieldNo].filterAll()
     @forceUpdate()
 
-  handleCheckboxChanged: (ev) ->
+  handleMeasureChanged: (ev) ->
     if prevCheck and prevCheck isnt ev.currentTarget
-      $(prevCheck).prop('checked', false).change()
+      $(prevCheck).removeClass 'active'
+      $(prevCheck).val undefined
+      $(prevCheck).removeClass 'btn-primary'
+      $(prevCheck).addClass 'btn-default'
+    $(ev.currentTarget).val 'selected'
+    $(ev.currentTarget).removeClass 'btn-default'
+    $(ev.currentTarget).addClass 'btn-primary'
     prevCheck = ev.currentTarget
 
   componentWillUpdate: (nextProps, nextState) ->
@@ -96,8 +102,7 @@ Filters = React.createClass
       $('select').select2({templateSelection: formatSelection})
       $('select').on('select2:select', @handleChanged)
       $('select').on('select2:unselect', @handleChanged)
-      $('#filters :checkbox').bootstrapToggle()
-      $('#filters :checkbox').change @handleCheckboxChanged
+      $('#filters button').click @handleMeasureChanged
 
       @isInitial = false
     if $? # If there is only one value in the field, it should be selected
@@ -124,7 +129,7 @@ Filters = React.createClass
       dom.div (id: 'filters'),
         React.createElement MatchingSeries,
           {name: @props.name, number: @universe.groupAll().value()}
-        dom.form {id: 'dimensionFilters'}, nodes
+        dom.form {id: 'dimensionFilters', className: 'form-horizontal'}, nodes
     else false
 
 Filters.propTypes =
