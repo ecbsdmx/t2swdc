@@ -2,7 +2,6 @@ React = require 'react'
 dom = React.DOM
 {Filter} = require './filter'
 {MatchingSeries} = require './matching-series'
-{MeasureInfo} = require './measure-info'
 crossfilter = require 'crossfilter2'
 Immutable = require 'immutable'
 
@@ -123,7 +122,6 @@ Filters = React.createClass
       nodes = (createSelectField(d, idx) for d, idx in filters)
       $('.btn-next').removeAttr('disabled') if $
       dom.div (id: 'filters'),
-        React.createElement MeasureInfo, {}
         React.createElement MatchingSeries,
           {name: @props.name, number: @universe.groupAll().value()}
         dom.form {id: 'dimensionFilters'}, nodes
