@@ -11,7 +11,7 @@
     "compile": "coffee -c -m -o dist src || true",
     "check-coverage": "istanbul check-coverage --statements 60 --branches 60 --functions 60 --lines 60",
     "report-coverage": "cat ./coverage/lcov.info | codecov",
-    "test": "mocha --recursive --compilers coffee:coffee-script/register",
+    "test": "mocha --require mocha-clean/brief --recursive --compilers coffee:coffee-script/register",
     "test:single": "istanbul cover -x **/*.test.coffee _mocha -- --recursive --compilers coffee:coffee-script/register --require coffee-coverage/register-istanbul",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "lint": "coffeelint src"
@@ -55,6 +55,7 @@
     "json-loader": "0.5.4",
     "jsx-loader": "^0.13.2",
     "mocha": "2.4.5",
+    "mocha-clean": "1.0.0",
     "mocha-jsdom": "1.1.0",
     "nock": "8.0.0",
     "react-addons-test-utils": "15.0.2",
