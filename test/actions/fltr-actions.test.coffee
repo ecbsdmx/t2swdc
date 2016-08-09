@@ -56,7 +56,8 @@ describe 'Filters actions', ->
 
     it 'should be possible to reset the measure dimension', ->
       action = func null
-      action.should.be.an('object').with.property('payload').that.is.a 'null'
+      action.should.be.an('object')
+      should.not.exist(action.payload)
 
     it 'should have an integer as iput', ->
       expect(func.bind(func, 'test')).to.throw TypeError
