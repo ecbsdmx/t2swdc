@@ -5,6 +5,7 @@
 {dataSelected, measureSelected} = require '../../actions/fltr-actions'
 {Wizard} = require './wizard'
 sdmxrest = require 'sdmx-rest'
+wdcInterface = require '../../util/wdc-interface'
 
 findAttachedFlows = (cs, selCat) ->
   return cat.dataflows for cat in cs.categories when cat.id is selCat
@@ -47,6 +48,7 @@ mapDispatchToProps = (dispatch) ->
     onImportClick: (url, index) ->
       dispatch dataSelected url
       dispatch measureSelected index
+      wdcInterface.submit url, index
   }
 
 WizardContainer =
