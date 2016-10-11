@@ -1,3 +1,7 @@
+# Tableau support
+wdcInterface = require './util/wdc-interface'
+wdcInterface.registerConnector()
+
 # React stuff
 React = require 'react'
 ReactDOM = require 'react-dom'
