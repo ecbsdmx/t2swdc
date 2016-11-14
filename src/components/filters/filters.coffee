@@ -67,15 +67,18 @@ Filters = React.createClass
     @forceUpdate()
 
   handleMeasureChanged: (ev) ->
-    if prevCheck and prevCheck isnt ev.currentTarget
+    if prevCheck
       $(prevCheck).removeClass 'active'
       $(prevCheck).val undefined
       $(prevCheck).removeClass 'btn-primary'
       $(prevCheck).addClass 'btn-default'
-    $(ev.currentTarget).val 'selected'
-    $(ev.currentTarget).removeClass 'btn-default'
-    $(ev.currentTarget).addClass 'btn-primary'
-    prevCheck = ev.currentTarget
+    if prevCheck isnt ev.currentTarget
+      $(ev.currentTarget).val 'selected'
+      $(ev.currentTarget).removeClass 'btn-default'
+      $(ev.currentTarget).addClass 'btn-primary'
+      return prevCheck = ev.currentTarget
+    prevCheck = null
+      
 
   componentWillUpdate: (nextProps, nextState) ->
     # When getting new data, we need to create crossfilter universe & dimensions
