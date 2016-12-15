@@ -13,7 +13,7 @@ describe 'Web Data Connector Interface', ->
     checkResult = () ->
       response = wdcInterface.response()
       response.fieldNames.should.be.an('array').with.lengthOf(42)
-      response.fieldNames.should.include('Currency')
+      response.fieldNames.should.include('02 - Currency')
       response.fieldTypes.should.be.an('array').with.lengthOf(42)
       response.fieldTypes.should.have.members(['string', 'datetime', 'float'])
       response.dataToReturn.should.be.an('array').with.lengthOf(4)
