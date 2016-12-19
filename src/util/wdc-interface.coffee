@@ -31,7 +31,7 @@ getComponents = (structure) ->
             else
               keyPos = dimPos
             # assumes there will always be less than 99 dimensions
-            prefix = if keyPos < 10 then "0#{keyPos}" else "keyPos"
+            prefix = if keyPos < 10 then "0#{keyPos}" else "#{keyPos}"
           c.name = "#{prefix} - #{c.name}"
           c.type = type
           c.level = level
