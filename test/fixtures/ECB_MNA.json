@@ -1,0 +1,394 @@
+{
+  "header": {
+    "id": "b396d17f-7edd-4afa-8e49-5c91142ac12d",
+    "test": false,
+    "prepared": "2016-12-19T22:28:37.627+01:00",
+    "sender": {
+      "id": "ECB"
+    }
+  },
+  "dataSets": [
+    {
+      "action": "Replace",
+      "validFrom": "2016-12-19T22:28:37.627+01:00",
+      "series": {
+        "0:0:0:0:0:0:0:0:0:0:0:0:0:0": {
+          "attributes": [
+            null,
+            0,
+            0,
+            null,
+            null,
+            0,
+            null,
+            null,
+            0,
+            null,
+            null,
+            0,
+            0,
+            0
+          ],
+          "observations": {
+            "0": [
+              2599043.9455213,
+              0,
+              0,
+              null,
+              null,
+              null
+            ],
+            "1": [
+              2685824.5582543,
+              0,
+              0,
+              null,
+              null,
+              null
+            ],
+            "2": [
+              2675028.082334,
+              0,
+              0,
+              null,
+              null,
+              null
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "structure": {
+    "links": [
+      {
+        "title": "National accounts, Main aggregates (Eurostat ESA2010 TP, table 1)",
+        "rel": "dataflow",
+        "href": "http://a-sdw-wsrest.ecb.europa.eu:80/service/dataflow/ESTAT/MNA/1.0"
+      }
+    ],
+    "name": "National accounts, Main aggregates (Eurostat ESA2010 TP, table 1)",
+    "dimensions": {
+      "series": [
+        {
+          "id": "FREQ",
+          "name": "Frequency",
+          "values": [
+            {
+              "id": "Q",
+              "name": "Quarterly"
+            }
+          ]
+        },
+        {
+          "id": "ADJUSTMENT",
+          "name": "Adjustment indicator",
+          "values": [
+            {
+              "id": "N",
+              "name": "Neither seasonally adjusted nor calendar adjusted"
+            }
+          ]
+        },
+        {
+          "id": "REF_AREA",
+          "name": "Reference area",
+          "values": [
+            {
+              "id": "I8",
+              "name": "Euro area 19 (fixed composition)"
+            }
+          ]
+        },
+        {
+          "id": "COUNTERPART_AREA",
+          "name": "Counterpart area",
+          "values": [
+            {
+              "id": "W2",
+              "name": "Domestic (home or reference area)"
+            }
+          ]
+        },
+        {
+          "id": "REF_SECTOR",
+          "name": "Reference sector",
+          "values": [
+            {
+              "id": "S1",
+              "name": "Total economy"
+            }
+          ]
+        },
+        {
+          "id": "COUNTERPART_SECTOR",
+          "name": "Counterpart sector",
+          "values": [
+            {
+              "id": "S1",
+              "name": "Total economy"
+            }
+          ]
+        },
+        {
+          "id": "ACCOUNTING_ENTRY",
+          "name": "Accounting entries",
+          "values": [
+            {
+              "id": "B",
+              "name": "Balance (Credits minus Debits)"
+            }
+          ]
+        },
+        {
+          "id": "STO",
+          "name": "Stocks, Transactions, Other Flows",
+          "values": [
+            {
+              "id": "B1GQ",
+              "name": "Gross domestic product at market prices"
+            }
+          ]
+        },
+        {
+          "id": "INSTR_ASSET",
+          "name": "Instrument and assets classification",
+          "values": [
+            {
+              "id": "_Z",
+              "name": "Not applicable"
+            }
+          ]
+        },
+        {
+          "id": "ACTIVITY",
+          "name": "Activity classification",
+          "values": [
+            {
+              "id": "_Z",
+              "name": "Not applicable"
+            }
+          ]
+        },
+        {
+          "id": "EXPENDITURE",
+          "name": "Expenditure (COFOG, COICOP, COPP or COPNI)",
+          "values": [
+            {
+              "id": "_Z",
+              "name": "Not applicable"
+            }
+          ]
+        },
+        {
+          "id": "UNIT_MEASURE",
+          "name": "Unit of measure",
+          "values": [
+            {
+              "id": "EUR",
+              "name": "Euro"
+            }
+          ]
+        },
+        {
+          "id": "PRICES",
+          "name": "Prices",
+          "values": [
+            {
+              "id": "V",
+              "name": "Current prices"
+            }
+          ]
+        },
+        {
+          "id": "TRANSFORMATION",
+          "name": "Transformation",
+          "values": [
+            {
+              "id": "N",
+              "name": "Non transformed data"
+            }
+          ]
+        }
+      ],
+      "observation": [
+        {
+          "id": "TIME_PERIOD",
+          "name": "Time period or range",
+          "role": "time",
+          "values": [
+            {
+              "id": "2016-Q1",
+              "name": "2016-Q1",
+              "start": "2016-01-01T00:00:00.000+01:00",
+              "end": "2016-03-31T23:59:59.999+02:00"
+            },
+            {
+              "id": "2016-Q2",
+              "name": "2016-Q2",
+              "start": "2016-04-01T00:00:00.000+02:00",
+              "end": "2016-06-30T23:59:59.999+02:00"
+            },
+            {
+              "id": "2016-Q3",
+              "name": "2016-Q3",
+              "start": "2016-07-01T00:00:00.000+02:00",
+              "end": "2016-09-30T23:59:59.999+02:00"
+            }
+          ]
+        }
+      ]
+    },
+    "attributes": {
+      "dataSet": [
+        {
+          "id": "COMMENT_DSET",
+          "name": "Dataset comment",
+          "values": []
+        }
+      ],
+      "series": [
+        {
+          "id": "TIME_FORMAT",
+          "name": "Time format code",
+          "values": []
+        },
+        {
+          "id": "COMMENT_TS",
+          "name": "Title complement, detailed description of the series",
+          "values": [
+            {
+              "name": "Gross domestic product at market prices - Euro area 19 (fixed composition) - Domestic (home or reference area), Total economy, Euro, Current prices, Non transformed data, Neither seasonally adjusted nor calendar adjusted data"
+            }
+          ]
+        },
+        {
+          "id": "COMPILING_ORG",
+          "name": "Compiling organisation",
+          "values": [
+            {
+              "id": "4D0",
+              "name": "European Commission (including Eurostat)"
+            }
+          ]
+        },
+        {
+          "id": "CURRENCY",
+          "name": "Currency",
+          "values": []
+        },
+        {
+          "id": "DATA_COMP",
+          "name": "Underlying compilation",
+          "values": []
+        },
+        {
+          "id": "DECIMALS",
+          "name": "Decimals",
+          "values": [
+            {
+              "id": "2",
+              "name": "Two"
+            }
+          ]
+        },
+        {
+          "id": "DISS_ORG",
+          "name": "Data dissemination organisation",
+          "values": []
+        },
+        {
+          "id": "LAST_UPDATE",
+          "name": "Last Update Date",
+          "values": []
+        },
+        {
+          "id": "REF_PERIOD_DETAIL",
+          "name": "Reference period detail",
+          "values": [
+            {
+              "id": "C",
+              "name": "Calendar year"
+            }
+          ]
+        },
+        {
+          "id": "REF_YEAR_PRICE",
+          "name": "Reference year (price)",
+          "values": []
+        },
+        {
+          "id": "TABLE_IDENTIFIER",
+          "name": "Table identifier",
+          "values": []
+        },
+        {
+          "id": "TIME_PER_COLLECT",
+          "name": "Time period collection",
+          "values": [
+            {
+              "id": "S",
+              "name": "Summed through period"
+            }
+          ]
+        },
+        {
+          "id": "TITLE",
+          "name": "Title",
+          "values": [
+            {
+              "name": "Gross domestic product at market prices"
+            }
+          ]
+        },
+        {
+          "id": "UNIT_MULT",
+          "name": "Unit multiplier",
+          "values": [
+            {
+              "id": "6",
+              "name": "Millions"
+            }
+          ]
+        }
+      ],
+      "observation": [
+        {
+          "id": "OBS_STATUS",
+          "name": "Observation status",
+          "values": [
+            {
+              "id": "A",
+              "name": "Normal value"
+            }
+          ]
+        },
+        {
+          "id": "CONF_STATUS",
+          "name": "Confidentiality status",
+          "values": [
+            {
+              "id": "F",
+              "name": "Free (free for publication)"
+            }
+          ]
+        },
+        {
+          "id": "PRE_BREAK_VALUE",
+          "name": "Pre-break value",
+          "values": []
+        },
+        {
+          "id": "COMMENT_OBS",
+          "name": "Comments to the observation value",
+          "values": []
+        },
+        {
+          "id": "EMBARGO_DATE",
+          "name": "Embargo date",
+          "values": []
+        }
+      ]
+    }
+  }
+}

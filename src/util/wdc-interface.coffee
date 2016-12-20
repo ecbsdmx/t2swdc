@@ -16,14 +16,25 @@ submit = (url, dimension) ->
 
 getComponents = (structure) ->
   components = []
+  dimPos = 0
 
   for type in ['dimensions', 'attributes']
     for level in ['dataSet', 'series', 'observation']
       if structure[type]?[level]?
         components = components.concat structure[type][level].map (c) ->
+          if type is 'attributes'
+            prefix = "M"
+          else
+            dimPos += 1
+            if c.keyPosition?
+              keyPos = c.keyPosition + 1 # keyPosition is zero-based
+            else
+              keyPos = dimPos
+            # assumes there will always be less than 99 dimensions
+            prefix = if keyPos < 10 then "0#{keyPos}" else "#{keyPos}"
+          c.name = "#{prefix} - #{c.name}"
           c.type = type
           c.level = level
-          c.name = "+#{c.name}" if type is 'attributes'
           c
 
   components
@@ -39,7 +50,7 @@ processResponse = (response) ->
   columnNames = for c in components
     switch
       when c.values[0]?.start? then [c.name, "#{c.name} start", "#{c.name} end"]
-      when c.values[0]?.id? then [c.name, "ID #{c.name}"]
+      when c.values[0]?.id? then [c.name, "#{c.name} ID"]
       else c.name
 
   columnTypes = for c in components

@@ -13,13 +13,28 @@ describe 'Web Data Connector Interface', ->
     checkResult = () ->
       response = wdcInterface.response()
       response.fieldNames.should.be.an('array').with.lengthOf(42)
-      response.fieldNames.should.include('Currency')
+      response.fieldNames.should.include('02 - Currency')
       response.fieldTypes.should.be.an('array').with.lengthOf(42)
       response.fieldTypes.should.have.members(['string', 'datetime', 'float'])
       response.dataToReturn.should.be.an('array').with.lengthOf(4)
       done()
 
     wdcInterface.makeRequest 'http://sdw-wsrest.ecb.europa.eu/service/EXR',
+      checkResult
+
+    return
+
+  it 'handles more than 9 dimensions', (done) ->
+    query = nock('http://sdw-wsrest.ecb.europa.eu')
+      .get((uri) -> uri.indexOf('MNA') > -1)
+      .replyWithFile(200, __dirname + '/../fixtures/ECB_MNA.json')
+
+    checkResult = () ->
+      response = wdcInterface.response()
+      response.fieldNames.should.include('14 - Transformation')
+      done()
+
+    wdcInterface.makeRequest 'http://sdw-wsrest.ecb.europa.eu/service/MNA',
       checkResult
 
     return
